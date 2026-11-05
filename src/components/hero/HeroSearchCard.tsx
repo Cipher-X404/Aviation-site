@@ -3,7 +3,7 @@ import { useAppStore } from '../../store/useAppStore';
 import { AIRPORTS } from '../../data/mockData';
 import { calculateLoanBreakdown } from '../../config/loan';
 import { formatPrice } from '../../services/currency';
-import { ArrowRight, ArrowRightLeft, Calendar, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowRightLeft, Calendar, ShieldCheck } from 'lucide-react';
 
 interface HeroSearchCardProps {
   suggestedTab?: 'flights' | 'hotels' | 'paylater';
@@ -104,7 +104,7 @@ export const HeroSearchCard: React.FC<HeroSearchCardProps> = ({ suggestedTab }) 
         {/* Live Status Eyebrow */}
         <div className="flex items-center gap-2 text-[10px] font-mono text-[#A5D1E1]">
           <span className="w-2 h-2 rounded-full bg-[#F2B632] animate-pulse" />
-          <span>IATA VERIFIED TICKETING</span>
+          <span>SAMPLE FLIGHT SEARCH</span>
         </div>
       </div>
 
@@ -149,7 +149,7 @@ export const HeroSearchCard: React.FC<HeroSearchCardProps> = ({ suggestedTab }) 
               >
                 <option value="Economy">Economy Class</option>
                 <option value="Business">Business Suites</option>
-                <option value="First">Royal First Class</option>
+                <option value="First">First Class</option>
               </select>
             </div>
 
@@ -256,7 +256,7 @@ export const HeroSearchCard: React.FC<HeroSearchCardProps> = ({ suggestedTab }) 
         {activeTab === 'hotels' && (
           <div className="space-y-4">
             <div className="p-3 rounded-xl bg-[#12484C]/40 border border-[#2B7574]/50 flex items-center gap-2.5">
-              <Sparkles className="w-4 h-4 text-[#F2B632] shrink-0 stroke-[2]" />
+              <ShieldCheck className="w-4 h-4 text-[#F2B632] shrink-0 stroke-[2]" />
               <p className="text-xs text-[#F4F6F5]">
                 Destinations pre-synchronized with your flight itinerary to <strong>{destAirport.city} ({destAirport.code})</strong>.
               </p>
@@ -300,7 +300,7 @@ export const HeroSearchCard: React.FC<HeroSearchCardProps> = ({ suggestedTab }) 
                 }}
                 className="btn-gold h-full min-h-[50px] px-6 rounded-xl flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider cursor-pointer shadow-lg"
               >
-                <span>Reserve Sanctuary</span>
+                <span>Browse stays</span>
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
             </div>
@@ -313,7 +313,7 @@ export const HeroSearchCard: React.FC<HeroSearchCardProps> = ({ suggestedTab }) 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[#A5D1E1] gap-2">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-[#F2B632] stroke-[2]" />
-                <span>Instant Pre-Approval · No Collateral · 0% 30-Day Payback</span>
+                <span>Illustrative payment options · Not a credit offer</span>
               </span>
               <span className="font-mono text-[#F2B632] font-semibold">
                 Monthly: {formatPrice(loanBreakdown.monthlyPayment, currency)}
@@ -376,7 +376,7 @@ export const HeroSearchCard: React.FC<HeroSearchCardProps> = ({ suggestedTab }) 
                 }}
                 className="btn-gold w-full sm:w-auto py-3 px-6 rounded-xl flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider cursor-pointer shadow-lg"
               >
-                <span>Apply with Instant Decision</span>
+                <span>Explore payment examples</span>
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
             </div>

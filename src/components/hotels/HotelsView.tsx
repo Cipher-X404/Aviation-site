@@ -11,7 +11,6 @@ import {
   Zap,
   Car,
   Wifi,
-  Sparkles,
   ShieldCheck,
   Check,
   Calendar,
@@ -85,24 +84,24 @@ export const HotelsView: React.FC = () => {
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
               <span className="text-xs font-mono tracking-widest text-[#F2B632] uppercase font-bold">
-                02. SYNCHRONIZED ARCHITECTURAL SUITES & RESIDENCES
+                02. PLACES TO STAY
               </span>
             </div>
             <h1 className="font-monument text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-white">
-              SANCTUARIES IN {currentAirport.city.toUpperCase()} ({hotelDestinationCode})
+              STAYS IN {currentAirport.city.toUpperCase()} ({hotelDestinationCode})
             </h1>
             <p className="text-xs sm:text-sm text-[#A5D1E1] mt-1 font-light">
-              Audited 5-star destination hotels with 24/7 industrial generator redundancy and runway tarmac transfers.
+              Browse sample properties. Confirm rates, amenities and arrival arrangements with the hotel before booking.
             </p>
           </div>
 
           <div className="flex flex-col sm:items-end gap-2 font-mono text-xs">
             <div className="inline-flex items-center gap-2 bg-[#12484C] text-[#F2B632] border border-[#2B7574]/50 px-3.5 py-1.5 rounded-xl shadow-sm">
               <Zap className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Caterpillar Diesel Grid: 100% Uptime Guaranteed</span>
+              <span>Example amenities vary by property</span>
             </div>
             <span className="text-[11px] text-[#A5D1E1]/70">
-              Runway Concierge Escort on Arrival
+              Check transfer options with the hotel
             </span>
           </div>
         </div>
@@ -162,7 +161,7 @@ export const HotelsView: React.FC = () => {
 
         {/* Quick Filter Amenity Pills */}
         <div className="relative z-10 flex flex-wrap items-center gap-2.5 mt-5 pt-4 border-t border-[#18363F] text-xs font-mono">
-          <span className="text-[#A5D1E1]/70 text-[10px] uppercase">Audited Standard:</span>
+          <span className="text-[#A5D1E1]/70 text-[10px] uppercase">Filter by amenity:</span>
 
           <button
             onClick={() => setFilterGeneratorOnly(!filterGeneratorOnly)}
@@ -173,7 +172,7 @@ export const HotelsView: React.FC = () => {
             }`}
           >
             <Zap className="w-3.5 h-3.5 text-emerald-400" />
-            <span>24/7 Dedicated Heavy Generator</span>
+            <span>Backup power</span>
           </button>
 
           <button
@@ -185,7 +184,7 @@ export const HotelsView: React.FC = () => {
             }`}
           >
             <Car className="w-3.5 h-3.5 text-[#F2B632]" />
-            <span>Maybach / S-Class Runway Escort</span>
+            <span>Airport pickup</span>
           </button>
         </div>
       </div>
@@ -250,13 +249,13 @@ export const HotelsView: React.FC = () => {
                     {hotel.amenities.hasGeneratorBackup && (
                       <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-emerald-500/10 text-[11px] font-mono text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-bold">
                         <Zap className="w-3.5 h-3.5" />
-                        <span>24/7 Heavy Generator</span>
+                        <span>Backup power</span>
                       </span>
                     )}
                     {hotel.amenities.hasAirportPickup && (
                       <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#12484C]/10 dark:bg-[#12484C]/60 text-[11px] font-mono text-[#12484C] dark:text-[#F2B632] border border-[#2B7574]/30">
                         <Car className="w-3.5 h-3.5 text-[#F2B632]" />
-                        <span>Runway Chauffeur</span>
+                        <span>Airport pickup</span>
                       </span>
                     )}
                     {hotel.amenities.hasHighSpeedWifi && (

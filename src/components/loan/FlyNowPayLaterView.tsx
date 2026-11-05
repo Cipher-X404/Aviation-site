@@ -18,7 +18,6 @@ import {
   UserCheck,
   AlertTriangle,
   RotateCcw,
-  Sparkles,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -94,8 +93,8 @@ export const FlyNowPayLaterView: React.FC = () => {
 
         <div className="relative z-10 max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#0E2931]/60 border border-[#A5D1E1]/30 text-xs font-mono text-[#F2B632]">
-            <Sparkles className="w-3.5 h-3.5 stroke-[1.5]" />
-            <span>AEROVISTA TRAVEL FINANCING PROTOCOL</span>
+            <CreditCard className="w-3.5 h-3.5 stroke-[1.5]" />
+            <span>PAYMENT PLAN EXAMPLES</span>
           </div>
 
           <h1 className="font-display text-3xl sm:text-5xl font-bold uppercase tracking-tight">
@@ -103,7 +102,7 @@ export const FlyNowPayLaterView: React.FC = () => {
           </h1>
 
           <p className="text-sm sm:text-base text-[#A5D1E1] leading-relaxed">
-            Split international flight tickets and hotel stays over 3 to 12 months with as little as 10% down. Live transparent formulas, deterministic approval in 60 seconds, and zero early repayment charges.
+            Explore example payments for a trip over different terms. Figures on this page are illustrative only; this demo does not assess applications or provide credit.
           </p>
 
           {/* Section Navigation Tabs */}
@@ -244,7 +243,7 @@ export const FlyNowPayLaterView: React.FC = () => {
               onClick={() => setActiveTab('apply')}
               className="btn-gold w-full py-3.5 px-6 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md"
             >
-              <span>Begin Instant Application</span>
+              <span>Explore payment options</span>
               <ArrowRight className="w-4 h-4 stroke-[2]" />
             </button>
           </div>
@@ -486,11 +485,11 @@ export const FlyNowPayLaterView: React.FC = () => {
                     Valid Passport or NIN Slip
                   </span>
                   <span className="block text-[10px] text-[#2B7574] dark:text-[#A5D1E1]">
-                    JPG or PDF format (Simulated auto-verified)
+                    JPG or PDF (demo upload only; files are not verified)
                   </span>
                   <span className="inline-flex items-center gap-1 text-[11px] font-mono text-[#12484C] dark:text-[#F2B632] font-semibold bg-[#F2B632]/20 px-2 py-0.5 rounded">
                     <CheckCircle2 className="w-3.5 h-3.5 stroke-[2]" />
-                    <span>Document Attached</span>
+                    <span>File selected locally</span>
                   </span>
                 </div>
 
@@ -504,7 +503,7 @@ export const FlyNowPayLaterView: React.FC = () => {
                   </span>
                   <span className="inline-flex items-center gap-1 text-[11px] font-mono text-[#12484C] dark:text-[#F2B632] font-semibold bg-[#F2B632]/20 px-2 py-0.5 rounded">
                     <CheckCircle2 className="w-3.5 h-3.5 stroke-[2]" />
-                    <span>Liveness Verified</span>
+                    <span>No identity check is performed</span>
                   </span>
                 </div>
               </div>
@@ -555,8 +554,8 @@ export const FlyNowPayLaterView: React.FC = () => {
                         {activeLoanDecision.reasonDetails}
                       </p>
                       <div className="flex items-center justify-between text-xs font-mono pt-2 border-t border-[#2B7574]/30">
-                        <span>Debt Service Ratio: {Math.round(activeLoanDecision.debtServiceRatio * 100)}%</span>
-                        <span className="text-[#F2B632] font-bold">Approved Principal: {formatPrice(amount, currency)}</span>
+                        <span>Example ratio: {Math.round(activeLoanDecision.debtServiceRatio * 100)}%</span>
+                        <span className="text-[#F2B632] font-bold">Example amount: {formatPrice(amount, currency)}</span>
                       </div>
                     </div>
                   ) : (
@@ -627,7 +626,7 @@ export const FlyNowPayLaterView: React.FC = () => {
                       className="mt-0.5 accent-[#F2B632]"
                     />
                     <span>
-                      I authorize Aerovista to evaluate my credit suitability. I understand there are 0% early repayment fees.
+                      I understand this is an example only. My information will not be submitted or used for a credit decision.
                     </span>
                   </label>
 
@@ -645,7 +644,7 @@ export const FlyNowPayLaterView: React.FC = () => {
                       onClick={handleRunUnderwriting}
                       className="btn-gold py-3 px-8 text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-lg disabled:opacity-50"
                     >
-                      <span>Run Instant Approval</span>
+                      <span>View example schedule</span>
                       <CheckCircle2 className="w-4 h-4 stroke-[2]" />
                     </button>
                   </div>
@@ -669,13 +668,13 @@ export const FlyNowPayLaterView: React.FC = () => {
                 {tenure}-Month Repayment Schedule
               </h3>
               <p className="text-xs text-[#12484C] dark:text-[#A5D1E1]">
-                Zero early settlement fees. Pay off any remaining balance anytime to cancel unaccrued interest.
+                This is an illustrative schedule, not a credit offer. Confirm fees and early-repayment terms with a licensed lender.
               </p>
             </div>
 
             <button
               onClick={() => {
-                alert('Early settlement simulation: Outstanding balance settled with zero early fees.');
+                alert('Demo only: no payment has been made.');
               }}
               className="btn-gold py-2.5 px-5 text-xs font-bold uppercase tracking-wider shrink-0 cursor-pointer"
             >

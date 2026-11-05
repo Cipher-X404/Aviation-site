@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { DESTINATION_IMAGES } from '../../data/images';
 import { formatPrice } from '../../services/currency';
-import { Plane, Calendar, MapPin, ArrowRight, Sun, Compass, Sparkles, Navigation } from 'lucide-react';
+import { Plane, Calendar, MapPin, ArrowRight, Sun, Compass, Navigation } from 'lucide-react';
 import { RevealOnScroll } from '../common/RevealOnScroll';
 
 interface DestinationGuide {
@@ -37,11 +37,11 @@ const DESTINATION_GUIDES: DestinationGuide[] = [
     country: 'Nigeria',
     flightTimeFromLos: '1h 10m Non-Stop',
     climate: '28°C · Monolith Plateau',
-    desc: 'Bespoke administrative capital carved against the monolithic granitic silhouette of Aso Rock. Broad tree-lined diplomatic corridors and private villas.',
+    desc: 'Abuja is a planned, spacious capital with Aso Rock at its centre. Explore the city’s parks, galleries and neighbourhoods.',
     bestMonths: 'December to March',
     avgFlightNgn: 132000,
     topHotel: 'Transcorp Royal Meridian, Maitama',
-    signatureExperience: 'Helicopter tour across Zuma Rock monolith and presidential valley.',
+    signatureExperience: 'Visit Aso Rock and nearby landmarks; check access and opening hours before you go.',
   },
   {
     code: 'ACC',
@@ -49,11 +49,11 @@ const DESTINATION_GUIDES: DestinationGuide[] = [
     country: 'Ghana',
     flightTimeFromLos: '1h 00m Direct',
     climate: '27°C · Gold Coast Bay',
-    desc: 'The cosmopolitan heart of the Gulf of Guinea. Rich Atlantic heritage, beachfront live jazz lounges, and modern art museums in Osu.',
+    desc: 'Accra blends coastal life with a lively food and arts scene. Osu is a good place to start exploring.',
     bestMonths: 'November to April',
     avgFlightNgn: 215000,
     topHotel: 'Labadi Horizon Beach Resort',
-    signatureExperience: 'Tasting menu at bespoke coastal seafood pavilion.',
+    signatureExperience: 'Try local seafood and Ghanaian dishes around the city.',
   },
   {
     code: 'NBO',
@@ -128,21 +128,21 @@ export const DestinationsView: React.FC = () => {
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
               <span className="text-xs font-mono tracking-widest text-[#F2B632] uppercase font-bold">
-                04. CURATED CONTINENTAL CORRIDORS & EXPEDITIONS
+                04. PLACES TO EXPLORE
               </span>
             </div>
             <h1 className="font-monument text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white">
-              CONTINENTAL ATLAS
+              Destination guide
             </h1>
             <p className="text-sm text-[#A5D1E1] font-light leading-relaxed">
-              Explore Aerovista&apos;s verified air corridors. Each destination features synchronized luxury hotel suites, runway Mercedes transfers, and direct GDS carrier inventory.
+              Browse destination ideas and sample stays. Listings are for demonstration; confirm local details and availability before making plans.
             </p>
           </div>
 
           <div className="flex flex-col sm:items-end gap-2 font-mono text-xs">
             <div className="inline-flex items-center gap-2 bg-[#12484C] text-[#F2B632] px-4 py-2 rounded-xl border border-[#2B7574]/50">
               <Compass className="w-4 h-4 text-[#F2B632] animate-spin-slow" />
-              <span>40+ CONTINENTAL TRANSIT HUBS</span>
+              <span>DESTINATION IDEAS</span>
             </div>
             <span className="text-[11px] text-[#A5D1E1]/70">
               Departures daily from Lagos (LOS) & Abuja (ABV)
@@ -211,8 +211,8 @@ export const DestinationsView: React.FC = () => {
                     </div>
 
                     <div className="flex items-center gap-1.5 bg-[#12484C]/10 dark:bg-[#12484C]/40 p-2 rounded-xl">
-                      <Sparkles className="w-3.5 h-3.5 text-[#F2B632] shrink-0" />
-                      <span className="truncate">Sanctuary: <strong>{d.topHotel}</strong></span>
+                      <MapPin className="w-3.5 h-3.5 text-[#F2B632] shrink-0" />
+                      <span className="truncate">Suggested stay: <strong>{d.topHotel}</strong></span>
                     </div>
                   </div>
                 </div>

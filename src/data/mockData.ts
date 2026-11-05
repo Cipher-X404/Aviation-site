@@ -675,33 +675,33 @@ export const MOCK_TESTIMONIALS: Testimonial[] = [
 
 export const MOCK_FAQS: FaqItem[] = [
   {
-    question: 'How does Fly Now, Pay Later work?',
+    question: 'Can I apply for a payment plan here?',
     answer:
-      'You select your flights or hotel bundle, configure your down payment (10% to 50%) and choose your preferred tenure (3, 6, 9, or 12 months). Our deterministic algorithm evaluates your application in under 60 seconds with zero paperwork. Once approved, your tickets are issued immediately, and you repay in predictable monthly instalments.',
+      'No. This is a product demo. The calculator shows illustrative figures only; it does not collect or assess an application, offer credit or book a ticket. Speak with a licensed provider before taking out credit.',
     category: 'loan',
   },
   {
-    question: 'Can I pay off my flight loan earlier than scheduled?',
+    question: 'Are the payment amounts an offer?',
     answer:
-      'Yes, absolutely. Aerovista enforces zero early repayment penalties. If you settle your outstanding balance ahead of time, any unaccrued future interest is waived immediately in your account dashboard.',
+      'No. Amounts are examples, not an offer or promise of approval. Actual rates, fees, early-payment terms and eligibility depend on a lender’s written agreement.',
     category: 'loan',
   },
   {
-    question: 'How are hotels pre-filled when I search for flights?',
+    question: 'Are the hotels and flight prices live?',
     answer:
-      'When you pick your flight arrival city and dates, our booking intelligence automatically syncs your destination airport to top-rated vetted luxury hotels, setting check-in to your arrival day and checkout to your return flight, unlocking special bundle discounts of up to 15%.',
+      'No. They are sample listings used to demonstrate the interface. Check current prices, availability, baggage rules and hotel details with the relevant airline or property.',
     category: 'hotels',
   },
   {
-    question: 'What happens if my flight schedule changes?',
+    question: 'Can I change a trip from this site?',
     answer:
-      'All bookings made via Aerovista come with our Real-Time Flight Protection guarantee. You receive instant SMS/email notifications and can rebook with our airline partners in one tap with zero agency rebooking fees.',
+      'No. The buttons and booking flow are for demonstration and do not change a real reservation. If you have a ticket, contact the airline or the travel agent that issued it.',
     category: 'booking',
   },
   {
-    question: 'Are generator and power backup guaranteed at hotels?',
+    question: 'Can I rely on amenities listed for a hotel?',
     answer:
-      'Yes. Every property in our West African and African destination collection is strictly audited for 24/7 dedicated heavy backup generation and water purification before inclusion in our catalog.',
+      'Treat the amenities here as examples. Contact the property to confirm what is available, along with check-in times, transport and cancellation terms.',
     category: 'hotels',
   },
 ];

@@ -15,7 +15,7 @@ export const SupportModal: React.FC = () => {
     {
       id: 'm-1',
       sender: 'concierge',
-      text: 'Good day. Welcome to Aerovista 24/7 Ground Concierge. How may we assist your upcoming flight or Pay Later plan today?',
+      text: 'Hi there. I can help you find your way around the flight, hotel and payment-plan examples on this site. What are you looking for?',
       time: 'Just now',
     },
   ]);
@@ -38,14 +38,14 @@ export const SupportModal: React.FC = () => {
 
     setTimeout(() => {
       let reply =
-        'Our flight concierge team has logged your inquiry. For immediate rebooking or baggage queries, our desks at MM2 Lagos and Nnamdi Azikiwe Abuja are active.';
+        'This demo cannot change a live booking. For a real trip, contact your airline directly about changes or baggage. Is there anything else I can help you find here?';
 
       if (query.includes('loan') || query.includes('pay later') || query.includes('interest')) {
         reply =
-          'Our Fly Now Pay Later facility offers 3, 6, 9, or 12-month amortized plans with 0% early settlement penalty. You can test your exact monthly repayment in our live calculator tab.';
+          'The payment-plan page has an example calculator for different terms. Its figures are for demonstration only and are not a credit offer.';
       } else if (query.includes('hotel') || query.includes('power') || query.includes('generator')) {
         reply =
-          'All hotels on Aerovista feature audited 24/7 heavy generator backup and guaranteed check-in sync with your flight touchdown.';
+          'Hotel amenities and arrival details in this demo are examples. Please confirm facilities and check-in times directly with a property before booking.';
       }
 
       setMessages((prev) => [
@@ -78,34 +78,35 @@ export const SupportModal: React.FC = () => {
 
         <button
           onClick={() => setSupportOpen(!isSupportOpen)}
-          aria-label="Open 24/7 Concierge Chat"
+          aria-label="Open Aerovista help"
           className="btn-gold py-2.5 px-4 rounded-full flex items-center gap-2 shadow-xl hover:scale-105 transition-transform cursor-pointer font-bold text-xs uppercase tracking-wider"
         >
           <MessageSquare className="w-4 h-4 stroke-[2]" />
-          <span className="hidden sm:inline">24/7 Ground Concierge</span>
+          <span className="hidden sm:inline">Ask Aerovista</span>
         </button>
       </div>
 
       {/* Chat Window Modal */}
       {isSupportOpen && (
-        <div className="fixed bottom-20 right-6 z-50 w-[340px] sm:w-[380px] bg-white dark:bg-[#0E2931] border border-[#2B7574]/40 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[460px] animate-fade-in">
+        <div className="fixed bottom-20 right-3 sm:right-6 z-50 w-[calc(100vw-24px)] sm:w-[400px] bg-[#fbfaf6] dark:bg-[#0b2025] border border-[#c9a955]/50 shadow-[0_24px_90px_rgba(0,0,0,.38)] overflow-hidden flex flex-col h-[min(560px,calc(100dvh-112px))] animate-fade-in">
           {/* Header */}
-          <div className="bg-[#12484C] text-[#F4F6F5] p-4 flex items-center justify-between border-b border-[#2B7574]/40">
+          <div className="bg-[#0a2529] text-[#F4F6F5] px-5 py-4 flex items-center justify-between border-b border-[#c9a955]/35">
             <div className="flex items-center gap-2.5">
               <div className="w-7 h-7 rounded-full bg-[#0E2931] text-[#F2B632] flex items-center justify-center font-bold text-xs">
                 AV
               </div>
               <div>
                 <span className="font-display text-sm font-bold tracking-wider uppercase block">
-                  Ground Concierge
+                  Aerovista help
                 </span>
                 <span className="text-[10px] text-[#A5D1E1] font-mono">
-                  Online · Average response &lt;1m
+                  Example replies · no live agent
                 </span>
               </div>
             </div>
 
             <button
+              aria-label="Close Aerovista help"
               onClick={() => setSupportOpen(false)}
               className="text-[#A5D1E1] hover:text-[#FFFFFF] cursor-pointer"
             >
@@ -136,6 +137,10 @@ export const SupportModal: React.FC = () => {
             ))}
           </div>
 
+          {/* Suggested requests keep the conversation useful and one tap away. */}
+          {messages.length === 1 && <div className="px-4 pb-3 bg-[#F4F6F5]/50 dark:bg-[#08181D]/50 flex flex-wrap gap-2">
+            {['Find a flight', 'Hotel check-in', 'Payment plans'].map((suggestion) => <button key={suggestion} type="button" onClick={() => setInputVal(suggestion)} className="border border-[#2B7574]/30 px-3 py-2 text-[10px] tracking-wide text-[#12484C] dark:text-[#d8c17f] hover:border-[#c9a955] transition-colors">{suggestion}</button>)}
+          </div>}
           {/* Input Footer */}
           <form
             onSubmit={handleSend}

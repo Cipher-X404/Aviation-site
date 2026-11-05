@@ -14,7 +14,6 @@ import {
   Check,
   ShieldCheck,
   Search,
-  Sparkles,
   Wifi,
   Coffee,
   Tv,
@@ -46,22 +45,7 @@ export const FlightsView: React.FC = () => {
   const [airlineFilter, setAirlineFilter] = useState<string>('all');
   const [maxPrice, setMaxPrice] = useState<number>(3_500_000);
   const [selectedDayOffset, setSelectedDayOffset] = useState<number>(0);
-
-  // Price change timer countdown simulation
-  const [timerSeconds, setTimerSeconds] = useState(874);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimerSeconds((prev) => (prev > 0 ? prev - 1 : 900));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const formatTimer = (totalSeconds: number) => {
-    const mins = Math.floor(totalSeconds / 60);
-    const secs = totalSeconds % 60;
-    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-  };
+  const [calendarStartDate] = useState(departureDate);
 
   // Load flights matching current search
   useEffect(() => {
@@ -100,16 +84,19 @@ export const FlightsView: React.FC = () => {
   const originAirport = AIRPORTS.find((a) => a.code === originCode) || AIRPORTS[0];
   const destAirport = AIRPORTS.find((a) => a.code === destinationCode) || AIRPORTS[1];
 
-  // 7-day lowest price calendar simulation
-  const dateMatrix = [
-    { day: 'Mon', date: 'Nov 10', price: 128500 },
-    { day: 'Tue', date: 'Nov 11', price: 135000 },
-    { day: 'Wed', date: 'Nov 12', price: 132000, isSelected: selectedDayOffset === 0 },
-    { day: 'Thu', date: 'Nov 13', price: 148000 },
-    { day: 'Fri', date: 'Nov 14', price: 165000 },
-    { day: 'Sat', date: 'Nov 15', price: 142000 },
-    { day: 'Sun', date: 'Nov 16', price: 139000 },
-  ];
+  // Illustrative fare calendar, anchored to the selected departure date.
+  const calendarStart = new Date(`${calendarStartDate}T12:00:00`);
+  const dateMatrix = Array.from({ length: 7 }, (_, offset) => {
+    const date = new Date(calendarStart);
+    date.setDate(calendarStart.getDate() + offset);
+    const isoDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    return {
+      isoDate,
+      day: date.toLocaleDateString('en-US', { weekday: 'short' }),
+      date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+      price: [128500, 135000, 132000, 148000, 165000, 142000, 139000][offset],
+    };
+  });
 
   return (
     <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 animate-fade-in">
@@ -122,7 +109,7 @@ export const FlightsView: React.FC = () => {
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
               <span className="text-xs font-mono tracking-widest text-[#F2B632] uppercase">
-                GDS AIRSPACE CORRIDOR // VERIFIED INVENTORY
+                SAMPLE FLIGHT OPTIONS
               </span>
             </div>
             <h1 className="font-monument text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-white flex items-center gap-3">
@@ -131,18 +118,12 @@ export const FlightsView: React.FC = () => {
               <span>{destAirport.city} ({destinationCode})</span>
             </h1>
             <p className="text-xs sm:text-sm text-[#A5D1E1] mt-1 font-light">
-              Direct carrier connection · Guaranteed seat availability · 0% ticketing markups
+              Example results only · Confirm fares and availability before booking
             </p>
           </div>
 
-          <div className="flex flex-col sm:items-end gap-2 font-mono text-xs">
-            <div className="inline-flex items-center gap-2 bg-[#861211]/30 text-rose-300 border border-rose-500/30 px-3.5 py-1.5 rounded-xl">
-              <Clock className="w-3.5 h-3.5 text-rose-400" />
-              <span>Fare Lock Expires in {formatTimer(timerSeconds)}</span>
-            </div>
-            <span className="text-[11px] text-[#A5D1E1]/70">
-              VAT & Continental Departure Taxes Included
-            </span>
+          <div className="max-w-xs text-left sm:text-right text-[11px] leading-5 text-[#A5D1E1]/75">
+            Sample fares only. Taxes, baggage and change fees depend on the airline and fare selected.
           </div>
         </div>
 
@@ -185,8 +166,8 @@ export const FlightsView: React.FC = () => {
                 className="bg-[#12484C] border border-[#2B7574]/50 rounded-lg px-3 py-1 text-xs text-[#F2B632] font-bold focus:outline-none cursor-pointer"
               >
                 <option value="Economy">Economy (Vanguard)</option>
-                <option value="Business">Executive Business</option>
-                <option value="First">Royal First Sovereign</option>
+                <option value="Business">Business class</option>
+                <option value="First">First Class</option>
               </select>
             </div>
           </div>
@@ -297,13 +278,13 @@ export const FlightsView: React.FC = () => {
         {/* 7-Day Fare Horizon Matrix */}
         <div className="relative z-10 mt-6 pt-5 border-t border-[#18363F]">
           <span className="text-[10px] font-mono uppercase tracking-widest text-[#A5D1E1]/70 block mb-2.5">
-            LOWEST CORRIDOR FARES THIS WEEK:
+            Sample fare by departure day:
           </span>
           <div className="grid grid-cols-7 gap-2 overflow-x-auto no-scrollbar">
             {dateMatrix.map((item, idx) => (
               <button
                 key={item.date}
-                onClick={() => setSelectedDayOffset(idx)}
+                onClick={() => { setSelectedDayOffset(idx); setFlightSearch({ departureDate: item.isoDate }); }}
                 className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
                   selectedDayOffset === idx
                     ? 'bg-[#12484C] border-[#F2B632] text-white shadow-md'
@@ -393,7 +374,7 @@ export const FlightsView: React.FC = () => {
               className="w-full bg-[#F4F6F5] dark:bg-[#061216] border border-[#2B7574]/30 rounded-xl px-3 py-2 text-xs font-mono text-[#0E2931] dark:text-[#FFFFFF] focus:outline-none"
             >
               <option value="all">All Partner Carriers</option>
-              <option value="aerovista">Aerovista Royal</option>
+              <option value="aerovista">Aerovista sample</option>
               <option value="zenith">Zenith Airways</option>
               <option value="equatorial">Equatorial Air</option>
               <option value="savannah">Savannah Wings</option>
@@ -421,10 +402,10 @@ export const FlightsView: React.FC = () => {
           <div className="p-4 rounded-2xl bg-[#12484C]/10 dark:bg-[#12484C]/30 border border-[#2B7574]/30 text-xs font-mono space-y-2">
             <div className="flex items-center gap-1.5 text-[#F2B632] font-bold uppercase">
               <ShieldCheck className="w-4 h-4" />
-              <span>GDS Price Integrity</span>
+              <span>Before you book</span>
             </div>
             <p className="text-[11px] text-[#2B7574] dark:text-[#A5D1E1]/80 leading-relaxed">
-              Ticket issuance is sealed cryptographically directly with the carrier. Zero surcharge markups.
+              These are sample results. Check the final fare, baggage rules and availability with the airline or your travel provider.
             </p>
           </div>
         </aside>
@@ -633,7 +614,7 @@ export const FlightsView: React.FC = () => {
                         {formatPrice(flight.priceNgn, currency)}
                       </span>
                       <span className="text-[10px] text-[#2B7574] dark:text-[#A5D1E1]/70 block">
-                        Taxes & Baggage (2 × 32kg) Included
+                        Example fare; baggage and taxes vary
                       </span>
                     </div>
 

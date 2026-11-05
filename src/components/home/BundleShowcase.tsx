@@ -3,7 +3,7 @@ import { useAppStore } from '../../store/useAppStore';
 import { MOCK_BUNDLES, MOCK_FLIGHTS, MOCK_HOTELS } from '../../data/mockData';
 import { HOTEL_IMAGES } from '../../data/images';
 import { formatPrice } from '../../services/currency';
-import { Plane, Building2, Sparkles, ArrowRight, Check } from 'lucide-react';
+import { Plane, Building2, ArrowRight, Check } from 'lucide-react';
 
 export const BundleShowcase: React.FC = () => {
   const { setSelectedFlight, setSelectedHotel, setActiveRoute, currency } = useAppStore();
@@ -19,7 +19,7 @@ export const BundleShowcase: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section id="bundle-showcase-section" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
         <div>
           <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
@@ -88,7 +88,7 @@ export const BundleShowcase: React.FC = () => {
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-[#2B7574] dark:text-[#F2B632] stroke-[1.5]" />
+                      <Building2 className="w-4 h-4 text-[#2B7574] dark:text-[#F2B632] stroke-[1.5]" />
                       <span>Private Chauffeured Airport Transfer Included</span>
                     </div>
                   </div>

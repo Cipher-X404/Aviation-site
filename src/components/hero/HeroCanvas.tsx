@@ -441,6 +441,34 @@ export const HeroCanvas: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-[#0E2931]/70 via-[#0E2931]/15 to-[#0E2931]/35 pointer-events-none" />
       <div className="absolute inset-0 bg-radial from-transparent via-transparent to-[#0E2931]/40 pointer-events-none" />
 
+      {/* ── Top Bar: Redesigned Architectural Corridor & Skip Containers ── */}
+      <div className="absolute top-20 sm:top-24 left-0 right-0 z-30 max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between pointer-events-auto">
+        {/* Left: Corridor Telemetry Capsule */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#07161B]/80 backdrop-blur-md border border-[#2B7574]/40 shadow-lg text-[10px] font-mono">
+          <div className="relative flex items-center justify-center w-2 h-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+          </div>
+          <span className="text-[#F2B632] font-semibold tracking-wider">CORRIDOR // MM2 LAGOS</span>
+          <span className="text-[#2B7574] hidden xs:inline">·</span>
+          <span className="text-[#A5D1E1]/80 tracking-wider hidden xs:inline">FL380 ACTIVE</span>
+        </div>
+
+        {/* Right: Redesigned Fast-Descent Skip to Booking Capsule */}
+        {!isFinalSceneActive && (
+          <button
+            onClick={handleSkipToBooking}
+            className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#07161B]/80 hover:bg-[#12484C] backdrop-blur-md border border-[#2B7574]/40 hover:border-[#F2B632]/80 shadow-lg transition-all duration-300 cursor-pointer"
+            title="Fast descent to booking form"
+          >
+            <span className="text-[10px] font-mono tracking-wider text-[#A5D1E1] group-hover:text-white uppercase transition-colors">
+              Skip to Booking
+            </span>
+            <ArrowDownRight className="w-3.5 h-3.5 text-[#F2B632] group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform" />
+          </button>
+        )}
+      </div>
+
       {/* ── Editorial Text Phases (Direct DOM manipulation) ─────── */}
       <div className="relative z-20 w-full h-full max-w-5xl mx-auto px-6 flex flex-col justify-center items-center text-center pointer-events-none">
         {/* Scene 1 */}
@@ -520,52 +548,31 @@ export const HeroCanvas: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Bottom Telemetry & Navigation Bar (Unobtrusive) ─────── */}
+      {/* ── Bottom Bar: Scene Dots + Scroll Cue ─────────────────── */}
       <div className="absolute bottom-6 left-0 right-0 z-30 max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between text-xs text-[#A5D1E1] pointer-events-none">
-        {/* Left: Scene progress dots + subtle corridor ping */}
-        <div className="flex items-center gap-3 sm:gap-4">
-          <div className="flex items-center gap-2">
-            {SCENES.map((sc, idx) => {
-              const isActive = activeSceneIndex === idx;
-              return (
-                <div
-                  key={sc.id}
-                  className={`h-1 rounded-full transition-all duration-300 ${
-                    isActive ? 'w-8 bg-[#F2B632]' : 'w-2 bg-[#F4F6F5]/25'
-                  }`}
-                />
-              );
-            })}
-          </div>
-
-          <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0E2931]/60 border border-[#2B7574]/30 text-[9px] font-mono text-[#A5D1E1]/70 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>CORRIDOR FL380 · MM2 LAGOS</span>
-          </div>
+        {/* Left: Scene progress dots */}
+        <div className="flex items-center gap-2">
+          {SCENES.map((sc, idx) => {
+            const isActive = activeSceneIndex === idx;
+            return (
+              <div
+                key={sc.id}
+                className={`h-1 rounded-full transition-all duration-300 ${
+                  isActive ? 'w-8 bg-[#F2B632]' : 'w-2 bg-[#F4F6F5]/25'
+                }`}
+              />
+            );
+          })}
         </div>
 
-        {/* Right: Skip button + scroll cue */}
-        <div className="flex items-center gap-3">
-          {!isFinalSceneActive && (
-            <button
-              onClick={handleSkipToBooking}
-              className="pointer-events-auto text-[10px] font-mono tracking-wider text-[#A5D1E1]/80 hover:text-white transition-colors bg-[#0E2931]/60 hover:bg-[#0E2931]/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#2B7574]/30 flex items-center gap-1.5 cursor-pointer shadow-sm"
-              title="Jump to booking form"
-            >
-              <span>Skip to Booking</span>
-              <ArrowDownRight className="w-3 h-3 text-[#F2B632]" />
-            </button>
-          )}
-
-          {/* Scroll cue text */}
-          <div
-            className={`flex items-center gap-1.5 font-mono text-[11px] text-[#A5D1E1] transition-opacity duration-500 ${
-              hasScrolled ? 'opacity-0' : 'opacity-80 animate-bounce'
-            }`}
-          >
-            <span className="hidden md:inline">Scroll to explore</span>
-            <ChevronDown className="w-3.5 h-3.5 stroke-[2] text-[#F2B632]" />
-          </div>
+        {/* Right: Scroll cue text */}
+        <div
+          className={`flex items-center gap-1.5 font-mono text-[11px] text-[#A5D1E1] transition-opacity duration-500 ${
+            hasScrolled ? 'opacity-0' : 'opacity-80 animate-bounce'
+          }`}
+        >
+          <span className="hidden md:inline">Scroll to explore</span>
+          <ChevronDown className="w-3.5 h-3.5 stroke-[2] text-[#F2B632]" />
         </div>
       </div>
     </div>

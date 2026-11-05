@@ -231,7 +231,7 @@ export const Navbar: React.FC = () => {
         <div
           className={`max-w-7xl mx-auto rounded-2xl transition-all duration-300 flex items-center justify-between px-4 sm:px-6 h-14 sm:h-16 border ${
             isScrolled
-              ? 'bg-[#F4F6F5]/92 dark:bg-[#08181D]/92 backdrop-blur-2xl border-[#E2E2E0] dark:border-[#18363F] shadow-lg shadow-[#0E2931]/8'
+              ? 'bg-[#F4F6F5]/95 dark:bg-[#08181D]/92 backdrop-blur-2xl border-[#E2E2E0] dark:border-[#18363F] shadow-lg shadow-[#0E2931]/8'
               : 'bg-[#0E2931]/75 dark:bg-[#061216]/75 backdrop-blur-xl border-[#2B7574]/25 text-[#F4F6F5] shadow-2xl'
           }`}
         >
@@ -269,7 +269,7 @@ export const Navbar: React.FC = () => {
             </div>
           </button>
 
-          {/* ─── Desktop Center: Explore Mega Trigger ─── */}
+          {/* ─── Desktop Center: Explore Mega Dropdown Trigger (Clean Transparent Nav Link) ─── */}
           <div
             className="hidden lg:flex items-center"
             onMouseEnter={handleDropdownEnter}
@@ -286,44 +286,56 @@ export const Navbar: React.FC = () => {
                   setTimeout(() => setMegaAnimating(false), 350);
                 }
               }}
-              className={`group/nav relative py-2 px-4 rounded-full text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+              className={`group/nav relative py-2 px-3 rounded-lg text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 flex items-center gap-1.5 cursor-pointer bg-transparent border-0 select-none ${
                 isMegaOpen
-                  ? 'text-[#F2B632] bg-[#12484C]/30'
+                  ? 'text-[#F2B632]'
                   : isScrolled
                   ? 'text-[#0E2931] dark:text-[#EAEFEF] hover:text-[#F2B632]'
                   : 'text-[#F4F6F5] hover:text-[#F2B632]'
               }`}
+              aria-expanded={isMegaOpen}
+              aria-haspopup="true"
             >
-              <span className="relative z-10">Explore</span>
-              <ChevronDown
-                className={`w-3.5 h-3.5 text-[#F2B632] transition-transform duration-300 ${
-                  isMegaOpen ? 'rotate-180' : 'group-hover/nav:translate-y-0.5'
-                }`}
-              />
-              {/* Golden underline that expands from center on hover */}
-              <span className="absolute bottom-0 left-4 right-4 h-[2px] bg-gradient-to-r from-transparent via-[#F2B632] to-transparent scale-x-0 group-hover/nav:scale-x-100 transition-transform duration-300 origin-center" />
+              <span className="relative z-10 transition-colors duration-200">
+                Explore
+              </span>
+
+              {/* Clear, Unambiguous Dropdown Chevron with Tactile Dip Animation */}
+              <div className="relative flex items-center justify-center w-3.5 h-3.5">
+                <ChevronDown
+                  className={`w-3.5 h-3.5 text-[#F2B632] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    isMegaOpen
+                      ? 'rotate-180 -translate-y-0.5'
+                      : 'group-hover/nav:translate-y-0.5'
+                  }`}
+                  strokeWidth={2.5}
+                />
+              </div>
+
+              {/* Subtle golden indicator bar on hover */}
+              <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-transparent via-[#F2B632] to-transparent scale-x-0 group-hover/nav:scale-x-100 transition-transform duration-300" />
             </button>
           </div>
 
           {/* ─── Right Actions ─── */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Search Pill Button (desktop) */}
+            {/* Search Pill Button (ONLY this element is enlarged) */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              className={`hidden lg:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full transition-all duration-200 cursor-pointer border shadow-sm ${
+              className={`hidden lg:flex items-center gap-3 px-5 py-2.5 rounded-full transition-all duration-200 cursor-pointer border shadow-sm ${
                 isScrolled
                   ? 'bg-[#12484C] text-[#F4F6F5] border-[#2B7574] hover:bg-[#0E2931] hover:border-[#F2B632] dark:bg-[#12484C]/40 dark:text-[#A5D1E1] dark:border-[#2B7574]/40 dark:hover:border-[#F2B632]'
                   : 'bg-[#12484C] text-[#F4F6F5] border-[#2B7574]/60 hover:bg-[#0E2931] hover:border-[#F2B632] dark:bg-white/5 dark:text-[#F4F6F5] dark:border-[#2B7574]/40'
               }`}
               title="Search corridors (⌘K)"
             >
-              <Search className="w-3.5 h-3.5 text-[#F2B632]" />
-              <span className="text-xs font-mono font-medium tracking-wide text-[#F4F6F5] dark:text-[#A5D1E1]">Search</span>
-              <kbd className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-[#09171C]/70 text-[#F2B632] border border-[#2B7574]/50 dark:bg-black/30 dark:text-[#A5D1E1]/70 dark:border-white/10">⌘K</kbd>
+              <Search className="w-4 h-4 text-[#F2B632]" />
+              <span className="text-xs sm:text-sm font-mono font-medium tracking-wide text-[#F4F6F5] dark:text-[#A5D1E1]">Search</span>
+              <kbd className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#09171C]/70 text-[#F2B632] border border-[#2B7574]/50 dark:bg-black/30 dark:text-[#A5D1E1]/70 dark:border-white/10">⌘K</kbd>
             </button>
 
-            {/* Book Flight CTA (desktop) */}
+            {/* Book Flight CTA (Original Size) */}
             <button
               onClick={() => navigateTo('/flights')}
               className="btn-gold hidden lg:flex items-center gap-1.5 px-4 py-2 text-xs font-bold uppercase tracking-wider whitespace-nowrap cursor-pointer group hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(242,182,50,0.4)] transition-all duration-200"
@@ -332,14 +344,14 @@ export const Navbar: React.FC = () => {
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform stroke-[2.5]" />
             </button>
 
-            {/* Desktop Hamburger → Side Drawer */}
+            {/* Desktop Hamburger → Side Drawer (Original Size with Light Mode Teal) */}
             <button
               onClick={() => setIsDrawerOpen(true)}
               aria-label="Open settings menu"
-              className={`hidden lg:flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 cursor-pointer ${
+              className={`hidden lg:flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 cursor-pointer shadow-sm ${
                 isScrolled
-                  ? 'border-[#E2E2E0] dark:border-[#18363F] text-[#0E2931] dark:text-[#EAEFEF] hover:bg-black/5 dark:hover:bg-white/5'
-                  : 'border-[#2B7574]/40 text-[#F4F6F5] hover:bg-white/10'
+                  ? 'bg-[#12484C] text-[#F4F6F5] border-[#2B7574] hover:bg-[#0E2931] hover:border-[#F2B632] dark:bg-[#12484C]/40 dark:text-[#EAEFEF] dark:border-[#2B7574]/40 dark:hover:border-[#F2B632]'
+                  : 'bg-[#12484C] text-[#F4F6F5] border-[#2B7574]/60 hover:bg-[#0E2931] hover:border-[#F2B632] dark:bg-white/5 dark:text-[#F4F6F5] dark:border-[#2B7574]/40'
               }`}
             >
               <div className="flex flex-col gap-[3px] w-4 h-3 justify-center">
@@ -349,28 +361,28 @@ export const Navbar: React.FC = () => {
               </div>
             </button>
 
-            {/* Mobile Search Button */}
+            {/* Mobile Search Button (Original Size with Light Mode Teal) */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
               className={`lg:hidden p-2 rounded-lg border cursor-pointer transition-colors shadow-sm ${
                 isScrolled
-                  ? 'bg-[#12484C] border-[#2B7574] text-[#F2B632] dark:bg-white/5 dark:border-[#18363F] dark:text-[#A5D1E1]'
-                  : 'bg-[#12484C] border-[#2B7574]/60 text-[#F2B632] dark:bg-[#0E2931]/60 dark:border-[#2B7574]/40'
+                  ? 'bg-[#12484C] border-[#2B7574] text-[#F2B632] hover:bg-[#0E2931] dark:bg-white/5 dark:border-[#18363F] dark:text-[#A5D1E1]'
+                  : 'bg-[#12484C] border-[#2B7574]/60 text-[#F2B632] hover:bg-[#0E2931] dark:bg-[#0E2931]/60 dark:border-[#2B7574]/40'
               }`}
               aria-label="Open search"
             >
               <Search className="w-4 h-4" />
             </button>
 
-            {/* Mobile Aperture Menu Trigger */}
+            {/* Mobile Aperture Menu Trigger (Original Size with Light Mode Teal) */}
             <button
               onClick={() => setApertureOpen(true)}
               aria-label="Open menu"
-              className={`lg:hidden flex items-center gap-2 p-2 rounded-lg border transition-all duration-300 cursor-pointer ${
+              className={`lg:hidden flex items-center gap-2 p-2 rounded-lg border transition-all duration-300 cursor-pointer shadow-sm ${
                 isScrolled
-                  ? 'border-[#E2E2E0] dark:border-[#18363F] text-[#0E2931] dark:text-[#EAEFEF] hover:bg-black/5 dark:hover:bg-white/5'
-                  : 'border-[#2B7574]/40 bg-[#0E2931]/60 text-[#F2B632]'
+                  ? 'bg-[#12484C] border-[#2B7574] text-[#F4F6F5] hover:bg-[#0E2931] dark:bg-[#12484C]/40 dark:border-[#2B7574]/40 dark:text-[#F2B632]'
+                  : 'bg-[#12484C] border-[#2B7574]/60 text-[#F4F6F5] hover:bg-[#0E2931] dark:bg-[#0E2931]/60 dark:border-[#2B7574]/40 dark:text-[#F2B632]'
               }`}
             >
               <div className="flex flex-col gap-1 w-5 h-3.5 justify-between">

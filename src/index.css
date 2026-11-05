@@ -327,3 +327,55 @@
 
 
 
+
+/* ── Floating Concierge Launcher — rotating gold ring shimmer ── */
+@keyframes shimmer-rotate {
+  to { transform: rotate(360deg); }
+}
+.chat-ring {
+  background: conic-gradient(from 0deg, transparent 0%, rgba(242,182,50,0.9) 22%, rgba(242,182,50,0) 50%, transparent 100%);
+  animation: shimmer-rotate 3.5s linear infinite;
+}
+
+/* Gentle float for the launcher orb */
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.animate-float-soft {
+  animation: float-soft 4s ease-in-out infinite;
+}
+
+/* Chat console entrance */
+@keyframes chat-rise {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-chat-rise {
+  animation: chat-rise 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Concierge avatar orb gradient drift */
+@keyframes orb-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-orb-shift {
+  background-size: 200% 200%;
+  animation: orb-shift 5s ease-in-out infinite;
+}
+
+/* Message bubble pop-in */
+@keyframes msg-pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-msg-pop {
+  animation: msg-pop 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Telemetry equalizer bars */
+@keyframes eq-bounce {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}

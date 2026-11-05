@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppStore } from '../../store/useAppStore';
-import { Plane, Building2, CreditCard, ArrowRight, ShieldCheck, Zap, Sparkles } from 'lucide-react';
+import { Plane, Building2, CreditCard, ArrowRight, ShieldCheck, Zap } from 'lucide-react';
 
 export const ServicesBento: React.FC = () => {
   const { setActiveRoute } = useAppStore();
@@ -9,13 +9,13 @@ export const ServicesBento: React.FC = () => {
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="mb-10 text-left">
         <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
-          02. CORE INFRASTRUCTURE
+          WHAT YOU CAN DO HERE
         </span>
         <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
-          ELEVATED TRAVEL SERVICES
+          Plan a trip, your way
         </h2>
         <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1 max-w-2xl">
-          Three deeply integrated capabilities engineered to remove friction from continental and transatlantic journeys.
+          Explore sample flights, hotel stays and payment-plan examples. This prototype does not make live bookings.
         </p>
       </div>
 
@@ -23,6 +23,9 @@ export const ServicesBento: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Bento 1: Real-Time Flight Engine (col-span-7) */}
         <div
+          role="link"
+          tabIndex={0}
+          onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setActiveRoute('/flights'); } }}
           onClick={() => {
             setActiveRoute('/flights');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -37,15 +40,15 @@ export const ServicesBento: React.FC = () => {
                 <Plane className="w-5 h-5 stroke-[1.5] -rotate-45" />
               </div>
               <span className="text-[11px] font-mono text-[#2B7574] dark:text-[#F2B632] uppercase border border-[#2B7574]/30 px-2 py-0.5 rounded">
-                GDS Direct Sync
+                Sample flight search
               </span>
             </div>
 
             <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#0E2931] dark:text-[#FFFFFF] uppercase tracking-wide">
-              Real-Time Flight Booking
+              Explore flight options
             </h3>
             <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-2 max-w-lg leading-relaxed">
-              Instant airline seat reservation with zero intermediary markup. Live departure board times, cheapest-day calendar, dynamic fare trend monitoring, and offline-ready boarding passes with gate verification barcodes.
+              Browse sample routes and compare the details shown for each flight. Check live availability and fare rules with the airline before you book.
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6 pt-6 border-t border-[#E2E2E0] dark:border-[#18363F]">
@@ -54,7 +57,7 @@ export const ServicesBento: React.FC = () => {
                   Carriers
                 </span>
                 <span className="text-sm font-semibold text-[#0E2931] dark:text-[#FFFFFF]">
-                  40+ Regional & Global
+                  Sample routes
                 </span>
               </div>
               <div>
@@ -62,7 +65,7 @@ export const ServicesBento: React.FC = () => {
                   Fares
                 </span>
                 <span className="text-sm font-semibold text-[#0E2931] dark:text-[#FFFFFF]">
-                  Best Price Match
+                  Compare listed fares
                 </span>
               </div>
               <div className="col-span-2 sm:col-span-1">
@@ -70,7 +73,7 @@ export const ServicesBento: React.FC = () => {
                   Ticketing
                 </span>
                 <span className="text-sm font-semibold text-[#0E2931] dark:text-[#FFFFFF]">
-                  Immediate Issuance
+                  Demo only
                 </span>
               </div>
             </div>
@@ -84,6 +87,9 @@ export const ServicesBento: React.FC = () => {
 
         {/* Bento 2: Hotel Pre-Fill Intelligence (col-span-5) */}
         <div
+          role="link"
+          tabIndex={0}
+          onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setActiveRoute('/hotels'); } }}
           onClick={() => {
             setActiveRoute('/hotels');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -96,7 +102,7 @@ export const ServicesBento: React.FC = () => {
                 <Building2 className="w-5 h-5 stroke-[1.5]" />
               </div>
               <span className="text-[11px] font-mono text-[#2B7574] dark:text-[#F2B632] uppercase border border-[#2B7574]/30 px-2 py-0.5 rounded">
-                Smart Itinerary Sync
+                Hotel examples
               </span>
             </div>
 
@@ -104,17 +110,17 @@ export const ServicesBento: React.FC = () => {
               Destination Hotels
             </h3>
             <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-2 leading-relaxed">
-              Never re-enter city names or dates. Your hotel check-in automatically aligns with your flight touchdown, with guaranteed 24/7 power backup and chauffeured airport pickups.
+              Use your destination and dates to explore example stays. Confirm check-in, amenities and transport with the property.
             </p>
 
             <div className="space-y-2 mt-6 pt-6 border-t border-[#E2E2E0] dark:border-[#18363F]">
               <div className="flex items-center gap-2 text-xs text-[#12484C] dark:text-[#A5D1E1]">
                 <ShieldCheck className="w-4 h-4 text-[#2B7574] dark:text-[#F2B632] stroke-[1.5]" />
-                <span>Audited 24/7 dedicated heavy generator backup</span>
+                <span>Listed amenities vary by property</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-[#12484C] dark:text-[#A5D1E1]">
                 <Zap className="w-4 h-4 text-[#2B7574] dark:text-[#F2B632] stroke-[1.5]" />
-                <span>Save up to 15% when bundled with flights</span>
+                <span>Compare flight and hotel costs</span>
               </div>
             </div>
           </div>
@@ -138,15 +144,15 @@ export const ServicesBento: React.FC = () => {
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-3 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#0E2931]/60 border border-[#A5D1E1]/30 text-xs font-mono text-[#F2B632]">
-                <Sparkles className="w-3.5 h-3.5 stroke-[1.5]" />
-                <span>FLEXIBLE FLIGHT FINANCING</span>
+                <Zap className="w-3.5 h-3.5 stroke-[1.5]" />
+                <span>PAYMENT PLAN EXAMPLES</span>
               </div>
 
               <h3 className="font-display text-2xl sm:text-4xl font-extrabold uppercase tracking-wide">
                 Fly Now, Pay Later
               </h3>
               <p className="text-sm sm:text-base text-[#A5D1E1] leading-relaxed">
-                Take off today. Split ticket costs over 3 to 12 months with as little as 10% down. Transparent APR, zero penalty for early settlement, and algorithmic approvals under 60 seconds.
+                Use the example calculator to compare payment terms. It does not submit an application or approve credit.
               </p>
             </div>
 
@@ -155,7 +161,7 @@ export const ServicesBento: React.FC = () => {
                 type="button"
                 className="btn-gold px-6 py-3.5 text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-lg"
               >
-                <span>Launch Loan Calculator</span>
+                <span>See example payments</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2]" />
               </button>
             </div>

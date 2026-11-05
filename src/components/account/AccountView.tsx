@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { DashboardAssistant } from '../common/DashboardAssistant';
 import { useAppStore, BookingRecord } from '../../store/useAppStore';
 import { MOCK_HOTELS } from '../../data/mockData';
 import { formatPrice } from '../../services/currency';
@@ -19,7 +20,6 @@ import {
   QrCode,
   DollarSign,
   ChevronRight,
-  Sparkles,
   Zap,
   Coffee
 } from 'lucide-react';
@@ -46,12 +46,12 @@ export const AccountView: React.FC = () => {
 
   const handlePayInstallment = (bookingId: string, monthlyNgn: number) => {
     payLoanInstallment(bookingId, monthlyNgn);
-    setPaySuccessMsg(`Installment of ${formatPrice(monthlyNgn, currency)} successfully paid. Live amortization schedule updated.`);
+    setPaySuccessMsg(`Installment of ${formatPrice(monthlyNgn, currency)} recorded in this demo. The example schedule has been updated.`);
     setTimeout(() => setPaySuccessMsg(null), 4000);
   };
 
   return (
-    <div className="pt-28 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 animate-fade-in">
+    <div className="pt-28 pb-36 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 animate-fade-in">
       {/* Payment Success Toast */}
       {paySuccessMsg && (
         <div className="fixed top-24 right-6 z-50 bg-[#12484C] text-[#F2B632] px-5 py-3 rounded-xl shadow-xl border border-[#2B7574]/40 flex items-center gap-3 font-mono text-xs animate-bounce">
@@ -61,8 +61,8 @@ export const AccountView: React.FC = () => {
       )}
 
       {/* Account Profile Monumental Header */}
-      <div className="bg-gradient-to-r from-[#0E2931] via-[#12484C] to-[#0D5C75] text-white rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#F2B632]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="bg-[#102b30] text-white rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 h-full w-1/3 border-l border-white/10 pointer-events-none" />
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div className="flex items-center gap-5">
@@ -91,7 +91,7 @@ export const AccountView: React.FC = () => {
           {/* Quick Metrics Capsule */}
           <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/10 self-start md:self-auto">
             <div>
-              <span className="block text-[10px] font-mono uppercase text-[#A5D1E1]">Royal Miles</span>
+              <span className="block text-[10px] font-mono uppercase text-[#A5D1E1]">Miles balance</span>
               <span className="text-lg font-bold font-mono text-[#F2B632] tabular-nums">
                 {currentUser.milesBalance.toLocaleString()} PTS
               </span>
@@ -113,18 +113,19 @@ export const AccountView: React.FC = () => {
         </div>
 
         {/* Tab Switcher (No borders on hover, refined luxury tabs) */}
-        <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t border-white/10">
+        <div className="fixed z-40 bottom-4 left-1/2 -translate-x-1/2 w-[min(94vw,700px)] flex items-center justify-around gap-1 p-2 bg-[#102b30] border border-[#c9a955]/50 shadow-[0_18px_55px_rgba(0,0,0,.32)] rounded-[26px]">
           {[
             { id: 'timeline', label: 'Trips Timeline' },
             { id: 'bookings', label: `Boarding Passes (${bookingHistory.length})` },
             { id: 'loans', label: `Fly Now Pay Later (${activeLoanBookings.length} Active)` },
-            { id: 'loyalty', label: 'Tier & Royal Privileges' },
+            { id: 'loyalty', label: 'Membership' },
             { id: 'saved', label: `Saved Sanctuaries (${savedHotels.length})` },
           ].map((t) => (
             <button
               key={t.id}
+              aria-pressed={activeTab === t.id}
               onClick={() => setActiveTab(t.id as any)}
-              className={`px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+              className={`px-2 sm:px-3 py-3 rounded-2xl text-[8px] sm:text-[9px] font-mono uppercase tracking-wide transition-all duration-200 cursor-pointer max-w-[19%] leading-tight ${
                 activeTab === t.id
                   ? 'bg-[#F2B632] text-[#0E2931] font-bold shadow-md'
                   : 'bg-white/10 text-[#A5D1E1] hover:text-white hover:bg-white/15'
@@ -142,7 +143,7 @@ export const AccountView: React.FC = () => {
           <div className="flex items-center justify-between pb-3 border-b border-[#2B7574]/20">
             <div>
               <h2 className="font-display text-xl font-bold uppercase text-[#0E2931] dark:text-[#FFFFFF]">
-                Active Itinerary & Flight Telemetry
+                Your trip details
               </h2>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] font-mono">
                 Real-time gate and boarding countdowns linked with airport radar.
@@ -215,10 +216,10 @@ export const AccountView: React.FC = () => {
                   </span>
                 </div>
                 <h3 className="font-display text-xl font-bold text-[#0E2931] dark:text-[#FFFFFF] uppercase">
-                  The Transcorp Royal Diplomatic Suite, Abuja
+                  Example stay in Abuja
                 </h3>
                 <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1]">
-                  Pre-filled from flight destination · 24/7 Heavy Generator & Clean Solar Microgrid Active · Armored Chauffeur Escort Assigned.
+                  Example hotel details. Confirm amenities and transfers directly with the property.
                 </p>
               </div>
             </div>
@@ -272,7 +273,7 @@ export const AccountView: React.FC = () => {
 
                 <div>
                   <h3 className="font-display text-xl sm:text-2xl font-bold text-[#0E2931] dark:text-[#FFFFFF] uppercase">
-                    {b.flight?.airline || 'Aerovista Royal'}
+                    {b.flight?.airline || 'Sample carrier'}
                   </h3>
                   <div className="flex items-center gap-2 text-sm text-[#12484C] dark:text-[#A5D1E1] font-mono mt-1">
                     <span>{b.flight?.origin || 'LOS'} ({b.flight?.originCity || 'Lagos'})</span>
@@ -318,7 +319,7 @@ export const AccountView: React.FC = () => {
                 Fly Now Pay Later Amortization Desk
               </h2>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] font-mono">
-                Real-time loan servicing with 0% early prepayment penalties.
+                Example payment schedule only; no payment is processed.
               </p>
             </div>
             <button
@@ -434,7 +435,7 @@ export const AccountView: React.FC = () => {
                         className="w-full sm:w-auto py-2.5 px-5 rounded-xl bg-[#12484C] hover:bg-[#0E2931] text-[#F2B632] font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <Zap className="w-4 h-4" />
-                        <span>Pay Entire Remaining Balance (0% Fee)</span>
+                        <span>Mark example balance as paid</span>
                       </button>
                     </div>
                   </div>
@@ -448,7 +449,7 @@ export const AccountView: React.FC = () => {
                 No Outstanding Loan Balances
               </h3>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] max-w-md mx-auto">
-                All previous travel facilities are settled in full. Your credit line remains pre-approved up to ₦2,500,000.
+                This sample account has no live credit facility. Example balance: ₦0.
               </p>
               <button
                 onClick={() => setActiveRoute('/fly-now-pay-later')}
@@ -467,13 +468,13 @@ export const AccountView: React.FC = () => {
           <div className="rounded-3xl bg-gradient-to-r from-[#09171C] to-[#12484C] text-white p-8 sm:p-10 shadow-2xl relative overflow-hidden">
             <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-[#F2B632] uppercase mb-2">
               <Award className="w-4 h-4" />
-              <span>AEROVISTA SOVEREIGN CLUB</span>
+              <span>AEROVISTA TRAVEL REWARDS · SAMPLE</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-display font-bold uppercase">
-              ONYX PRESIDENTIAL TIER
+              Sample membership
             </h2>
             <p className="text-xs sm:text-sm text-[#A5D1E1] max-w-2xl mt-1">
-              Top 1% elite flyer privileges across West Africa, the Gulf, and Europe.
+              Example rewards and benefits for exploring the account screens. No real membership or perks are attached.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 pt-8 border-t border-white/10">
@@ -512,7 +513,7 @@ export const AccountView: React.FC = () => {
                 Saved Luxury Sanctuaries
               </h2>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] font-mono">
-                Guaranteed clean power & private executive concierge reservations.
+                Example benefits shown for demonstration only.
               </p>
             </div>
             <button
@@ -537,7 +538,7 @@ export const AccountView: React.FC = () => {
                     <span className="text-[11px] font-mono uppercase text-[#F2B632] bg-[#12484C] px-2.5 py-0.5 rounded">
                       {h.city} Sector
                     </span>
-                    <span className="text-xs font-mono text-emerald-500">24/7 Heavy Power</span>
+                    <span className="text-xs font-mono text-emerald-500">Backup power (example)</span>
                   </div>
                   <h3 className="font-display text-xl font-bold uppercase text-[#0E2931] dark:text-[#FFFFFF]">
                     {h.name}
@@ -560,7 +561,7 @@ export const AccountView: React.FC = () => {
                     }}
                     className="btn-gold px-4 py-2 text-xs font-bold uppercase tracking-wider cursor-pointer"
                   >
-                    Reserve Sanctuary →
+                    Browse stays →
                   </button>
                 </div>
               </div>
@@ -569,6 +570,7 @@ export const AccountView: React.FC = () => {
         </div>
       )}
 
+      <button onClick={() => { setActiveRoute('/flights'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} aria-label="Book a flight" className="fixed z-30 right-5 bottom-24 w-14 h-14 rounded-2xl bg-[#c9a955] text-[#102b30] shadow-xl flex items-center justify-center hover:-translate-y-1 transition-transform"><Plane size={22}/></button>
       {/* Modal View for E-Ticket */}
       {selectedTicket && (
         <BoardingPassModal
@@ -576,6 +578,7 @@ export const AccountView: React.FC = () => {
           onClose={() => setSelectedTicket(null)}
         />
       )}
+      <DashboardAssistant role="traveler" />
     </div>
   );
 };

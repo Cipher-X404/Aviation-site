@@ -23,39 +23,38 @@ const MEGA_TABS: MegaTab[] = [
   {
     id: 'flights',
     label: 'Flights & Routes',
-    categoryTitle: 'AERONAUTICAL CORRIDORS',
+    categoryTitle: 'FLIGHTS & DESTINATIONS',
     image: 'https://images.unsplash.com/photo-1436491865332-7a61a109db05?auto=format&fit=crop&w=900&q=80',
-    featuredBadge: '0% TICKETING MARKUP',
+    featuredBadge: 'SAMPLE ROUTE SEARCH',
     links: [
       { label: 'Direct Continental Flights', route: '/flights' },
-      { label: 'Airspace Corridors & Guides', route: '/destinations' },
-      { label: 'Live Airspace Radar', route: '/', scrollTarget: 'live-radar-section' },
+      { label: 'Destinations & travel notes', route: '/destinations' },
+      { label: 'Animated route map', route: '/', scrollTarget: 'live-radar-section' },
       { label: 'Private Fleet & Cabins', route: '/', scrollTarget: 'fleet-showcase-section' },
     ],
   },
   {
     id: 'hotels',
     label: 'Hotels & Stays',
-    categoryTitle: 'ARCHITECTURAL SANCTUARIES',
+    categoryTitle: 'PLACES TO STAY',
     image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80',
-    featuredBadge: 'CAT GENERATOR VERIFIED',
+    featuredBadge: 'SAMPLE HOTEL LISTINGS',
     links: [
       { label: 'Synchronized Hotel Suites', route: '/hotels' },
       { label: 'Flight + Hotel Bundles', route: '/', scrollTarget: 'bundle-showcase-section' },
-      { label: 'Runway Chauffeur Services', route: '/hotels' },
+      { label: 'Airport transfers', route: '/hotels' },
     ],
   },
   {
     id: 'finance',
-    label: 'Finance & Credit',
-    categoryTitle: 'SOVEREIGN TRAVEL CREDIT',
+    label: 'Payment plans',
+    categoryTitle: 'PAYMENT EXAMPLES',
     image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&q=80',
-    featuredBadge: 'INSTANT BVN DECISION',
+    featuredBadge: 'ILLUSTRATIVE CALCULATOR',
     links: [
       { label: 'Fly Now Pay Later Console', route: '/fly-now-pay-later' },
-      { label: 'Live Amortization Calculator', route: '/fly-now-pay-later' },
+      { label: 'Payment examples', route: '/fly-now-pay-later' },
       { label: 'My Trips & Boarding Passes', route: '/account' },
-      { label: 'Admin Dispatch Board', route: '/admin' },
     ],
   },
 ];
@@ -64,8 +63,8 @@ const MEGA_TABS: MegaTab[] = [
 const MOBILE_LINKS = [
   { section: '01 // AIRWAYS', items: [
     { label: 'Flights', route: '/flights' },
-    { label: 'Corridors', route: '/destinations' },
-    { label: 'Live Radar', route: '/', scrollTarget: 'live-radar-section' },
+    { label: 'Destinations', route: '/destinations' },
+    { label: 'Route map', route: '/', scrollTarget: 'live-radar-section' },
     { label: 'Fleet & Cabins', route: '/', scrollTarget: 'fleet-showcase-section' },
   ]},
   { section: '02 // SANCTUARIES', items: [
@@ -77,7 +76,6 @@ const MOBILE_LINKS = [
     { label: 'My Trips', route: '/account' },
   ]},
   { section: '04 // OPERATIONS', items: [
-    { label: 'Admin Ops', route: '/admin' },
   ]},
 ];
 
@@ -198,10 +196,14 @@ export const Navbar: React.FC = () => {
     setActiveRoute(route);
 
     if (scrollTargetId) {
-      setTimeout(() => {
+      let attempts = 0;
+      const findTarget = () => {
         const el = document.getElementById(scrollTargetId);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        else if (attempts++ < 60) requestAnimationFrame(findTarget);
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+      requestAnimationFrame(findTarget);
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -240,18 +242,8 @@ export const Navbar: React.FC = () => {
             onClick={() => navigateTo('/')}
             className="flex items-center gap-2.5 sm:gap-3 text-left group cursor-pointer focus:outline-none shrink-0"
           >
-            {/* Compass Monogram */}
-            <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-[#12484C] to-[#0D5C75] border border-[#2B7574]/50 flex items-center justify-center text-[#F2B632] shadow-sm transition-transform duration-500 group-hover:scale-110">
-              <svg
-                viewBox="0 0 24 24"
-                className="w-4 h-4 fill-none stroke-current stroke-[1.75] transition-transform duration-500 group-hover:rotate-45"
-              >
-                <circle cx="12" cy="12" r="9" strokeOpacity="0.4" />
-                <path d="M12 3L14.5 9.5L21 12L14.5 14.5L12 21L9.5 14.5L3 12L9.5 9.5L12 3Z" fill="currentColor" fillOpacity="0.2" />
-                <circle cx="12" cy="12" r="1.5" fill="#F2B632" />
-              </svg>
-              <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#F2B632] animate-pulse" />
-            </div>
+            {/* Reserved image mark: drop the final brand artwork into this frame later. */}
+            <div aria-label="Aerovista logo image placeholder" className="w-9 h-9 border border-[#9a7727]/60 flex items-center justify-center text-[9px] font-mono tracking-widest text-[#9a7727] transition-colors group-hover:border-[#9a7727]">AV</div>
 
             <div className="flex flex-col">
               <span
@@ -264,7 +256,7 @@ export const Navbar: React.FC = () => {
                 AEROVISTA
               </span>
               <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-[#2B7574] dark:text-[#A5D1E1] uppercase -mt-1 hidden sm:block">
-                Royal Air & Expeditions
+                Travel planning
               </span>
             </div>
           </button>
@@ -316,7 +308,7 @@ export const Navbar: React.FC = () => {
                   ? 'bg-[#12484C] text-[#F4F6F5] border-[#2B7574] hover:bg-[#0E2931] hover:border-[#F2B632] dark:bg-[#12484C]/40 dark:text-[#A5D1E1] dark:border-[#2B7574]/40 dark:hover:border-[#F2B632]'
                   : 'bg-[#12484C] text-[#F4F6F5] border-[#2B7574]/60 hover:bg-[#0E2931] hover:border-[#F2B632] dark:bg-white/5 dark:text-[#F4F6F5] dark:border-[#2B7574]/40'
               }`}
-              title="Search corridors (⌘K)"
+              title="Search the site (⌘K)"
             >
               <Search className="w-3.5 h-3.5 text-[#F2B632]" />
               <span className="text-xs font-mono font-medium tracking-wide text-[#F4F6F5] dark:text-[#A5D1E1]">Search</span>
@@ -434,7 +426,7 @@ export const Navbar: React.FC = () => {
                   <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1.5 text-[10px] font-mono text-[#A5D1E1] tracking-widest">
                       <Radio className="w-3 h-3 text-emerald-400 animate-pulse" />
-                      GDS LIVE
+                      SAMPLE ROUTES
                     </span>
                     <button
                       type="button"
@@ -507,9 +499,9 @@ export const Navbar: React.FC = () => {
                     <div className="mt-6 pt-4 border-t border-[#18363F] flex items-center justify-between">
                       <div className="flex items-center gap-3 text-[10px] font-mono text-[#A5D1E1] tracking-widest">
                         <Radio className="w-3 h-3 text-[#F2B632] animate-pulse" />
-                        <span>40 Active Air Corridors</span>
+                        <span>Sample route list</span>
                         <span>·</span>
-                        <span>VAT & Fuel Included</span>
+                        <span>Check final fare rules with the airline</span>
                       </div>
                       <button
                         onClick={() => navigateTo('/flights')}
@@ -644,7 +636,6 @@ export const Navbar: React.FC = () => {
                 <div className="space-y-1">
                   {[
                     { label: 'My Trips', route: '/account' },
-                    { label: 'Admin Dispatch', route: '/admin' },
                     { label: 'Fly Now Pay Later', route: '/fly-now-pay-later' },
                   ].map((link) => (
                     <button
@@ -693,7 +684,7 @@ export const Navbar: React.FC = () => {
                 className="w-full flex items-center gap-2.5 px-3 py-3 rounded-xl bg-[#12484C]/40 border border-[#2B7574]/40 text-[#A5D1E1] hover:border-[#F2B632]/50 transition-all cursor-pointer"
               >
                 <Search className="w-4 h-4 text-[#F2B632]" />
-                <span className="text-xs font-mono">Search corridors...</span>
+                <span className="text-xs font-mono">Search flights, stays and more</span>
               </button>
 
               <div>
@@ -729,7 +720,7 @@ export const Navbar: React.FC = () => {
             </div>
 
             <div className="relative z-10 text-[10px] font-mono text-[#A5D1E1]/70">
-              <span>ACTIVE GDS TELEMETRY</span>
+              <span>SAMPLE TRAVEL DATA</span>
             </div>
           </div>
 
@@ -764,9 +755,7 @@ export const Navbar: React.FC = () => {
                       onClick={() => navigateTo(item.route, item.scrollTarget)}
                       className="text-left w-full group cursor-pointer block py-3"
                     >
-                      <span className={`font-monument text-lg font-bold uppercase group-hover:text-[#F2B632] transition-colors ${
-                        item.route === '/admin' ? 'text-[#199FB1]' : 'text-[#F4F6F5]'
-                      }`}>
+                      <span className="font-monument text-lg font-bold uppercase group-hover:text-[#F2B632] transition-colors text-[#F4F6F5]">
                         {item.label}
                       </span>
                     </button>

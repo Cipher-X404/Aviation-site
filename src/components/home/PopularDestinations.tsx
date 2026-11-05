@@ -93,7 +93,7 @@ export const PopularDestinations: React.FC = () => {
             POPULAR FLIGHT ROUTES
           </h2>
           <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1 max-w-xl">
-            Direct departures from Lagos (LOS). Tap any route to pre-fill real-time seat availability and lowest available fares.
+            Direct departures from Lagos (LOS). Choose a route to see sample flight options. Check current prices with the airline before booking.
           </p>
         </div>
 

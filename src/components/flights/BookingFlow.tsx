@@ -12,7 +12,6 @@ import {
   Check,
   ArrowRight,
   ArrowLeft,
-  Sparkles,
   Luggage,
   Utensils,
 } from 'lucide-react';
@@ -34,6 +33,7 @@ export const BookingFlow: React.FC = () => {
 
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1);
   const [confirmedBooking, setConfirmedBooking] = useState<BookingRecord | null>(null);
+  const [isBoardingPassOpen, setIsBoardingPassOpen] = useState(false);
 
   // Form state
   const [firstName, setFirstName] = useState(passengers[0]?.firstName || 'Folashade');
@@ -459,7 +459,7 @@ export const BookingFlow: React.FC = () => {
                     Debit / Credit Card
                   </span>
                   <span className="text-[10px] text-[#2B7574] dark:text-[#A5D1E1]">
-                    Pay full fare instantly
+                    Pay the full example fare
                   </span>
                 </button>
 
@@ -491,7 +491,7 @@ export const BookingFlow: React.FC = () => {
                 >
                   <div className="flex items-center justify-between">
                     <span className="block text-xs font-bold">Fly Now, Pay Later</span>
-                    <Sparkles className="w-3.5 h-3.5 text-[#F2B632] stroke-[1.5]" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#F2B632] stroke-[1.5]" />
                   </div>
                   <span className="text-[10px] opacity-80 block mt-1">
                     Pay {loanDownPercent}% today, rest monthly
@@ -507,7 +507,7 @@ export const BookingFlow: React.FC = () => {
                       Configure Flight Financing
                     </span>
                     <span className="text-xs font-mono text-[#2B7574] dark:text-[#A5D1E1]">
-                      Instant Pre-Approval
+                      Example payment plan
                     </span>
                   </div>
 
@@ -586,24 +586,22 @@ export const BookingFlow: React.FC = () => {
 
               <div>
                 <span className="text-xs font-mono uppercase tracking-widest text-[#2B7574] dark:text-[#F2B632]">
-                  RESERVATION CONFIRMED
+                  DEMO BOOKING COMPLETE
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#0E2931] dark:text-[#FFFFFF] mt-1">
                   Ready for Departure
                 </h2>
                 <p className="text-xs text-[#12484C] dark:text-[#A5D1E1] max-w-md mx-auto mt-2">
-                  Your seat <strong>{selectedSeat}</strong> on flight <strong>{flight.flightNumber}</strong> is locked. Your electronic boarding pass has been generated.
+                  This example itinerary has been saved in the demo. No seat is reserved and this is not a valid boarding pass.
                 </p>
               </div>
 
               <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                 <button
-                  onClick={() => {
-                    // Open Boarding Pass Modal
-                  }}
+                  onClick={() => setIsBoardingPassOpen(true)}
                   className="btn-gold px-6 py-2.5 text-xs font-bold uppercase tracking-wider cursor-pointer"
                 >
-                  View & Print Boarding Pass
+                  View sample boarding pass
                 </button>
 
                 <button
@@ -685,10 +683,10 @@ export const BookingFlow: React.FC = () => {
       </div>
 
       {/* Render Boarding Pass Modal when confirmed */}
-      {confirmedBooking && (
+      {confirmedBooking && isBoardingPassOpen && (
         <BoardingPassModal
           booking={confirmedBooking}
-          onClose={() => setConfirmedBooking(null)}
+          onClose={() => setIsBoardingPassOpen(false)}
         />
       )}
     </div>

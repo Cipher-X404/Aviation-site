@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { CABIN_IMAGES } from '../../data/images';
-import { Check, Sparkles, Wifi, Wine, Shield, ArrowRight, Bed, Armchair, Coffee } from 'lucide-react';
+import { Check, Wifi, Wine, Shield, ArrowRight, Bed, Armchair, Coffee } from 'lucide-react';
 
 interface CabinTier {
   id: 'First' | 'Business' | 'Economy';
@@ -21,58 +21,58 @@ interface CabinTier {
 const CABIN_TIERS: CabinTier[] = [
   {
     id: 'First',
-    name: 'ROYAL FIRST SANCTUARY SUITE',
-    subtitle: 'Private Enclosed Sovereign Suites with Sliding Doors',
-    aircraft: 'Boeing 787-10 & Airbus A350-1000',
-    seatPitch: '82 inches',
-    bedLength: '208 cm Full Double Lie-Flat',
-    dining: 'Caviar Service & Dom Pérignon 2013 on demand',
-    connectivity: 'Complimentary High-Throughput Starlink WiFi',
-    groundTransfer: 'Mercedes-Maybach or Armored Sentinel Escort Included',
-    loungeAccess: 'Diplomatic Presidential Lounge + Private Bedroom',
+    name: 'First class',
+    subtitle: 'More space and privacy; details vary by airline and aircraft.',
+    aircraft: 'Aircraft and seat vary by carrier',
+    seatPitch: 'Varies by seat',
+    bedLength: 'Check seat details with the airline',
+    dining: 'Meals and drinks vary by airline and route',
+    connectivity: 'Wi-Fi availability varies by aircraft',
+    groundTransfer: 'Airport transfer is not included unless stated',
+    loungeAccess: 'Lounge access depends on fare and airport',
     highlightFeatures: [
-      'Motorized acoustic sliding privacy door',
-      'Dual ambient lighting with circadian sunset sync',
-      'Poynton & Co. Cashmere Duvet and silk pillow',
-      'Dedicated in-cabin flight attendant per 4 suites',
+      'Privacy features vary by seat',
+      'Seat controls vary by aircraft',
+      'Bedding varies by airline',
+      'Cabin crew support is provided by the airline',
     ],
     imageSrc: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: 'Business',
-    name: 'DIPLOMATIC EXECUTIVE BUSINESS',
-    subtitle: 'Direct Aisle Access 1-2-1 Suite Stagger',
-    aircraft: 'Airbus A330-900neo & Boeing 787-9',
-    seatPitch: '60 inches',
-    bedLength: '198 cm Fully Flat Bed',
-    dining: '3-Course Multi-Choice Continental & Regional Tasting',
-    connectivity: 'High-speed satellite messaging and stream WiFi',
-    groundTransfer: 'Priority Executive Chauffeur Booking Access',
-    loungeAccess: 'Unlimited Sovereign Executive Business Lounges',
+    name: 'Business class',
+    subtitle: 'Seat layout varies by aircraft',
+    aircraft: 'Aircraft and seat vary by carrier',
+    seatPitch: 'Varies by seat',
+    bedLength: 'Check seat details with the airline',
+    dining: 'Meal service varies by airline and route',
+    connectivity: 'Wi-Fi availability varies by aircraft',
+    groundTransfer: 'Transfers are not included unless stated',
+    loungeAccess: 'Lounge access depends on fare and airport',
     highlightFeatures: [
-      'Direct aisle access from every individual seat',
-      'Active noise-canceling Bose A30 headsets',
-      '18-inch 4K touchscreen IFE with Bluetooth pairing',
-      'Fast-track diplomatic security lane in LOS & ABV',
+      'Seat layout varies by aircraft',
+      'Onboard amenities vary by airline',
+      'Entertainment options vary by aircraft',
+      'Airport services vary by terminal',
     ],
     imageSrc: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80',
   },
   {
     id: 'Economy',
-    name: 'VANGUARD PREMIUM COMFORT',
-    subtitle: 'Generous 40-Inch Pitch & Ergonomic Recline',
-    aircraft: 'Fleet-wide Deployment',
-    seatPitch: '40 inches (Industry leading)',
-    bedLength: '8-inch deep recline with articulated cradle',
-    dining: 'Chef-crafted warm entrees & complimentary premium beverages',
-    connectivity: 'On-board messaging portal & USB-C 65W charging',
-    groundTransfer: 'Standard Terminal Pickup Points',
-    loungeAccess: 'Day Pass Available via Royal Miles',
+    name: 'Economy class',
+    subtitle: 'Compare seat pitch and recline by airline',
+    aircraft: 'Aircraft and seat vary by carrier',
+    seatPitch: 'Varies by seat',
+    bedLength: 'Recline varies by seat',
+    dining: 'Meals and drinks depend on route and fare',
+    connectivity: 'Power and connectivity vary by aircraft',
+    groundTransfer: 'Airport transfer is not included unless stated',
+    loungeAccess: 'Lounge access depends on fare and airport',
     highlightFeatures: [
-      'Extra legroom with adjustable 6-way leather headrest',
-      'Curated West African comfort delicacies and wine',
-      'Generous 2 × 23kg checked baggage allowance',
-      'Priority boarding ahead of standard groups',
+      'Seat features vary by aircraft',
+      'Meal options vary by route',
+      'Check baggage allowance with the airline',
+      'Boarding group depends on fare',
     ],
     imageSrc: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
   },
@@ -93,21 +93,21 @@ export const FleetCabinShowcase: React.FC = () => {
   };
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section id="fleet-showcase-section" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#F2B632]" />
             <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase">
-              04. THE PRIVATE FLEET & CABIN ARCHITECTURE
+              04. THE Cabin classes, explained
             </span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
-            CABIN SUITES & ON-BOARD CRAFT
+            A quick guide to cabin classes
           </h2>
           <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1 max-w-2xl">
-            Designed for executive discretion, acoustic stillness, and deep restorative sleep over long-haul corridors.
+            What you get depends on the airline, aircraft and fare. Use this guide as a starting point, then check the seat and included services before booking.
           </p>
         </div>
 
@@ -124,7 +124,7 @@ export const FleetCabinShowcase: React.FC = () => {
                   : 'text-[#12484C] dark:text-[#A5D1E1] hover:text-[#0E2931] dark:hover:text-white'
               }`}
             >
-              {tier.id === 'First' ? 'Royal First' : tier.id === 'Business' ? 'Executive' : 'Vanguard'}
+              {tier.id === 'First' ? 'First class' : tier.id === 'Business' ? 'Business class' : 'Economy class'}
             </button>
           ))}
         </div>
@@ -136,7 +136,7 @@ export const FleetCabinShowcase: React.FC = () => {
         <div className="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between space-y-8">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono text-[#2B7574] dark:text-[#F2B632] uppercase mb-2">
-              <Sparkles className="w-3.5 h-3.5" />
+              <Coffee className="w-3.5 h-3.5" />
               <span>{selectedTier.aircraft}</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-display font-bold uppercase text-[#0E2931] dark:text-white">
@@ -220,7 +220,7 @@ export const FleetCabinShowcase: React.FC = () => {
           {/* Cabin Code Stamp */}
           <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-[#0E2931]/80 backdrop-blur-md border border-white/10 text-white flex items-center justify-between">
             <div>
-              <span className="text-[10px] font-mono text-[#F2B632] uppercase block">AEROVISTA PRIVATE FLEET</span>
+              <span className="text-[10px] font-mono text-[#F2B632] uppercase block">CABIN CLASS GUIDE</span>
               <span className="font-display font-bold text-sm uppercase">{selectedTier.name}</span>
             </div>
             <div className="w-10 h-10 rounded-xl bg-[#F2B632] text-[#0E2931] flex items-center justify-center font-bold text-xs">

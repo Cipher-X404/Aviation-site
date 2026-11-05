@@ -11,7 +11,6 @@ import {
   ArrowRight,
   X,
   Radio,
-  Sparkles,
 } from 'lucide-react';
 
 interface SearchResultItem {
@@ -110,7 +109,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
       category: 'hotel' as const,
       title: h.name,
       subtitle: `${h.district}, ${h.city} · ${h.starRating}★`,
-      badge: h.amenities.hasGeneratorBackup ? '24/7 Power' : 'Sanctuary',
+      badge: h.amenities.hasGeneratorBackup ? 'Backup power' : 'Hotel example',
       routeTarget: '/hotels',
       priceNgn: h.pricePerNightNgn,
       metadata: { hotelDestinationCode: h.destinationCode },
@@ -121,15 +120,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
       id: 'srv-fnpl',
       category: 'service',
       title: 'Fly Now Pay Later',
-      subtitle: 'Instant credit approval · 0% initial down',
+      subtitle: 'Example payment plans · not a credit offer',
       badge: 'FINANCE',
       routeTarget: '/fly-now-pay-later',
     },
     {
       id: 'srv-radar',
       category: 'service',
-      title: 'Live Airspace Radar',
-      subtitle: 'Real-time flight corridor tracking',
+      title: 'Animated route map',
+      subtitle: 'Explore an illustrative route map',
       badge: 'TELEMETRY',
       routeTarget: '/',
       metadata: { scrollTo: 'live-radar-section' },
@@ -138,7 +137,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
       id: 'srv-fleet',
       category: 'service',
       title: 'Private Fleet & Cabins',
-      subtitle: 'Royal First & Diplomatic Business suites',
+      subtitle: 'First and business class options',
       badge: 'CABINS',
       routeTarget: '/',
       metadata: { scrollTo: 'fleet-showcase-section' },
@@ -319,7 +318,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
         >
           {filteredItems.length === 0 ? (
             <div className="py-14 text-center space-y-2">
-              <Sparkles className="w-6 h-6 text-[#2B7574] mx-auto animate-pulse" />
+              <Search className="w-6 h-6 text-[#2B7574] mx-auto animate-pulse" />
               <p className="text-sm font-mono text-[#A5D1E1]">No results found for &ldquo;{query}&rdquo;</p>
               <p className="text-xs text-[#A5D1E1]/50 font-sans">Try searching for Lagos, London, First Class, or Radar</p>
             </div>
@@ -392,7 +391,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
         {/* Compact Footer */}
         <div className="px-5 py-2.5 bg-[#061216] border-t border-[#18363F] flex items-center justify-between text-[11px] font-mono text-[#A5D1E1]/50">
           <span>Use ↑ ↓ to navigate · ↵ to select</span>
-          <span className="text-[#F2B632]/80">AEROVISTA GDS</span>
+          <span className="text-[#F2B632]/80">AEROVISTA SEARCH</span>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { DashboardAssistant } from '../common/DashboardAssistant';
 import { useAppStore, FlightOpsRecord, UnderwritingApplication } from '../../store/useAppStore';
 import { formatPrice } from '../../services/currency';
 import {
@@ -34,7 +35,7 @@ export const AdminDashboard: React.FC = () => {
     approveUnderwriting,
     declineUnderwriting,
     bookingHistory,
-    switchRole,
+    logout,
     setActiveRoute,
   } = useAppStore();
 
@@ -49,6 +50,12 @@ export const AdminDashboard: React.FC = () => {
   const showNotification = (msg: string) => {
     setActionNotice(msg);
     setTimeout(() => setActionNotice(null), 3500);
+  };
+
+  const endAdminSession = async () => {
+    await fetch('/api/admin/logout', { method: 'POST', credentials: 'same-origin' }).catch(() => undefined);
+    logout();
+    setActiveRoute('/');
   };
 
   const handleUpdateFlight = (flightId: string) => {
@@ -78,7 +85,7 @@ export const AdminDashboard: React.FC = () => {
   const pendingLoansCount = underwritingQueue.filter((q) => q.status === 'Pending').length;
 
   return (
-    <div className="min-h-screen pt-28 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 animate-fade-in">
+    <div className="min-h-screen pt-28 pb-36 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 animate-fade-in">
       {/* Top Notification Toast */}
       {actionNotice && (
         <div className="fixed top-24 right-6 z-50 bg-[#12484C] text-[#F2B632] px-5 py-3 rounded-xl shadow-xl border border-[#2B7574]/40 flex items-center gap-3 font-mono text-xs animate-bounce">
@@ -88,7 +95,7 @@ export const AdminDashboard: React.FC = () => {
       )}
 
       {/* Admin Executive Header Bar */}
-      <div className="rounded-3xl bg-gradient-to-r from-[#09171C] via-[#0E2931] to-[#12484C] text-white p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+      <div className="rounded-3xl bg-[#101f24] text-white p-6 sm:p-10 shadow-2xl relative overflow-hidden">
         {/* Ambient background glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#199FB1]/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -97,14 +104,14 @@ export const AdminDashboard: React.FC = () => {
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
               <span className="text-[11px] font-mono tracking-widest text-[#F2B632] uppercase">
-                AEROVISTA FLIGHT OPERATIONS CENTER · MM2 STATION (LOS/DNMM)
+                AEROVISTA · DEMO OPERATIONS
               </span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-display font-bold uppercase tracking-wide">
               EXECUTIVE DISPATCH & RISK PORTAL
             </h1>
             <p className="text-xs sm:text-sm text-[#A5D1E1] mt-1 max-w-2xl font-body">
-              Command station for active air corridors, real-time load factors, automated credit underwriting, and passenger manifest ledger.
+              Demo operations dashboard. Flight statuses, payment applications and passenger records are sample data; actions here only update this screen.
             </p>
           </div>
 
@@ -126,7 +133,7 @@ export const AdminDashboard: React.FC = () => {
               <div className="flex items-center gap-3 mt-2">
                 <button
                   type="button"
-                  onClick={switchRole}
+                  onClick={() => void endAdminSession()}
                   className="text-[11px] font-mono text-[#F2B632] hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <RefreshCw className="w-3 h-3" />
@@ -135,9 +142,7 @@ export const AdminDashboard: React.FC = () => {
                 <span className="text-white/20">|</span>
                 <button
                   type="button"
-                  onClick={() => {
-                    setActiveRoute('/');
-                  }}
+                  onClick={() => void endAdminSession()}
                   className="text-[11px] font-mono text-[#A5D1E1] hover:text-white flex items-center gap-1 cursor-pointer"
                 >
                   <LogOut className="w-3 h-3" />
@@ -185,43 +190,45 @@ export const AdminDashboard: React.FC = () => {
 
           <div className="bg-white/5 p-4 rounded-xl backdrop-blur-sm">
             <div className="flex items-center justify-between text-[#A5D1E1] text-[11px] font-mono uppercase mb-1">
-              <span>GDS Confirmed</span>
+              <span>Sample bookings</span>
               <FileText className="w-3.5 h-3.5 text-emerald-400" />
             </div>
             <div className="text-lg sm:text-xl font-bold font-mono tabular-nums text-white">
               {totalBookingsCount} Active PNRs
             </div>
-            <div className="text-[10px] text-white/50 font-mono mt-0.5">100% electronic ticketing</div>
+            <div className="text-[10px] text-white/50 font-mono mt-0.5">Example records only</div>
           </div>
         </div>
       </div>
 
       {/* Navigation Tabs (Luxury Pill-Free Editorial Bar) */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-[#2B7574]/20 pb-4">
+      <div className="fixed z-40 bottom-4 left-1/2 -translate-x-1/2 w-[min(94vw,620px)] flex items-center justify-around gap-1 p-2 bg-[#e9e4d8] dark:bg-[#102b30] border border-[#9a7727]/50 shadow-[0_18px_55px_rgba(0,0,0,.32)] rounded-[26px]">
         <button
           type="button"
+          aria-pressed={activeTab === 'flights'}
           onClick={() => setActiveTab('flights')}
-          className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+          className={`px-2 sm:px-3 py-3 rounded-2xl text-[8px] sm:text-[9px] font-mono font-bold tracking-wide uppercase transition-all duration-300 flex flex-col items-center justify-center gap-1 cursor-pointer max-w-[24%] leading-tight ${
             activeTab === 'flights'
               ? 'bg-[#12484C] text-[#F2B632] shadow-lg shadow-[#12484C]/25'
               : 'bg-white dark:bg-[#0E2931]/50 text-[#12484C] dark:text-[#A5D1E1] hover:bg-[#12484C]/10'
           }`}
         >
           <Plane className="w-4 h-4" />
-          <span>Flight Dispatch & Radar ({flightOps.length})</span>
+          <span>Flight ops</span>
         </button>
 
         <button
           type="button"
+          aria-pressed={activeTab === 'loans'}
           onClick={() => setActiveTab('loans')}
-          className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 cursor-pointer relative ${
+          className={`px-2 sm:px-3 py-3 rounded-2xl text-[8px] sm:text-[9px] font-mono font-bold tracking-wide uppercase transition-all duration-300 flex flex-col items-center justify-center gap-1 cursor-pointer max-w-[24%] leading-tight relative ${
             activeTab === 'loans'
               ? 'bg-[#12484C] text-[#F2B632] shadow-lg shadow-[#12484C]/25'
               : 'bg-white dark:bg-[#0E2931]/50 text-[#12484C] dark:text-[#A5D1E1] hover:bg-[#12484C]/10'
           }`}
         >
           <CreditCard className="w-4 h-4" />
-          <span>Loan Underwriting Queue</span>
+          <span>Loan queue</span>
           {pendingLoansCount > 0 && (
             <span className="w-2 h-2 rounded-full bg-[#F2B632] animate-pulse" />
           )}
@@ -229,28 +236,30 @@ export const AdminDashboard: React.FC = () => {
 
         <button
           type="button"
+          aria-pressed={activeTab === 'passengers'}
           onClick={() => setActiveTab('passengers')}
-          className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+          className={`px-2 sm:px-3 py-3 rounded-2xl text-[8px] sm:text-[9px] font-mono font-bold tracking-wide uppercase transition-all duration-300 flex flex-col items-center justify-center gap-1 cursor-pointer max-w-[24%] leading-tight ${
             activeTab === 'passengers'
               ? 'bg-[#12484C] text-[#F2B632] shadow-lg shadow-[#12484C]/25'
               : 'bg-white dark:bg-[#0E2931]/50 text-[#12484C] dark:text-[#A5D1E1] hover:bg-[#12484C]/10'
           }`}
         >
           <Users className="w-4 h-4" />
-          <span>Passenger Ledger & GDS Manifest ({bookingHistory.length})</span>
+          <span>Passengers</span>
         </button>
 
         <button
           type="button"
+          aria-pressed={activeTab === 'sanctuary'}
           onClick={() => setActiveTab('sanctuary')}
-          className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+          className={`px-2 sm:px-3 py-3 rounded-2xl text-[8px] sm:text-[9px] font-mono font-bold tracking-wide uppercase transition-all duration-300 flex flex-col items-center justify-center gap-1 cursor-pointer max-w-[24%] leading-tight ${
             activeTab === 'sanctuary'
               ? 'bg-[#12484C] text-[#F2B632] shadow-lg shadow-[#12484C]/25'
               : 'bg-white dark:bg-[#0E2931]/50 text-[#12484C] dark:text-[#A5D1E1] hover:bg-[#12484C]/10'
           }`}
         >
           <Building className="w-4 h-4" />
-          <span>VIP Sanctuary & Ground Fleet</span>
+          <span>Hotels</span>
         </button>
       </div>
 
@@ -260,10 +269,10 @@ export const AdminDashboard: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h2 className="text-xl font-display font-bold uppercase text-[#0E2931] dark:text-white">
-                LIVE DISPATCH SCHEDULE
+                Sample flight statuses
               </h2>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] font-mono">
-                Click any flight to re-assign departure gates or update live transponder status.
+                Select a sample flight to edit its gate or status in this dashboard.
               </p>
             </div>
 
@@ -361,7 +370,7 @@ export const AdminDashboard: React.FC = () => {
                     className="w-full py-2 px-3 rounded-lg bg-[#12484C]/10 dark:bg-white/5 hover:bg-[#12484C] hover:text-[#F2B632] dark:hover:bg-[#12484C] text-xs font-mono uppercase font-bold text-[#12484C] dark:text-[#A5D1E1] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <Sliders className="w-3.5 h-3.5" />
-                    <span>Adjust Gate & Telemetry</span>
+                    <span>Edit sample flight details</span>
                   </button>
                 </div>
               );
@@ -436,7 +445,7 @@ export const AdminDashboard: React.FC = () => {
         </div>
       )}
 
-      {/* Tab 2: Loan Underwriting Queue */}
+      {/* Tab 2: Loan queue */}
       {activeTab === 'loans' && (
         <div className="space-y-6">
           <div>
@@ -444,7 +453,7 @@ export const AdminDashboard: React.FC = () => {
               FLY NOW PAY LATER UNDERWRITING DESK
             </h2>
             <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] font-mono">
-              Algorithmic credit evaluation powered by real-time BVN & Bank Verification feeds. Review and approve ticket financing instantly.
+              Sample applications for interface testing. This dashboard does not connect to BVN, bank records or a live credit decision service.
             </p>
           </div>
 
@@ -491,7 +500,7 @@ export const AdminDashboard: React.FC = () => {
                     </div>
                     <div>
                       <span className="text-[10px] text-[#12484C]/60 dark:text-[#A5D1E1]/60 block uppercase">
-                        Verified Income
+                        Income (sample)
                       </span>
                       <span className="font-bold text-[#0E2931] dark:text-white tabular-nums">
                         {formatPrice(app.monthlyIncomeNgn, currency)}/mo
@@ -526,18 +535,18 @@ export const AdminDashboard: React.FC = () => {
                       type="button"
                       onClick={() => {
                         approveUnderwriting(app.id);
-                        showNotification(`Loan application ${app.id} approved. PNR issued.`);
+                        showNotification(`Sample application ${app.id} marked approved.`);
                       }}
                       className="flex-1 py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                     >
                       <CheckCircle2 className="w-4 h-4" />
-                      <span>Approve & Issue PNR</span>
+                      <span>Mark example approved</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => {
                         declineUnderwriting(app.id);
-                        showNotification(`Loan application ${app.id} marked as declined.`);
+                        showNotification(`Sample application ${app.id} marked declined.`);
                       }}
                       className="py-2.5 px-4 rounded-xl bg-rose-600/10 hover:bg-rose-600 hover:text-white text-rose-600 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1 cursor-pointer"
                     >
@@ -547,7 +556,7 @@ export const AdminDashboard: React.FC = () => {
                   </div>
                 ) : (
                   <div className="pt-2 border-t border-[#E2E2E0] dark:border-[#1E3E47] text-xs font-mono text-center text-[#12484C]/70 dark:text-[#A5D1E1]/70">
-                    Decision finalized · Automated notification dispatched to traveler
+                    Example status saved in this demo
                   </div>
                 )}
               </div>
@@ -556,13 +565,13 @@ export const AdminDashboard: React.FC = () => {
         </div>
       )}
 
-      {/* Tab 3: Passenger Ledger & GDS Manifest */}
+      {/* Tab 3: Passenger list */}
       {activeTab === 'passengers' && (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h2 className="text-xl font-display font-bold uppercase text-[#0E2931] dark:text-white">
-                GDS ELECTRONIC PASSENGER MANIFEST
+                SAMPLE BOOKING RECORDS
               </h2>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] font-mono">
                 Real-time booking records synchronized across regional and international sectors.
@@ -636,7 +645,7 @@ export const AdminDashboard: React.FC = () => {
         </div>
       )}
 
-      {/* Tab 4: VIP Sanctuary & Ground Fleet */}
+      {/* Tab 4: Hotels */}
       {activeTab === 'sanctuary' && (
         <div className="space-y-6">
           <div>
@@ -644,7 +653,7 @@ export const AdminDashboard: React.FC = () => {
               SANCTUARY RESIDENCES & GROUND CHAUFFEUR TELEMETRY
             </h2>
             <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] font-mono">
-              24/7 Uninterrupted Clean Power guarantee and armored diplomatic ground transport manifests.
+              Example hotel and transfer information. Confirm amenities and transport details with each provider.
             </p>
           </div>
 
@@ -655,10 +664,10 @@ export const AdminDashboard: React.FC = () => {
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               </div>
               <h3 className="font-display font-bold text-base uppercase text-[#0E2931] dark:text-white">
-                The Chesney Sanctuary & Diplomatic Suites
+                The Chesney Hotels & Diplomatic Suites
               </h3>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] mt-2">
-                14/16 Allocated · 100% Dual Turbine Backup Live · Zero Grid Fluctuation.
+                Example property details · confirm directly with the hotel.
               </p>
               <div className="mt-4 pt-4 border-t border-[#E2E2E0] dark:border-[#1E3E47] text-xs font-mono">
                 Ground Escorts: 4 Mercedes Maybach S680 on standby at MM2 Diplomatic Apron.
@@ -674,7 +683,7 @@ export const AdminDashboard: React.FC = () => {
                 Transcorp Hilton Presidential Wing
               </h3>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] mt-2">
-                8/10 Allocated · High-security diplomatic corridor with direct helipad clearance.
+                Example room allocation. Confirm property details and transfers directly.
               </p>
               <div className="mt-4 pt-4 border-t border-[#E2E2E0] dark:border-[#1E3E47] text-xs font-mono">
                 Ground Escorts: 2 Armored Sentinel Range Rovers active.
@@ -699,6 +708,8 @@ export const AdminDashboard: React.FC = () => {
           </div>
         </div>
       )}
+      <button onClick={() => { setActiveRoute('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} aria-label="Return to site home" className="fixed z-30 right-5 bottom-24 w-14 h-14 rounded-2xl bg-[#c9a955] text-[#102b30] shadow-xl flex items-center justify-center hover:-translate-y-1 transition-transform"><Plane size={22}/></button>
+      <DashboardAssistant role="admin" onAdminAction={(action) => setActiveTab(action as 'flights' | 'loans' | 'passengers' | 'sanctuary')} />
     </div>
   );
 };

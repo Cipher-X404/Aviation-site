@@ -1,0 +1,7 @@
+{
+  "name": "Aerovista Air & Expeditions",
+  "description": "Luxury air travel, real-time flight bookings, integrated hotel reservations, and flexible Fly Now Pay Later flight financing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

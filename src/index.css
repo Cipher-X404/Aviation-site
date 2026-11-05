@@ -1,0 +1,329 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --ink: #0E2931;
+  --deep: #12484C;
+  --teal: #2B7574;
+  --ocean-1: #0D5C75;
+  --ocean-2: #199FB1;
+  --ocean-3: #A5D1E1;
+  --paper: #F4F6F5;
+  --line: #E2E2E0;
+  --gold: #F2B632;
+  --crimson: #861211;
+
+  --font-display: 'Cinzel', 'Cormorant Garamond', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-serif: 'Cormorant Garamond', 'Cinzel', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+.dark {
+  --ink: #EAEFEF;
+  --deep: #0B2426;
+  --teal: #3BA09E;
+  --ocean-1: #083442;
+  --ocean-2: #199FB1;
+  --ocean-3: #183C49;
+  --paper: #09171C;
+  --line: #18363F;
+  --gold: #F2B632;
+  --crimson: #C93938;
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+  
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background-color: var(--paper);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+}
+
+/* Tabular numerals for prices, departure times, flight numbers */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Topographic Contour SVG background texture */
+.bg-topo {
+  background-image: radial-gradient(circle at 50% 50%, rgba(43, 117, 116, 0.08) 1px, transparent 1px),
+    linear-gradient(to right, rgba(18, 72, 76, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(18, 72, 76, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px, 48px 48px, 48px 48px;
+}
+
+.dark .bg-topo {
+  background-image: radial-gradient(circle at 50% 50%, rgba(59, 160, 158, 0.12) 1px, transparent 1px),
+    linear-gradient(to right, rgba(43, 117, 116, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(43, 117, 116, 0.06) 1px, transparent 1px);
+}
+
+/* Contour line overlay pattern */
+.bg-contour {
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30 Q 30 10, 60 30 T 120 30 M0 60 Q 30 40, 60 60 T 120 60 M0 90 Q 30 70, 60 90 T 120 90' stroke='rgba(43, 117, 116, 0.07)' fill='none' stroke-width='1.2'/%3E%3C/svg%3E");
+}
+
+.dark .bg-contour {
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30 Q 30 10, 60 30 T 120 30 M0 60 Q 30 40, 60 60 T 120 60 M0 90 Q 30 70, 60 90 T 120 90' stroke='rgba(59, 160, 158, 0.1)' fill='none' stroke-width='1.2'/%3E%3C/svg%3E");
+}
+
+/* Ocean gradient for the Fly Now Pay Later section */
+.bg-ocean-gradient {
+  background: linear-gradient(135deg, #0D5C75 0%, #12484C 50%, #199FB1 100%);
+}
+
+/* Perforated divider for boarding passes */
+.border-perforated {
+  background-image: linear-gradient(to right, #2B7574 40%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 12px 1.5px;
+  background-repeat: repeat-x;
+}
+
+.dark .border-perforated {
+  background-image: linear-gradient(to right, #3BA09E 40%, rgba(255, 255, 255, 0) 0%);
+}
+
+.border-perforated-v {
+  background-image: linear-gradient(to bottom, #2B7574 40%, rgba(255, 255, 255, 0) 0%);
+  background-position: right;
+  background-size: 1.5px 12px;
+  background-repeat: repeat-y;
+}
+
+/* Ticket notch cutouts */
+.ticket-notch-left {
+  position: relative;
+}
+.ticket-notch-left::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -12px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-color: var(--paper);
+  border-radius: 9999px;
+  box-shadow: inset -2px 0 3px rgba(18, 72, 76, 0.15);
+  z-index: 10;
+}
+
+.ticket-notch-right {
+  position: relative;
+}
+.ticket-notch-right::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-color: var(--paper);
+  border-radius: 9999px;
+  box-shadow: inset 2px 0 3px rgba(18, 72, 76, 0.15);
+  z-index: 10;
+}
+
+/* Custom gold button styling */
+.btn-gold {
+  background-color: #F2B632;
+  color: #0E2931;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(242, 182, 50, 0.25);
+  border-radius: 6px;
+}
+.btn-gold:hover {
+  background-color: #F8C34B;
+  box-shadow: 0 6px 20px rgba(242, 182, 50, 0.35);
+  transform: translateY(-1px);
+}
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* Soft teal tinted shadows */
+.shadow-teal-soft {
+  box-shadow: 0 8px 30px -4px rgba(18, 72, 76, 0.12);
+}
+
+.dark .shadow-teal-soft {
+  box-shadow: 0 8px 30px -4px rgba(8, 24, 29, 0.6);
+}
+
+/* Film grain subtle overlay */
+.film-grain {
+  position: relative;
+}
+.film-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Hide scrollbars while preserving scroll functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Trove-Style Debossed Monument Wordmark */
+.font-monument {
+  font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+}
+
+.trove-debossed {
+  position: relative;
+  color: #ECEEEB;
+  -webkit-text-stroke: 1.5px rgba(22, 50, 56, 0.12);
+  text-shadow:
+    -2px -2px 3px rgba(255, 255, 255, 0.95),
+    2px 2px 5px rgba(14, 41, 49, 0.18),
+    inset 0 2px 4px rgba(14, 41, 49, 0.15);
+  user-select: none;
+}
+
+.dark .trove-debossed {
+  color: #0B191E;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
+  text-shadow:
+    -1px -1px 2px rgba(255, 255, 255, 0.04),
+    2px 3px 6px rgba(0, 0, 0, 0.8),
+    inset 0 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* Diagonal Sunbeam Caustic Sheen across the footer wordmark */
+.trove-light-streaks {
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0px,
+    rgba(255, 255, 255, 0) 60px,
+    rgba(255, 255, 255, 0.18) 75px,
+    rgba(255, 255, 255, 0.28) 90px,
+    rgba(255, 255, 255, 0.18) 105px,
+    rgba(255, 255, 255, 0) 120px,
+    rgba(255, 255, 255, 0) 220px
+  );
+  pointer-events: none;
+}
+
+.dark .trove-light-streaks {
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0px,
+    rgba(255, 255, 255, 0) 60px,
+    rgba(43, 117, 116, 0.08) 75px,
+    rgba(242, 182, 50, 0.06) 90px,
+    rgba(43, 117, 116, 0.08) 105px,
+    rgba(255, 255, 255, 0) 120px,
+    rgba(255, 255, 255, 0) 220px
+  );
+}
+
+/* Contest-Grade 10X Luxury Card Styling (Zero Border Color Change) */
+.card-luxury {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px -2px rgba(18, 72, 76, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.card-luxury:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px -12px rgba(18, 72, 76, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.dark .card-luxury {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.dark .card-luxury:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px -12px rgba(18, 72, 76, 0.45), inset 0 1px 0 rgba(242, 182, 50, 0.15);
+}
+
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Nav Link Hover Magnetic Glow & Beam */
+.nav-link-hover {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #F2B632, transparent);
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link-hover:hover::after {
+  transform: scaleX(1);
+}
+
+/* Section Reveal Fade */
+@keyframes sectionFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-section-reveal {
+  animation: sectionFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+

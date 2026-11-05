@@ -12,7 +12,6 @@ import {
   Compass,
   CheckCircle2,
   Activity,
-  Sparkles,
   Lock
 } from 'lucide-react';
 
@@ -35,12 +34,12 @@ interface EnhancedLog {
 const BLACK_BOX_LOGS: EnhancedLog[] = [
   {
     id: 'fdr-01',
-    author: 'Dr. Folashade Adeleke',
-    title: 'Consultant Cardiovascular Surgeon · Lagoon Premier Health',
-    route: 'LOS → DXB · Royal First Suite',
-    verifiedBookingRef: 'AV-8842-DXB',
+    author: 'Sample journey 01',
+    title: 'Lagos to Dubai · example itinerary',
+    route: 'LOS → DXB · sample route',
+    verifiedBookingRef: 'EXAMPLE-01',
     quote:
-      'Traveling between Lagos and Dubai for high-acuity surgical symposia requires total sleep reliability. Aerovista’s private suite delivered seamless 24/7 Starlink connectivity, complete acoustic isolation from engine harmonics, and an expedited diplomatic tarmac transfer that saved me 45 minutes.',
+      'Example only: a traveller compares flight times and cabin options for a Lagos–Dubai trip, then checks arrival transport before choosing a hotel.',
     travelMonth: 'OCT 2026',
     frequency: '128.450 MHz',
     aircraft: 'Boeing 787-10 Dreamliner',
@@ -51,12 +50,12 @@ const BLACK_BOX_LOGS: EnhancedLog[] = [
   },
   {
     id: 'fdr-02',
-    author: 'Engr. Babatunde Sowore',
-    title: 'Managing Director · Sahara Infrastructure Consortium',
-    route: 'LOS → ABV · Executive Diplomatic',
-    verifiedBookingRef: 'AV-7319-ABV',
+    author: 'Sample journey 02',
+    title: 'Lagos to Abuja · example itinerary',
+    route: 'LOS → ABV · sample route',
+    verifiedBookingRef: 'EXAMPLE-02',
     quote:
-      'The Fly Now, Pay Later underwriting verified my corporate credentials in under 90 seconds. We booked five executive engineers to Abuja with zero capital friction. The integrated hotel reservation was ready on arrival with guaranteed 100% heavy generator power.',
+      'Example only: a small team compares flight times to Abuja and reviews hotel location, check-in details and listed amenities.',
     travelMonth: 'NOV 2026',
     frequency: '131.200 MHz',
     aircraft: 'Airbus A330-900neo',
@@ -67,12 +66,12 @@ const BLACK_BOX_LOGS: EnhancedLog[] = [
   },
   {
     id: 'fdr-03',
-    author: 'Lady Genevieve Al-Hassan',
-    title: 'Senior Partner · Westminster & Gulf Private Wealth',
-    route: 'LOS → LHR · Vanguard Royal First',
-    verifiedBookingRef: 'AV-9912-LHR',
+    author: 'Sample journey 03',
+    title: 'Lagos to London · example itinerary',
+    route: 'LOS → LHR · sample route',
+    verifiedBookingRef: 'EXAMPLE-03',
     quote:
-      'The sanctuary suite and ground chauffeur in London were synchronized with uncanny precision. When our flight was slightly rescheduled due to headwinds over the Sahara corridor, the concierge team had already adjusted our private terminal greeting.',
+      'Example only: someone planning a London trip compares arrival times and looks into the journey from the airport to their hotel.',
     travelMonth: 'OCT 2026',
     frequency: '119.800 MHz',
     aircraft: 'Airbus A350-1000',
@@ -111,21 +110,21 @@ export const TestimonialsSection: React.FC = () => {
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase">
-              05. VERIFIED PASSENGER ACCOUNTS · CVR/FDR TELEMETRY
+              05. SAMPLE TRAVEL SCENARIOS
             </span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
-            FLIGHT RECORDER ACOUSTIC LOGBOOK
+            Three ways a trip might come together
           </h2>
           <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1 max-w-2xl">
-            Direct airborne debriefs from verified executive flyers. Cryptographically signed and recorded in flight deck archives.
+            These are fictional examples to show how flight and hotel details might fit together. They are not customer reviews or real bookings.
           </p>
         </div>
 
         {/* Cryptographic Seal Watermark */}
         <div className="flex items-center gap-2 bg-[#12484C]/10 dark:bg-white/5 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-mono text-[#12484C] dark:text-[#F2B632]">
           <ShieldCheck className="w-4 h-4 text-emerald-500" />
-          <span>IATA / GDS CRYPTOGRAPHIC VERIFICATION</span>
+          <span>ILLUSTRATIVE CONTENT</span>
         </div>
       </div>
 
@@ -256,7 +255,7 @@ export const TestimonialsSection: React.FC = () => {
                   OFFICIAL DEBRIEF TRANSCRIPT
                 </span>
                 <span className="text-xs font-mono text-[#F2B632] bg-[#12484C] px-3 py-1 rounded-lg">
-                  VERIFIED PNR: {activeLog.verifiedBookingRef}
+                  SAMPLE REFERENCE: {activeLog.verifiedBookingRef}
                 </span>
               </div>
 

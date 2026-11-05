@@ -13,13 +13,13 @@ export const FaqSection: React.FC = () => {
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
       <div className="mb-12 text-center">
         <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
-          06. CLARITY & PROTOCOLS
+          06. GOOD TO KNOW
         </span>
         <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
-          FREQUENTLY ASKED QUESTIONS
+          A few common questions
         </h2>
         <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1">
-          Everything you need to know about flight ticketing, hotel syncing, and Fly Now Pay Later.
+          What this demo can do, and where to check the details that matter.
         </p>
       </div>
 

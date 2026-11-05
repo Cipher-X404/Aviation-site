@@ -237,7 +237,7 @@ export const SupportModal: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Flight Deck Ground Dispatch Console (Bespoke Interactive Terminal) ── */}
+      {/* ── Flight Deck Ground Dispatch Console ── */}
       {isSupportOpen && (
         <div
           className="fixed bottom-24 right-4 sm:right-7 z-50 w-[360px] sm:w-[420px] bg-[#07161B]/97 text-[#F4F6F5] border border-[#2B7574]/60 rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col h-[540px] animate-chat-rise select-none relative"
@@ -265,7 +265,7 @@ export const SupportModal: React.FC = () => {
                   <span className="font-monument text-[13px] font-bold tracking-wider text-white">
                     Aerovista Concierge
                   </span>
-                  <span className="text-[8px] font-mono px-1.5 py-0.2 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                  <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
                     <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" /> LIVE
                   </span>
                 </div>

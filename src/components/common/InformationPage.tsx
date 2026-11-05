@@ -1,0 +1,20 @@
+import React from 'react';
+import { useAppStore } from '../../store/useAppStore';
+
+const content: Record<string, { label: string; title: string; intro: string; sections: [string, string][] }> = {
+  '/about': { label: 'A note from Aerovista', title: 'Travel should feel considered, from the first search to the return home.', intro: 'Aerovista is a travel-planning experience shaped around West African departures, thoughtful stays and clear decisions. This site is a product prototype: routes, prices and availability shown in the interface may be illustrative rather than live inventory.', sections: [['A better starting point', 'Compare the details that shape a trip: departure, arrival, cabin, stay and payment options. Keep the information that matters visible and the next step easy to understand.'], ['Designed around real journeys', 'We put local airports, Nigerian naira and practical travel questions near the centre of the experience, rather than treating them as an afterthought.'], ['Need assistance?', 'This prototype has no live support channel. Do not enter passport details, payment card numbers or other sensitive personal information.']] },
+  '/privacy': { label: 'Privacy', title: 'Your information deserves a clear explanation.', intro: 'This prototype stores some interface choices and sample travel data in the browser so its screens can be explored. It is not a live booking service.', sections: [['Information in this demo', 'The account, itinerary and payment examples may be simulated. Do not enter real passport, identity, health or payment information into this site.'], ['Browser storage', 'The experience may use local browser storage to remember preferences or demonstration state. Clearing site data in your browser removes that local state.'], ['Contact', 'This prototype does not collect personal information for a live travel service. This page is product guidance for the prototype, not a substitute for a jurisdiction-specific privacy notice.']] },
+  '/terms': { label: 'Terms of use', title: 'A prototype, not a booking service.', intro: 'Aerovista is provided here for product demonstration. Sample fares, hotel details, loan examples, flight status and availability should not be relied on to make travel or financial decisions.', sections: [['No live reservation', 'Actions on this site may update a local demonstration state only. They do not guarantee a seat, room, ticket, financing approval or reservation.'], ['Verify before travel', 'Before purchasing travel, confirm the itinerary, fare rules, baggage allowance, visa requirements and property policies with the relevant carrier or provider.'], ['Questions', 'This prototype has no live support channel. Please do not enter sensitive personal or payment information.']] },
+};
+
+export const InformationPage: React.FC<{ route: string }> = ({ route }) => {
+  const page = content[route];
+  const setActiveRoute = useAppStore((state) => state.setActiveRoute);
+  if (!page) return null;
+  return <div className="pt-32 pb-24 px-6 sm:px-10 max-w-7xl mx-auto min-h-[70vh]">
+    <div className="grid lg:grid-cols-[.8fr_1.2fr] gap-10 lg:gap-24">
+      <header><p className="text-[10px] uppercase tracking-[.28em] text-[#9a7727] mb-5">{page.label}</p><h1 className="font-serif normal-case tracking-tight text-5xl sm:text-7xl leading-[.98]">{page.title}</h1><button onClick={() => setActiveRoute('/')} className="mt-9 text-xs uppercase tracking-[.18em] border-b border-[#9a7727] pb-2 hover:text-[#9a7727]">Return to Aerovista ↗</button></header>
+      <div><p className="text-lg leading-8 opacity-80 border-l-2 border-[#c9a955] pl-5 mb-12">{page.intro}</p><div className="divide-y divide-[#2B7574]/20 border-y border-[#2B7574]/20">{page.sections.map(([title, body], i) => <section key={title} className="grid grid-cols-[42px_1fr] gap-4 py-6"><span className="font-mono text-xs text-[#9a7727]">0{i + 1}</span><div><h2 className="font-serif normal-case tracking-normal text-2xl">{title}</h2><p className="mt-3 text-sm leading-7 opacity-70">{body}</p></div></section>)}</div></div>
+    </div>
+  </div>;
+};

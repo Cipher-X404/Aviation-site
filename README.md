@@ -1,20 +1,43 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Aerovista
 
-# Run and deploy your AI Studio app
+A travel-planning prototype for West African departures, sample stays and itinerary planning.
 
-This contains everything you need to run your app locally.
+## Run locally
 
-View your app in AI Studio: https://ai.studio/apps/df1335a3-b8a0-4a68-be18-62b961463650
+```sh
+npm install
+npm run dev
+```
 
-## Run Locally
+The trip planner and dashboard assistants work in guided local mode without a provider key. To enable Gemini responses, create `.env.local` (never commit it) and add:
 
-**Prerequisites:**  Node.js
+```env
+GEMINI_API_KEY=your-server-side-key
+GEMINI_MODEL=gemini-2.5-flash
+```
 
+The key is read by the Vite server middleware and is never sent to browser code. Prompts are sent to Gemini when it is configured. The assistant is not connected to airline, hotel, payment, credit or airport systems.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Administrator access
+
+The admin area is locked unless the server has an `ADMIN_ACCESS_CODE`. Set a long, unique value in `.env.local`:
+
+```env
+ADMIN_ACCESS_CODE=use-a-long-random-secret-here
+```
+
+Admin sign-in uses an HttpOnly, SameSite=Strict session cookie, a short expiry and rate-limited attempts. The dashboard and all its records are still sample data. Do not use this shared-code prototype as a substitute for production identity and authorization (such as an audited identity provider, per-user roles, persistent session storage, CSRF protections, monitoring and a real data-access layer). For a production deployment, configure secrets only in the host's secret manager and serve the built app with:
+
+```sh
+npm run build
+npm start
+```
+
+`npm run preview` also enables the local API middleware for testing a production build.
+
+## Checks
+
+```sh
+npm run build
+npm run lint
+```

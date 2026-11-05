@@ -379,3 +379,18 @@
   0%, 100% { transform: scaleY(0.4); }
   50% { transform: scaleY(1); }
 }
+
+/* Keyboard users get a clear, high-contrast focus marker across native controls. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid #c9a955;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

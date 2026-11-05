@@ -11,7 +11,6 @@ import {
   LifeBuoy,
   Send,
   Check,
-  ArrowUp,
 } from 'lucide-react';
 
 interface FooterLink {

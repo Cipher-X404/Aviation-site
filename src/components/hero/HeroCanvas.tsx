@@ -21,37 +21,37 @@ interface SceneContent {
 const SCENES: SceneContent[] = [
   {
     id: 'scene-1',
-    badge: 'EXPEDITION 01 // DAWN ASCENT',
-    headline: 'AEROVISTA ROYAL',
+    badge: 'START WITH THE JOURNEY',
+    headline: 'AEROVISTA',
     subheadline:
-      'Bespoke aeronautical charters and direct continental routing with uncompromising luxury.',
+      'Plan a flight, find a place to stay, and keep the details together.',
     start: 0.0,
     end: 0.28,
   },
   {
     id: 'scene-2',
-    badge: 'EXPEDITION 02 // CRUISE LEVEL 38,000 FT',
+    badge: 'ROUTES TO CONSIDER',
     headline: 'ABOVE THE HORIZON',
     subheadline:
-      'Guaranteed premium seating across 40+ African corridors and international transit capitals.',
+      'Compare sample routes from Lagos to regional and international destinations.',
     start: 0.28,
     end: 0.58,
   },
   {
     id: 'scene-3',
-    badge: 'EXPEDITION 03 // COASTAL DESCENT',
-    headline: 'ARCHITECTURAL SANCTUARIES',
+    badge: 'MAKE ROOM FOR THE STAY',
+    headline: 'A PLACE TO STAY',
     subheadline:
-      'Bespoke destination suites and private residences synchronized directly to your arrival runway.',
+      'Find a stay that suits your plans, with arrival dates close at hand.',
     start: 0.58,
     end: 0.82,
   },
   {
     id: 'scene-4',
-    badge: 'EXPEDITION 04 // RECEPTION SANCTUARY',
-    headline: 'YOUR SANCTUARY AWAITS',
+    badge: 'PLAN THE DETAILS',
+    headline: 'YOUR NEXT JOURNEY',
     subheadline:
-      'Real-time flight ticketing, verified sanctuary reservations, and flexible Fly Now Pay Later credit.',
+      'Explore flights, hotels and payment-plan examples in one place.',
     start: 0.82,
     end: 1.0,
   },
@@ -432,7 +432,7 @@ export const HeroCanvas: React.FC = () => {
       {isReducedMotion && (
         <img
           src={HERO_CONFIG.desktop.posterPath}
-          alt="Aerovista Royal flight taking off at golden dawn"
+          alt="Airplane taking off in warm evening light"
           className="absolute inset-0 w-full h-full object-cover"
         />
       )}

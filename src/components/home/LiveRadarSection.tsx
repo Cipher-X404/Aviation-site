@@ -309,14 +309,14 @@ export const LiveRadarSection: React.FC = () => {
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
             <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase font-bold">
-              03. ACTIVE AIR TRAFFIC CORRIDORS & ADS-B TELEMETRY
+              03. ROUTE EXPLORER · ILLUSTRATION
             </span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
-            LIVE FLIGHT RADAR & RUNWAY VECTOR
+            Explore sample routes
           </h2>
           <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1 max-w-2xl font-light">
-            Continuous real-time ADS-B transponder tracking across West African and intercontinental air corridors. Inspect true airspeed, altitude, flight deck captain, and direct seat inventory.
+            An animated route illustration for exploring the interface. Aircraft positions and flight details here are simulated, not live tracking data.
           </p>
         </div>
 
@@ -324,7 +324,7 @@ export const LiveRadarSection: React.FC = () => {
         <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
           <div className="flex items-center gap-2 bg-[#09171C] text-[#F2B632] px-3.5 py-1.5 rounded-xl border border-[#2B7574]/40 shadow-sm">
             <Activity className="w-4 h-4 text-emerald-400 animate-pulse" />
-            <span>REAL-TIME SIMULATION ACTIVE · {visibleFleet.length} AIRBORNE</span>
+            <span>ROUTE DEMO · {visibleFleet.length} AIRBORNE</span>
           </div>
 
           {/* Audio Ping Toggle */}
@@ -350,12 +350,12 @@ export const LiveRadarSection: React.FC = () => {
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4 p-3 rounded-2xl bg-[#0E2931]/70 backdrop-blur-md border border-[#2B7574]/30 text-xs font-mono">
         {/* Category Filters */}
         <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar">
-          <span className="text-[#A5D1E1]/70 text-[11px] uppercase mr-1">Corridor Filter:</span>
+          <span className="text-[#A5D1E1]/70 text-[11px] uppercase mr-1">Route type:</span>
           {[
-            { id: 'all', label: 'All Corridors' },
-            { id: 'domestic', label: 'Domestic Trunk' },
-            { id: 'international', label: 'Intercontinental' },
-            { id: 'charter', label: 'VIP Royal Charters' },
+            { id: 'all', label: 'All routes' },
+            { id: 'domestic', label: 'Domestic' },
+            { id: 'international', label: 'International' },
+            { id: 'charter', label: 'Charter examples' },
           ].map((cat) => (
             <button
               key={cat.id}
@@ -378,7 +378,7 @@ export const LiveRadarSection: React.FC = () => {
             className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#12484C] text-[#F2B632] hover:bg-[#12484C]/80 cursor-pointer"
           >
             {isSimPaused ? <Play className="w-3 h-3 fill-current" /> : <Pause className="w-3 h-3" />}
-            <span>{isSimPaused ? 'Resume Sweep' : 'Pause'}</span>
+            <span>{isSimPaused ? 'Resume animation' : 'Pause animation'}</span>
           </button>
 
           <button
@@ -518,11 +518,11 @@ export const LiveRadarSection: React.FC = () => {
             <div className="flex items-center justify-between mb-3 text-xs font-mono">
               <span className="text-[#F2B632] font-bold uppercase tracking-wider flex items-center gap-1.5">
                 <Navigation className="w-3.5 h-3.5" />
-                TRANSPONDER ACTIVE
+                SAMPLE FLIGHT DATA
               </span>
               <span className="text-emerald-400 font-bold uppercase flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                SQUAWK {selectedFlight.squawk}
+                SAMPLE CODE {selectedFlight.squawk}
               </span>
             </div>
 
@@ -539,19 +539,19 @@ export const LiveRadarSection: React.FC = () => {
             {/* Live Avionics Telemetry Grid */}
             <div className="grid grid-cols-2 gap-3 mt-6 pt-5 border-t border-white/10 text-xs font-mono">
               <div>
-                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">True Altitude</span>
+                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Sample altitude</span>
                 <span className="text-base font-bold text-white tabular-nums">{currentAltitude}</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Ground Airspeed</span>
+                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Sample speed</span>
                 <span className="text-base font-bold text-white tabular-nums">{currentSpeed}</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Aircraft Model</span>
+                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Example aircraft</span>
                 <span className="font-bold text-white truncate block">{selectedFlight.aircraft}</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Flight Commander</span>
+                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Sample carrier</span>
                 <span className="font-bold text-[#F2B632] truncate block">{selectedFlight.captain}</span>
               </div>
               <div>
@@ -559,7 +559,7 @@ export const LiveRadarSection: React.FC = () => {
                 <span className="font-bold text-white">{distanceRemaining}</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Estimated Touchdown</span>
+                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Example arrival</span>
                 <span className="font-bold text-emerald-400">In {etaMinutes}</span>
               </div>
             </div>
@@ -567,7 +567,7 @@ export const LiveRadarSection: React.FC = () => {
             {/* Load Factor & Seat Capacity Bar */}
             <div className="mt-5 p-3 rounded-xl bg-black/40 border border-white/5 space-y-2">
               <div className="flex items-center justify-between text-xs font-mono">
-                <span className="text-[#A5D1E1]">Passenger Load Factor</span>
+                <span className="text-[#A5D1E1]">Sample seat count</span>
                 <span className="text-white font-bold">
                   {selectedFlight.passengersOnboard} / {selectedFlight.capacity} ({Math.round((selectedFlight.passengersOnboard / selectedFlight.capacity) * 100)}%)
                 </span>
@@ -583,13 +583,13 @@ export const LiveRadarSection: React.FC = () => {
             {/* Fare Price Box */}
             <div className="mt-5 p-4 rounded-xl bg-[#12484C]/60 border border-[#2B7574]/50">
               <span className="text-[10px] font-mono text-[#A5D1E1] uppercase block">
-                Next Confirmed Seat Fare From
+                Example fare from
               </span>
               <span className="text-2xl font-bold font-mono text-[#F2B632] tabular-nums">
                 {formatPrice(selectedFlight.startingPriceNgn, currency)}
               </span>
               <span className="text-[10px] text-[#A5D1E1]/70 block mt-0.5">
-                Eligible for 0% Down Fly Now Pay Later
+                Illustrative payment plans only
               </span>
             </div>
           </div>

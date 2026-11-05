@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Zap, Globe, CreditCard, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Zap, Globe, CreditCard, CheckCircle2 } from 'lucide-react';
 import { useAppStore } from '../../store/useAppStore';
 
 interface TrustPillar {
@@ -13,30 +13,30 @@ interface TrustPillar {
 const TRUST_PILLARS: TrustPillar[] = [
   {
     icon: ShieldCheck,
-    title: 'Zero Ticketing Markup',
-    subtitle: 'Direct GDS carrier feeds with zero third-party agent markups or hidden fees.',
+    title: 'Compare flight options',
+    subtitle: 'Browse sample routes and compare the details shown for each option.',
     badge: 'IATA DIRECT',
     routeTarget: '/flights',
   },
   {
     icon: Globe,
-    title: '40+ Direct Corridors',
-    subtitle: 'Pre-cleared airways spanning West Africa, European gateways, and Gulf transit hubs.',
-    badge: 'SOVEREIGN AIRWAYS',
+    title: 'Explore destinations',
+    subtitle: 'Browse destination ideas, from nearby city breaks to longer journeys.',
+    badge: 'DESTINATION IDEAS',
     routeTarget: '/destinations',
   },
   {
     icon: Zap,
-    title: 'Sanctuary Verification',
-    subtitle: 'Presidential suites backed by guaranteed 24/7 dual-generator power and private chauffeur.',
-    badge: 'CAT BACKUP VERIFIED',
+    title: 'Find a place to stay',
+    subtitle: 'Compare example properties, locations and listed amenities. Confirm details with each hotel.',
+    badge: 'PROPERTY DETAILS VARY',
     routeTarget: '/hotels',
   },
   {
     icon: CreditCard,
-    title: 'Flexible Travel Credit',
-    subtitle: 'Fly Now Pay Later facility up to ₦3,000,000 with 0% initial down and flexible tenures.',
-    badge: 'INSTANT UNDERWRITING',
+    title: 'See payment examples',
+    subtitle: 'Try the sample calculator to see how a trip cost changes across different terms.',
+    badge: 'EXAMPLE CALCULATOR',
     routeTarget: '/fly-now-pay-later',
   },
 ];
@@ -56,14 +56,14 @@ export const TrustMarquee: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#12484C]/60 border border-[#2B7574]/40 text-[10px] font-mono text-[#F2B632] uppercase tracking-[0.2em]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>DIRECT CARRIER INTERCONNECT · ZERO MARKUP</span>
+            <span>TRAVEL PLANNING · SAMPLE LISTINGS</span>
           </div>
 
           <h3 className="font-monument text-xl sm:text-2xl lg:text-3xl font-bold uppercase tracking-tight text-[#F4F6F5]">
-            The Standard in Sovereign Aviation
+            A clearer way to plan a trip
           </h3>
           <p className="text-xs sm:text-sm text-[#A5D1E1]/80 font-light leading-relaxed">
-            Institutional flight dispatch, verified luxury sanctuaries, and frictionless financing on a single private terminal platform.
+            Explore sample flights, stays and payment options. Check with providers before making travel or financial decisions.
           </p>
         </div>
 
@@ -74,7 +74,10 @@ export const TrustMarquee: React.FC = () => {
             return (
               <div
                 key={pillar.title}
-                onClick={() => pillar.routeTarget && setActiveRoute(pillar.routeTarget)}
+                role="link"
+                tabIndex={0}
+                onKeyDown={(event) => { if ((event.key === 'Enter' || event.key === ' ') && pillar.routeTarget) { event.preventDefault(); setActiveRoute(pillar.routeTarget); window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
+                onClick={() => { if (pillar.routeTarget) { setActiveRoute(pillar.routeTarget); window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
                 className="group relative p-6 rounded-2xl bg-[#0E2931]/60 hover:bg-[#12484C]/50 border border-[#2B7574]/30 hover:border-[#F2B632]/50 transition-all duration-300 cursor-pointer shadow-lg hover:-translate-y-1"
               >
                 {/* Top Badge */}
@@ -106,15 +109,15 @@ export const TrustMarquee: React.FC = () => {
         <div className="mt-10 pt-6 border-t border-[#18363F]/80 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#A5D1E1]/70">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-            <span>IATA Validated Ticketing Engine</span>
+            <span>Example flight listings</span>
           </div>
           <div className="flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#F2B632]" />
-            <span>CBN Compliant Escrow Settlement</span>
+            <Globe className="w-3.5 h-3.5 text-[#F2B632]" />
+            <span>Payment examples only</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-cyan-400" />
-            <span>24/7 Dedicated Sovereign Concierge</span>
+            <span>Help exploring this demo</span>
           </div>
         </div>
       </div>

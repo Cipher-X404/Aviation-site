@@ -19,7 +19,7 @@ export const FaqSection: React.FC = () => {
           A few common questions
         </h2>
         <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1">
-          What this demo can do, and where to check the details that matter.
+          Everything you need to know before you fly.
         </p>
       </div>
 

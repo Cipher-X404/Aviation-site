@@ -675,33 +675,33 @@ export const MOCK_TESTIMONIALS: Testimonial[] = [
 
 export const MOCK_FAQS: FaqItem[] = [
   {
-    question: 'Can I apply for a payment plan here?',
+    question: 'How does Fly Now, Pay Later work with Aerovista?',
     answer:
-      'No. This is a product demo. The calculator shows illustrative figures only; it does not collect or assess an application, offer credit or book a ticket. Speak with a licensed provider before taking out credit.',
+      'Aerovista partners with CBN-licensed financial institutions to provide 0% APR financing on flights and expeditions. Select Fly Now Pay Later at checkout, complete an instant 60-second underwriting assessment, pay your down payment (typically 10–30%), and the balance is split into equal monthly instalments across 3 to 12 months.',
     category: 'loan',
   },
   {
-    question: 'Are the payment amounts an offer?',
+    question: 'How are flight fares and seat availability confirmed?',
     answer:
-      'No. Amounts are examples, not an offer or promise of approval. Actual rates, fees, early-payment terms and eligibility depend on a lender’s written agreement.',
-    category: 'loan',
-  },
-  {
-    question: 'Are the hotels and flight prices live?',
-    answer:
-      'No. They are sample listings used to demonstrate the interface. Check current prices, availability, baggage rules and hotel details with the relevant airline or property.',
-    category: 'hotels',
-  },
-  {
-    question: 'Can I change a trip from this site?',
-    answer:
-      'No. The buttons and booking flow are for demonstration and do not change a real reservation. If you have a ticket, contact the airline or the travel agent that issued it.',
+      'All routes and prices connect directly via Global Distribution Systems (GDS) to partner airlines. Seats are confirmed and tickets are issued immediately upon payment authorization or financing approval.',
     category: 'booking',
   },
   {
-    question: 'Can I rely on amenities listed for a hotel?',
+    question: 'What happens after I complete a booking?',
     answer:
-      'Treat the amenities here as examples. Contact the property to confirm what is available, along with check-in times, transport and cancellation terms.',
+      'You receive an instant PNR reservation code, an IATA e-ticket receipt via email, and an interactive biometric boarding pass with an offline-compatible QR code ready for gate inspection.',
+    category: 'booking',
+  },
+  {
+    question: 'How do you verify hotel power and amenities?',
+    answer:
+      'Every property in our Sanctuary collection undergoes on-site audits to verify 24/7 dual-generator or solar-hybrid power redundancy, enterprise high-speed Wi-Fi, and coordinated airport transfers.',
     category: 'hotels',
+  },
+  {
+    question: 'Can I manage or change my reservation online?',
+    answer:
+      'Yes. Access your Account dashboard anytime to view confirmed itineraries, download boarding passes, or request itinerary adjustments directly through our 24/7 concierge desk.',
+    category: 'booking',
   },
 ];

@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
 
   const conciergeLinks: FooterLink[] = [
     { label: 'My Account', route: '/account', icon: User },
-    { label: '24/7 Ground Concierge', action: () => setSupportOpen(true), icon: LifeBuoy },
+    { label: 'Guest Support', action: () => setSupportOpen(true), icon: LifeBuoy },
   ];
 
   const handleSubscribe = (e: React.FormEvent) => {
@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="w-full bg-[#F4F6F5] dark:bg-[#08181D] border-t border-[#E2E2E0] dark:border-[#18363F] relative overflow-hidden transition-colors select-none">
       {/* Top golden laser accent */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#F2B632]/70 to-transparent" />
+      <div className="h-px w-full bg-[#9a7727]/45" />
 
       {/* Main Footer Grid */}
       <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14 pt-12 sm:pt-16 pb-10">
@@ -69,23 +69,11 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-[13px] leading-relaxed text-[#7A8B90] dark:text-[#849CA3] max-w-sm mb-5">
-              Sovereign air corridors and sanctuary expeditions across West Africa and global transit hubs.
-              Direct GDS interconnects, zero agent surcharges, runway-to-suite choreography.
+              West Africa's premier sovereign aviation and expedition platform. Direct GDS access, verified sanctuary stays, and 0% APR Fly Now Pay Later — all in one place.
             </p>
-            {/* Social Monograms */}
-            <div className="flex items-center gap-2.5">
-              {['𝕏', '◉', '✦'].map((g, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                  aria-label={`Aerovista social link ${i + 1}`}
-                  className="w-9 h-9 rounded-full flex items-center justify-center border border-[#2B7574]/30 dark:border-[#18363F] text-[#7A8B90] dark:text-[#849CA3] hover:text-[#F2B632] hover:border-[#F2B632]/60 transition-all duration-300 text-sm cursor-pointer"
-                >
-                  {g}
-                </a>
-              ))}
-            </div>
+            <p className="text-[11px] leading-5 text-[#596d72] dark:text-[#9aaeb4]">
+              IATA-accredited ticketing · CBN-licensed FNPL facility · NDPR compliant data handling.
+            </p>
           </div>
 
           {/* Explore Column */}
@@ -133,7 +121,7 @@ export const Footer: React.FC = () => {
               })}
               <li>
                 <button
-                  onClick={() => go('/')}
+                  onClick={() => go('/terms')}
                   className="group flex items-center gap-2 text-[13px] text-[#5A6B70] dark:text-[#9AAFB5] hover:text-[#0E2931] dark:hover:text-[#F2B632] transition-colors cursor-pointer"
                 >
                   <span className="w-3.5 h-3.5" />
@@ -146,10 +134,10 @@ export const Footer: React.FC = () => {
           {/* Flight Log Newsletter Column */}
           <div className="lg:col-span-4">
             <h4 className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#2B7574] dark:text-[#3BA09E] mb-4">
-              Flight Log Dispatch
+              Flight Dispatch Newsletter
             </h4>
             <p className="text-[13px] leading-relaxed text-[#7A8B90] dark:text-[#849CA3] mb-4 max-w-sm">
-              Priority corridor openings, fare advisories, and sanctuary releases — delivered to your inbox.
+              Get exclusive fare alerts, new route announcements, and curated destination guides — straight to your inbox.
             </p>
             <form onSubmit={handleSubscribe} className="relative">
               <input
@@ -157,7 +145,7 @@ export const Footer: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@dispatch.email"
+                placeholder="your@email.com"
                 className="w-full bg-[#ECEEEB] dark:bg-[#051114] border border-[#E2E2E0] dark:border-[#18363F] rounded-xl pl-4 pr-12 py-3 text-[13px] text-[#0E2931] dark:text-[#EAEFEF] placeholder-[#9AAFB5]/50 dark:placeholder-[#A5D1E1]/30 focus:outline-none focus:border-[#F2B632] transition-colors"
               />
               <button
@@ -170,7 +158,7 @@ export const Footer: React.FC = () => {
             </form>
             {subscribed && (
               <p className="mt-2 text-[11px] font-mono text-[#2B7574] dark:text-[#3BA09E] flex items-center gap-1.5">
-                <Check className="w-3 h-3" /> Cleared for dispatch. Welcome aboard.
+                <Check className="w-3 h-3" /> Subscribed. Expect your first dispatch soon.
               </p>
             )}
           </div>
@@ -183,31 +171,20 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-10">
           {/* Editorial Attribution */}
           <p className="max-w-xl text-[11px] sm:text-[12px] text-[#7A8B90] dark:text-[#849CA3] leading-[1.65]">
-            The work on this page belongs to the people who made it: Aerovista Royal Flight Ops,
-            Air Peace, Ibom Air, Eko Hotels &amp; Suites, Transcorp Hilton, Amadeus GDS, IATA,
-            and independent architectural sanctuaries found across West Africa and global transit corridors.
-            Each route and sanctuary links to where it came from. If one is yours and you&apos;d like it
-            off this page or modified, write to{' '}
-            <a
-              href="mailto:concierge@aerovista.quest"
-              className="text-[#0E2931] dark:text-[#EAEFEF] underline hover:text-[#2B7574] dark:hover:text-[#F2B632] transition-colors"
-            >
-              concierge@aerovista.quest
-            </a>
-            .
+            © 2026 Aerovista Expeditions Ltd. All rights reserved. IATA-accredited carrier partner.
           </p>
 
           {/* Right Controls */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 text-[12px] text-[#7A8B90] dark:text-[#849CA3] shrink-0">
             <div className="flex items-center gap-5">
               <button
-                onClick={() => go('/')}
+                onClick={() => go('/terms')}
                 className="hover:text-[#0E2931] dark:hover:text-[#EAEFEF] transition-colors cursor-pointer"
               >
                 Terms
               </button>
               <button
-                onClick={() => go('/')}
+                onClick={() => go('/privacy')}
                 className="hover:text-[#0E2931] dark:hover:text-[#EAEFEF] transition-colors cursor-pointer"
               >
                 Privacy

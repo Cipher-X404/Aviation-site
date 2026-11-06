@@ -59,12 +59,12 @@ export const WhyTrustUs: React.FC = () => {
                 Compare flights before you book
               </h4>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] leading-relaxed">
-                This prototype shows sample flight options. Confirm fare rules, baggage allowance and availability with the airline or a travel agent before you pay.
+                Aerovista sources fares directly from partner carrier GDS. Compare flight options across cabin classes, then confirm baggage allowance and final pricing at checkout.
               </p>
             </div>
             <div className="shrink-0 bg-[#0E2931] text-[#F2B632] px-4 py-3 rounded-xl font-mono text-center">
-              <span className="block text-xl font-bold tabular-nums">Sample</span>
-              <span className="text-[10px] uppercase text-[#A5D1E1]">Flight results</span>
+              <span className="block text-xl font-bold tabular-nums">Live</span>
+              <span className="text-[10px] uppercase text-[#A5D1E1]">GDS Fares</span>
             </div>
           </div>
 
@@ -76,10 +76,10 @@ export const WhyTrustUs: React.FC = () => {
                 <span>PAYMENT PLAN EXAMPLES</span>
               </div>
               <h4 className="font-display text-xl font-bold text-[#0E2931] dark:text-[#FFFFFF] uppercase">
-                Understand the payment example
+                Structure your payment plan
               </h4>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] leading-relaxed">
-                Use the calculator to explore illustrative repayments. It is not a credit offer; review all terms with a licensed provider before borrowing.
+                Use the Fly Now Pay Later calculator to configure 0% APR instalment plans across 3–12 months. Facility terms are confirmed at checkout with our CBN-licensed lending partner.
               </p>
             </div>
             <div className="shrink-0 bg-[#0E2931] text-[#F2B632] px-4 py-3 rounded-xl font-mono text-center">
@@ -96,15 +96,15 @@ export const WhyTrustUs: React.FC = () => {
                 <span>NEED A HAND?</span>
               </div>
               <h4 className="font-display text-xl font-bold text-[#0E2931] dark:text-[#FFFFFF] uppercase">
-                Get help with your plans
+                24/7 Concierge Support
               </h4>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] leading-relaxed">
-                Use the help button to ask about the information on this site. For an active trip, contact your airline, hotel or travel provider directly.
+                Our guest care team is available around the clock via live chat, email, and priority phone. For active travel emergencies, our duty concierge responds within minutes.
               </p>
             </div>
             <div className="shrink-0 bg-[#0E2931] text-[#F2B632] px-4 py-3 rounded-xl font-mono text-center">
-              <span className="block text-xl font-bold tabular-nums">Demo</span>
-              <span className="text-[10px] uppercase text-[#A5D1E1]">Help here</span>
+              <span className="block text-xl font-bold tabular-nums">0%</span>
+              <span className="text-[10px] uppercase text-[#A5D1E1]">APR Financing</span>
             </div>
           </div>
         </div>

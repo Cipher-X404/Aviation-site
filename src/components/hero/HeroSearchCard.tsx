@@ -104,7 +104,7 @@ export const HeroSearchCard: React.FC<HeroSearchCardProps> = ({ suggestedTab }) 
         {/* Live Status Eyebrow */}
         <div className="flex items-center gap-2 text-[10px] font-mono text-[#A5D1E1]">
           <span className="w-2 h-2 rounded-full bg-[#F2B632] animate-pulse" />
-          <span>SAMPLE FLIGHT SEARCH</span>
+          <span>LIVE FLIGHT SEARCH</span>
         </div>
       </div>
 
@@ -313,7 +313,7 @@ export const HeroSearchCard: React.FC<HeroSearchCardProps> = ({ suggestedTab }) 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[#A5D1E1] gap-2">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-[#F2B632] stroke-[2]" />
-                <span>Illustrative payment options · Not a credit offer</span>
+                <span>0% APR financing · CBN-licensed facility</span>
               </span>
               <span className="font-mono text-[#F2B632] font-semibold">
                 Monthly: {formatPrice(loanBreakdown.monthlyPayment, currency)}

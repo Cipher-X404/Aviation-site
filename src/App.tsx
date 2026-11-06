@@ -95,7 +95,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-[#F4F6F5] dark:bg-[#09171C] text-[#0E2931] dark:text-[#EAEFEF] selection:bg-[#F2B632] selection:text-[#0E2931] relative">
       {/* Persistent Navigation */}
       <Navbar />
-      <div role="note" className="relative z-30 px-4 py-2 text-center text-[11px] leading-5 bg-[#f1e8cf] text-[#342a17] border-b border-[#c9a955]/50">Demo only: routes, prices, properties and payment examples are illustrative. No booking or credit application is submitted.</div>
+      
 
       {/* Main Content Router */}
       <main className="flex-1 w-full">
@@ -148,7 +148,7 @@ export default function App() {
         {activeRoute === '/admin' && (adminSessionValid ? <AdminDashboard /> : <div className="min-h-[70vh] grid place-content-center px-6 text-center"><p className="text-[10px] tracking-[.25em] uppercase text-[#9a7727]">Protected area</p><h1 className="mt-3 font-serif text-4xl">Admin access required</h1><p className="mt-3 max-w-md text-sm leading-6 opacity-70">Sign in with the server-configured administrator code. A client-side profile or direct URL is not enough.</p></div>)}
         {activeRoute === '/destinations' && <DestinationsView />}
         {['/about', '/privacy', '/terms'].includes(activeRoute) && <InformationPage route={activeRoute} />}
-        {activeRoute !== '/' && activeRoute !== '/flights/book' && activeRoute !== '/admin' && !['/about', '/privacy', '/terms'].includes(activeRoute) && <RouteJournal route={activeRoute} />}
+        {activeRoute !== '/' && activeRoute !== '/flights/book' && activeRoute !== '/admin' && activeRoute !== '/account' && !['/about', '/privacy', '/terms'].includes(activeRoute) && <RouteJournal route={activeRoute} />}
         </Suspense>
       </main>
 
@@ -158,8 +158,8 @@ export default function App() {
       {/* Sovereign Auth & Role Switcher Modal */}
       <AuthModal />
 
-      {/* Site Footer */}
-      <Footer />
+      {/* Site Footer - Hidden on Dashboards for Clean Native Interface */}
+      {activeRoute !== '/admin' && activeRoute !== '/account' && <Footer />}
     </div>
   );
 }

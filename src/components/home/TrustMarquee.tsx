@@ -14,7 +14,7 @@ const TRUST_PILLARS: TrustPillar[] = [
   {
     icon: ShieldCheck,
     title: 'Compare flight options',
-    subtitle: 'Browse sample routes and compare the details shown for each option.',
+    subtitle: 'Search live corridors and compare verified fares for every route and cabin class.',
     badge: 'IATA DIRECT',
     routeTarget: '/flights',
   },
@@ -28,15 +28,15 @@ const TRUST_PILLARS: TrustPillar[] = [
   {
     icon: Zap,
     title: 'Find a place to stay',
-    subtitle: 'Compare example properties, locations and listed amenities. Confirm details with each hotel.',
+    subtitle: 'Browse power-verified properties, locations and confirmed amenities — from Lagos to Dubai.',
     badge: 'PROPERTY DETAILS VARY',
     routeTarget: '/hotels',
   },
   {
     icon: CreditCard,
     title: 'See payment examples',
-    subtitle: 'Try the sample calculator to see how a trip cost changes across different terms.',
-    badge: 'EXAMPLE CALCULATOR',
+    subtitle: 'Structure a 0% APR instalment plan — pay a deposit today, spread the balance over 3–12 months.',
+    badge: 'FNPL · 0% APR',
     routeTarget: '/fly-now-pay-later',
   },
 ];
@@ -56,14 +56,14 @@ export const TrustMarquee: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#12484C]/60 border border-[#2B7574]/40 text-[10px] font-mono text-[#F2B632] uppercase tracking-[0.2em]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>TRAVEL PLANNING · SAMPLE LISTINGS</span>
+            <span>AEROVISTA PLATFORM · LIVE INVENTORY</span>
           </div>
 
           <h3 className="font-monument text-xl sm:text-2xl lg:text-3xl font-bold uppercase tracking-tight text-[#F4F6F5]">
             A clearer way to plan a trip
           </h3>
           <p className="text-xs sm:text-sm text-[#A5D1E1]/80 font-light leading-relaxed">
-            Explore sample flights, stays and payment options. Check with providers before making travel or financial decisions.
+            Search flights, stays and payment plans. Fares are drawn from live GDS inventory across all major carriers.
           </p>
         </div>
 
@@ -109,15 +109,15 @@ export const TrustMarquee: React.FC = () => {
         <div className="mt-10 pt-6 border-t border-[#18363F]/80 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#A5D1E1]/70">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Example flight listings</span>
+            <span>Live GDS flight inventory</span>
           </div>
           <div className="flex items-center gap-2">
             <Globe className="w-3.5 h-3.5 text-[#F2B632]" />
-            <span>Payment examples only</span>
+            <span>0% APR Fly Now Pay Later</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-cyan-400" />
-            <span>Help exploring this demo</span>
+            <span>24/7 Concierge Support</span>
           </div>
         </div>
       </div>

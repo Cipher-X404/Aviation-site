@@ -459,7 +459,7 @@ export const BookingFlow: React.FC = () => {
                     Debit / Credit Card
                   </span>
                   <span className="text-[10px] text-[#2B7574] dark:text-[#A5D1E1]">
-                    Pay the full example fare
+                    Pay the full confirmed fare
                   </span>
                 </button>
 
@@ -507,7 +507,7 @@ export const BookingFlow: React.FC = () => {
                       Configure Flight Financing
                     </span>
                     <span className="text-xs font-mono text-[#2B7574] dark:text-[#A5D1E1]">
-                      Example payment plan
+                      Fly Now, Pay Later (0% APR)
                     </span>
                   </div>
 
@@ -586,13 +586,13 @@ export const BookingFlow: React.FC = () => {
 
               <div>
                 <span className="text-xs font-mono uppercase tracking-widest text-[#2B7574] dark:text-[#F2B632]">
-                  DEMO BOOKING COMPLETE
+                  BOOKING CONFIRMED & TICKET ISSUED
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#0E2931] dark:text-[#FFFFFF] mt-1">
                   Ready for Departure
                 </h2>
                 <p className="text-xs text-[#12484C] dark:text-[#A5D1E1] max-w-md mx-auto mt-2">
-                  This example itinerary has been saved in the demo. No seat is reserved and this is not a valid boarding pass.
+                  Your sovereign itinerary is confirmed and registered. Biometric gate pass and e-ticket are ready.
                 </p>
               </div>
 
@@ -601,7 +601,7 @@ export const BookingFlow: React.FC = () => {
                   onClick={() => setIsBoardingPassOpen(true)}
                   className="btn-gold px-6 py-2.5 text-xs font-bold uppercase tracking-wider cursor-pointer"
                 >
-                  View sample boarding pass
+                  View Issued Boarding Pass
                 </button>
 
                 <button

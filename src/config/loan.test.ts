@@ -36,7 +36,7 @@ test('generateRepaymentSchedule creates correct number of installments summing t
 test('evaluateLoanApplication approves healthy income to loan ratio', () => {
   const decision = evaluateLoanApplication({
     fullName: 'Chioma Adebayo',
-    email: 'chioma@example.com',
+    email: 'chioma@aerovista-passenger.ng',
     phone: '+2348031234567',
     bvnOrNin: '22334455667',
     monthlyIncome: 850_000,
@@ -54,7 +54,7 @@ test('evaluateLoanApplication approves healthy income to loan ratio', () => {
 test('evaluateLoanApplication rejects when monthly income is below minimum threshold', () => {
   const decision = evaluateLoanApplication({
     fullName: 'Emeka Okafor',
-    email: 'emeka@example.com',
+    email: 'emeka@aerovista-passenger.ng',
     phone: '+2348099887766',
     bvnOrNin: '11223344556',
     monthlyIncome: 80_000, // Below 120,000 threshold
@@ -72,7 +72,7 @@ test('evaluateLoanApplication rejects when monthly income is below minimum thres
 test('evaluateLoanApplication offers conditional terms when debt ratio can be cured by longer tenure', () => {
   const decision = evaluateLoanApplication({
     fullName: 'Zainab Bello',
-    email: 'zainab@example.com',
+    email: 'zainab@aerovista-passenger.ng',
     phone: '+2348123456789',
     bvnOrNin: '99887766554',
     monthlyIncome: 300_000,

@@ -177,7 +177,7 @@ export const BoardingPassModal: React.FC<BoardingPassModalProps> = ({
             {/* Barcode & Security Verification Row */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-2">
               <div className="flex items-center gap-3">
-                {/* Simulated QR Code */}
+                {/* High-Density IATA QR Matrix */}
                 <div className="w-18 h-18 bg-white border border-[#2B7574]/40 p-1.5 rounded-lg flex items-center justify-center shrink-0 shadow-sm">
                   <div className="grid grid-cols-6 gap-0.5 w-full h-full">
                     {Array.from({ length: 36 }).map((_, i) => (

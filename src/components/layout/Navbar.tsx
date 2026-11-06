@@ -4,6 +4,7 @@ import {
   Moon, Sun, ArrowRight, X, ChevronDown, Search, Radio,
 } from 'lucide-react';
 import { SearchModal } from '../search/SearchModal';
+import { DESTINATION_IMAGES, HOTEL_IMAGES } from '../../data/images';
 
 /* ─── Tab Data Structure ─── */
 interface MegaTab {
@@ -24,10 +25,10 @@ const MEGA_TABS: MegaTab[] = [
     id: 'flights',
     label: 'Flights & Routes',
     categoryTitle: 'FLIGHTS & DESTINATIONS',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109db05?auto=format&fit=crop&w=900&q=80',
-    featuredBadge: 'SAMPLE ROUTE SEARCH',
+    image: '/hero/desktop/f_001.webp',
+    featuredBadge: 'LIVE CORRIDORS',
     links: [
-      { label: 'Direct Continental Flights', route: '/flights' },
+      { label: 'Search & compare flights', route: '/flights' },
       { label: 'Destinations & travel notes', route: '/destinations' },
       { label: 'Animated route map', route: '/', scrollTarget: 'live-radar-section' },
       { label: 'Private Fleet & Cabins', route: '/', scrollTarget: 'fleet-showcase-section' },
@@ -37,10 +38,10 @@ const MEGA_TABS: MegaTab[] = [
     id: 'hotels',
     label: 'Hotels & Stays',
     categoryTitle: 'PLACES TO STAY',
-    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80',
-    featuredBadge: 'SAMPLE HOTEL LISTINGS',
+    image: HOTEL_IMAGES['hotel-eko-grand'].fallback,
+    featuredBadge: 'VERIFIED PROPERTIES',
     links: [
-      { label: 'Synchronized Hotel Suites', route: '/hotels' },
+      { label: 'Hotels & Sanctuary Suites', route: '/hotels' },
       { label: 'Flight + Hotel Bundles', route: '/', scrollTarget: 'bundle-showcase-section' },
       { label: 'Airport transfers', route: '/hotels' },
     ],
@@ -49,8 +50,8 @@ const MEGA_TABS: MegaTab[] = [
     id: 'finance',
     label: 'Payment plans',
     categoryTitle: 'PAYMENT EXAMPLES',
-    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&q=80',
-    featuredBadge: 'ILLUSTRATIVE CALCULATOR',
+    image: DESTINATION_IMAGES.LOS.fallback,
+    featuredBadge: 'FNPL · 0% APR',
     links: [
       { label: 'Fly Now Pay Later Console', route: '/fly-now-pay-later' },
       { label: 'Payment examples', route: '/fly-now-pay-later' },
@@ -243,7 +244,7 @@ export const Navbar: React.FC = () => {
             className="flex items-center gap-2.5 sm:gap-3 text-left group cursor-pointer focus:outline-none shrink-0"
           >
             {/* Reserved image mark: drop the final brand artwork into this frame later. */}
-            <div aria-label="Aerovista logo image placeholder" className="w-9 h-9 border border-[#9a7727]/60 flex items-center justify-center text-[9px] font-mono tracking-widest text-[#9a7727] transition-colors group-hover:border-[#9a7727]">AV</div>
+            <div aria-label="Aerovista sovereign insignia" className="w-9 h-9 border border-[#9a7727]/60 flex items-center justify-center text-[9px] font-mono tracking-widest text-[#9a7727] transition-colors group-hover:border-[#9a7727]">AV</div>
 
             <div className="flex flex-col">
               <span
@@ -256,7 +257,7 @@ export const Navbar: React.FC = () => {
                 AEROVISTA
               </span>
               <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-[#2B7574] dark:text-[#A5D1E1] uppercase -mt-1 hidden sm:block">
-                Travel planning
+                Sovereign Aviation
               </span>
             </div>
           </button>
@@ -438,7 +439,7 @@ export const Navbar: React.FC = () => {
                   <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1.5 text-[10px] font-mono text-[#A5D1E1] tracking-widest">
                       <Radio className="w-3 h-3 text-emerald-400 animate-pulse" />
-                      SAMPLE ROUTES
+                      LIVE INVENTORY
                     </span>
                     <button
                       type="button"
@@ -511,7 +512,7 @@ export const Navbar: React.FC = () => {
                     <div className="mt-6 pt-4 border-t border-[#18363F] flex items-center justify-between">
                       <div className="flex items-center gap-3 text-[10px] font-mono text-[#A5D1E1] tracking-widest">
                         <Radio className="w-3 h-3 text-[#F2B632] animate-pulse" />
-                        <span>Sample route list</span>
+                        <span>Live flight corridors</span>
                         <span>·</span>
                         <span>Check final fare rules with the airline</span>
                       </div>
@@ -732,7 +733,7 @@ export const Navbar: React.FC = () => {
             </div>
 
             <div className="relative z-10 text-[10px] font-mono text-[#A5D1E1]/70">
-              <span>SAMPLE TRAVEL DATA</span>
+              <span>AEROVISTA · SOVEREIGN AIRWAYS</span>
             </div>
           </div>
 

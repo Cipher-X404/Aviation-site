@@ -3,7 +3,7 @@
  * Guaranteed zero broken images across all rendering environments.
  */
 
-// Helper to create an evocative duotone architectural SVG placeholder
+// Helper to render an evocative duotone architectural asset fallback
 function createTealDuotoneSvg(title: string, subtitle: string, code: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
     <defs>
@@ -134,22 +134,21 @@ export const HOTEL_IMAGES: Record<string, ImageAsset> = {
 
 export const CABIN_IMAGES: Record<string, ImageAsset> = {
   First: {
-    src: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80',
+    src: '/hero/desktop/f_014.webp',
     fallback: createTealDuotoneSvg('ROYAL FIRST SANCTUARY', 'Private Enclosed Sovereign Suite · Double Bed', 'SUITE-1A'),
-    alt: 'Royal First Class Private Suite with Lie-Flat Double Bed',
+    alt: 'Aircraft on an airport approach, used as an illustration for the cabin guide',
     aspectRatio: '16:9',
   },
   Business: {
-    src: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80',
+    src: '/hero/desktop/f_048.webp',
     fallback: createTealDuotoneSvg('EXECUTIVE DIPLOMATIC', '1-2-1 Direct Aisle Access · Noise-Canceling', 'EXEC-3F'),
-    alt: 'Executive Business Class Lie-Flat Suite',
+    alt: 'Aircraft in flight, used as an illustration for the cabin guide',
     aspectRatio: '16:9',
   },
   Economy: {
-    src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+    src: '/hero/desktop/f_082.webp',
     fallback: createTealDuotoneSvg('VANGUARD PREMIUM', '40-Inch Pitch · Ergonomic Articulated Cradle', 'VANG-12B'),
-    alt: 'Vanguard Premium Comfort Cabin with Generous Legroom',
+    alt: 'Aircraft at the airport, used as an illustration for the cabin guide',
     aspectRatio: '16:9',
   },
 };
-

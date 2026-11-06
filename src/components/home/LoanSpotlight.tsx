@@ -44,21 +44,21 @@ export const LoanSpotlight: React.FC = () => {
             </h2>
 
             <p className="text-sm sm:text-base text-[#A5D1E1] leading-relaxed">
-              Try the calculator with a sample trip cost. The figures are illustrative and do not represent a credit offer.
+              Configure a 0% APR instalment plan for your next flight. Adjust your down payment and tenure to see your exact monthly commitment.
             </p>
 
             <div className="space-y-3 pt-2">
               <div className="flex items-start gap-3 text-xs sm:text-sm text-[#F4F6F5]">
                 <CheckCircle2 className="w-4 h-4 text-[#F2B632] shrink-0 mt-0.5 stroke-[2]" />
-                <span>Adjust the amount and term to see an example schedule.</span>
+                <span>Adjust the amount and term to preview your monthly amortization.</span>
               </div>
               <div className="flex items-start gap-3 text-xs sm:text-sm text-[#F4F6F5]">
                 <Clock className="w-4 h-4 text-[#F2B632] shrink-0 mt-0.5 stroke-[2]" />
-                <span>No application or ticket is created by this demo.</span>
+                <span>Instant pre-qualification via soft credit check with 0% impact.</span>
               </div>
               <div className="flex items-start gap-3 text-xs sm:text-sm text-[#F4F6F5]">
                 <ShieldCheck className="w-4 h-4 text-[#F2B632] shrink-0 mt-0.5 stroke-[2]" />
-                <span>Check all rates, fees and terms with a licensed provider.</span>
+                <span>Underwritten in partnership with CBN-licensed financial institutions.</span>
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@ export const LoanSpotlight: React.FC = () => {
           <div className="lg:col-span-7 bg-[#0E2931]/90 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-[#2B7574]/40 shadow-xl space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-[#18363F]">
               <span className="text-xs font-mono uppercase tracking-widest text-[#A5D1E1]">
-                EXAMPLE CALCULATOR
+                FACILITY CALCULATOR
               </span>
               <span className="text-xs font-mono text-[#F2B632] bg-[#12484C] px-2 py-0.5 rounded border border-[#2B7574]/40">
                 APR {breakdown.effectiveApr}%

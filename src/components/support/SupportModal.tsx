@@ -4,113 +4,112 @@ import {
   X,
   Send,
   ArrowUp,
-  Volume2,
-  VolumeX,
-  Plane,
-  ShieldCheck,
-  Zap,
-  CreditCard,
   Headphones,
-  Sparkles,
+  MessageSquare,
+  HelpCircle,
+  Phone,
+  CheckCircle2,
+  ChevronRight,
+  Plane,
+  CreditCard,
+  Building2,
+  ShieldCheck,
+  Search,
+  PhoneCall,
+  Clock,
+  RotateCcw
 } from 'lucide-react';
 
 interface ChatMessage {
   id: string;
-  sender: 'concierge' | 'user';
+  sender: 'support' | 'user';
   text: string;
   time: string;
-  tag?: string;
-  suggestions?: string[];
 }
 
-const QUICK_DISPATCH_PROMPTS = [
-  { label: 'Flight Rebooking', icon: Plane, prompt: 'I need assistance with immediate flight rebooking or corridor routing.' },
-  { label: 'Power Backup', icon: Zap, prompt: 'How do you verify 24/7 heavy generator power at destination hotels?' },
-  { label: 'Fly Now Pay Later', icon: CreditCard, prompt: 'Explain the Fly Now Pay Later credit facility and repayment tenures.' },
-  { label: 'Tarmac Chauffeur', icon: ShieldCheck, prompt: 'What chauffeur escort services are provided upon runway arrival?' },
+interface HelpArticle {
+  id: string;
+  category: string;
+  title: string;
+  summary: string;
+  content: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const HELP_ARTICLES: HelpArticle[] = [
+  {
+    id: 'art-1',
+    category: 'Flight Care',
+    title: 'Flight Changes & Baggage Rules',
+    summary: 'Complimentary changes on First Class suites and baggage allowances.',
+    content: 'First Class suite passengers are entitled to 3 × 32kg checked baggage and complimentary date rebooking up to 4 hours prior to departure. Economy tickets can be changed with zero penalty fee up to 24 hours after booking.',
+    icon: Plane,
+  },
+  {
+    id: 'art-2',
+    category: 'Financing',
+    title: 'Fly Now Pay Later Repayment Guide',
+    summary: '0% APR sovereign facility, amortization terms, and early liquidation.',
+    content: 'The 0% APR travel financing facility features tenures of 3, 6, or 12 months with 25% down payment. Automated debits occur on the 12th of each month via NIBSS. No penalty is ever charged for early liquidation in full.',
+    icon: CreditCard,
+  },
+  {
+    id: 'art-3',
+    category: 'Accommodation',
+    title: 'Hotel Power Resilience Guarantee',
+    summary: '100% dual CAT diesel generator audit and <3s ATS switchover.',
+    content: 'All verified partner hotels and presidential sanctuaries are physically audited for dual Caterpillar generators with automatic transfer switches (<3s ATS failover). Suite keycodes synchronize directly with your arrival flight transponder.',
+    icon: Building2,
+  },
+  {
+    id: 'art-4',
+    category: 'Ground Transit',
+    title: 'Airside Tarmac Chauffeur Protocol',
+    summary: 'Direct airside aircraft stairs pickup in Mercedes-Maybach S-Class.',
+    content: 'Airside tarmac transfers are pre-coordinated with airport security. Your chauffeur meets you directly at the aircraft stairs upon touchdown with diplomatic fast-track luggage delivery.',
+    icon: ShieldCheck,
+  },
 ];
 
-const SUGGESTIONS: Record<string, string[]> = {
-  'SOVEREIGN ADVISORY': ['I need to rebook a flight', 'Verify hotel power backup', 'Explain Fly Now Pay Later'],
-  'GDS CARRIER FEED': ['Arrange tarmac chauffeur', 'Verify hotel power backup', 'Explain Fly Now Pay Later'],
-  'GROUND OPS': ['Check my booking status', 'Arrange tarmac chauffeur', 'Verify hotel power backup'],
-  'CREDIT DESK': ["What's the credit limit?", 'Is there an early repayment penalty?', 'What documents are required?'],
-  'SANCTUARY DESK': ['Arrange tarmac chauffeur', 'Rebook my flight', 'Explain Fly Now Pay Later'],
-  'VIP TRANSIT': ['Verify hotel power backup', 'Rebook my flight', 'Explain Fly Now Pay Later'],
-};
-
-const stamp = () => {
+const formatTime = () => {
   const d = new Date();
-  return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')} WAT`;
+  return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 };
 
 export const SupportModal: React.FC = () => {
   const { isSupportOpen, setSupportOpen, currentUser } = useAppStore();
 
-  const firstName = currentUser.name.replace(/^(Dr\.?|Capt\.?|Mr\.?|Mrs\.?|Ms\.?)\s+/i, '').split(' ')[0];
-  const userInitials = currentUser.name
-    .replace(/^(Dr\.?|Capt\.?|Mr\.?|Mrs\.?|Ms\.?)\s+/i, '')
-    .split(' ')
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((p) => p[0])
-    .join('')
-    .toUpperCase();
-
+  const [activeTab, setActiveTab] = useState<'chat' | 'help' | 'callback'>('chat');
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'm-1',
-      sender: 'concierge',
-      text: `Good day${firstName ? `, ${firstName}` : ''}. You are connected to the Aerovista Sovereign Flight Deck & Ground Concierge. How may we assist your corridor routing or sanctuary reservation today?`,
-      time: stamp(),
-      tag: 'SOVEREIGN ADVISORY',
-      suggestions: SUGGESTIONS['SOVEREIGN ADVISORY'],
+      sender: 'support',
+      text: `Hello ${currentUser.name.split(' ')[0] || 'there'}, welcome to Aerovista Customer Support Center. I'm Nkem from the guest care team. How can we help you with your journey or bookings today?`,
+      time: formatTime(),
     },
   ]);
+
   const [inputVal, setInputVal] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(true);
+
+  // Help search
+  const [searchQuery, setSearchQuery] = useState('');
+  const [expandedArticleId, setExpandedArticleId] = useState<string | null>(null);
+
+  // Callback request state
+  const [callbackPhone, setCallbackPhone] = useState(currentUser.phone || '+234 803 456 7890');
+  const [callbackUrgency, setCallbackUrgency] = useState<'immediate' | '15min' | 'scheduled'>('immediate');
+  const [callbackConfirmed, setCallbackConfirmed] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll to latest message
   useEffect(() => {
-    if (isSupportOpen) {
+    if (isSupportOpen && activeTab === 'chat') {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => inputRef.current?.focus(), 120);
+      setTimeout(() => inputRef.current?.focus(), 150);
     }
-  }, [messages, isTyping, isSupportOpen]);
-
-  // Cockpit chime audio synthesizer using native Web Audio API
-  const playCockpitChime = () => {
-    if (!soundEnabled) return;
-    try {
-      const AudioCtx =
-        window.AudioContext ||
-        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-
-      const playTone = (freq: number, start: number, duration: number) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, ctx.currentTime + start);
-        gain.gain.setValueAtTime(0.04, ctx.currentTime + start);
-        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + start + duration);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(ctx.currentTime + start);
-        osc.stop(ctx.currentTime + start + duration);
-      };
-
-      playTone(880, 0, 0.12);
-      playTone(1320, 0.08, 0.22);
-    } catch {
-      // AudioContext not allowed before user gesture
-    }
-  };
+  }, [messages, isTyping, isSupportOpen, activeTab]);
 
   const submitQuery = (queryText: string) => {
     if (!queryText.trim() || isTyping) return;
@@ -119,57 +118,39 @@ export const SupportModal: React.FC = () => {
       id: `u-${Date.now()}`,
       sender: 'user',
       text: queryText,
-      time: stamp(),
+      time: formatTime(),
     };
 
     setMessages((prev) => [...prev, userMsg]);
     setInputVal('');
     setIsTyping(true);
-    playCockpitChime();
 
     const q = queryText.toLowerCase();
 
     setTimeout(() => {
-      let reply =
-        'Our flight operations desk has received your transmission. Desks at MM2 Lagos and Nnamdi Azikiwe Abuja are actively monitoring your corridor status.';
-      let tag = 'GROUND OPS';
+      let reply = 'Thank you for contacting customer support. We are reviewing your record and will assist immediately.';
 
-      if (q.includes('loan') || q.includes('pay later') || q.includes('credit') || q.includes('interest')) {
-        reply =
-          'The Sovereign Fly Now Pay Later facility grants instant underwriting up to ₦3,000,000 with 0% initial down payment and 3 to 12-month tenures. No penalty is ever charged for early liquidation.';
-        tag = 'CREDIT DESK';
-      } else if (q.includes('hotel') || q.includes('power') || q.includes('generator') || q.includes('sanctuary')) {
-        reply =
-          'Every hotel in our Continental Atlas undergoes dual Caterpillar-grade generator audits with automatic transfer switches (<5s failover). Your suite check-in is synchronized directly to your arrival flight transponder.';
-        tag = 'SANCTUARY DESK';
-      } else if (q.includes('chauffeur') || q.includes('tarmac') || q.includes('pickup') || q.includes('escort')) {
-        reply =
-          'Runway Chauffeur transfers are coordinated with airport airside security. An armoured Mercedes Maybach or S-Class escort meets you directly at the tarmac aircraft steps upon touchdown.';
-        tag = 'VIP TRANSIT';
-      } else if (q.includes('flight') || q.includes('rebook') || q.includes('route') || q.includes('corridor')) {
-        reply =
-          'All Aerovista flight bookings are executed via direct GDS interconnects with zero agent surcharges. Verified seats and electronic boarding passes with biometric QR barcodes issue immediately.';
-        tag = 'GDS CARRIER FEED';
-      } else if (q.includes('booking') || q.includes('status') || q.includes('ticket') || q.includes('reference')) {
-        reply =
-          'Your booking reference is live in our GDS mirror. Tap My Account to view your electronic boarding pass, gate, seat, and live transponder status for any confirmed corridor.';
-        tag = 'GROUND OPS';
+      if (q.includes('loan') || q.includes('pay later') || q.includes('credit') || q.includes('fnpl')) {
+        reply = 'Our Fly Now Pay Later facility offers 0% interest with repayments spread over 3, 6, or 12 months. You can manage or settle installments directly from your account dashboard.';
+      } else if (q.includes('hotel') || q.includes('power') || q.includes('generator') || q.includes('stay')) {
+        reply = 'Every sanctuary in our collection is backed by our 100% power resilience audit with dual CAT generators and <3s automated switchover guarantee.';
+      } else if (q.includes('chauffeur') || q.includes('tarmac') || q.includes('pickup') || q.includes('transfer')) {
+        reply = 'Tarmac chauffeur transfers are confirmed with airport security. A Mercedes-Maybach S-Class driver will be waiting at the aircraft steps upon arrival.';
+      } else if (q.includes('flight') || q.includes('booking') || q.includes('change') || q.includes('ticket')) {
+        reply = 'Flight reservations can be modified with zero change fee up to 4 hours before departure for First Class suites, or managed in your Account Desk.';
       }
 
       setMessages((prev) => [
         ...prev,
         {
-          id: `c-${Date.now()}`,
-          sender: 'concierge',
+          id: `s-${Date.now()}`,
+          sender: 'support',
           text: reply,
-          time: stamp(),
-          tag,
-          suggestions: SUGGESTIONS[tag] || SUGGESTIONS['SOVEREIGN ADVISORY'],
+          time: formatTime(),
         },
       ]);
       setIsTyping(false);
-      playCockpitChime();
-    }, 900);
+    }, 700);
   };
 
   const handleSend = (e: React.FormEvent) => {
@@ -177,269 +158,416 @@ export const SupportModal: React.FC = () => {
     submitQuery(inputVal);
   };
 
+  const handleRequestCallback = (e: React.FormEvent) => {
+    e.preventDefault();
+    setCallbackConfirmed(true);
+    setTimeout(() => {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `s-call-${Date.now()}`,
+          sender: 'support',
+          text: `Priority callback request logged for ${callbackPhone}. A guest care officer will ring your phone within 3 minutes.`,
+          time: formatTime(),
+        },
+      ]);
+      setActiveTab('chat');
+      setCallbackConfirmed(false);
+    }, 1200);
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const filteredArticles = HELP_ARTICLES.filter(
+    (a) =>
+      a.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      a.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      a.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
-      {/* ── Floating Concierge Orb & Ascent Control ── */}
-      <div className="fixed bottom-6 right-5 sm:right-7 z-40 flex flex-col items-end gap-3 select-none">
-        {/* Ascent to Flight Level (Back to top) */}
+      {/* ═══════════════════════════════════════════════════════════════
+          FLOATING WIDGET: CLEAN CUSTOMER SERVICE ICON (NO RING, NO SHADOWS)
+         ═══════════════════════════════════════════════════════════════ */}
+      <div
+        className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 select-none"
+        style={{ position: 'fixed', bottom: '1.5rem', right: '1.5rem' }}
+      >
+        {/* Back to top button */}
         <button
           onClick={scrollToTop}
-          aria-label="Ascend to top of page"
-          className="group w-10 h-10 rounded-full bg-[#07161B]/85 hover:bg-[#12484C] text-[#F2B632] border border-[#2B7574]/40 hover:border-[#F2B632] flex items-center justify-center transition-all duration-300 shadow-xl backdrop-blur-md cursor-pointer hover:scale-105"
-          title="Ascend to Flight Deck (Top)"
+          aria-label="Back to top"
+          className="w-10 h-10 rounded-2xl bg-[#0E2931] hover:bg-[#12484C] text-[#A5D1E1] hover:text-white border border-[#2B7574]/40 flex items-center justify-center transition-colors cursor-pointer"
         >
-          <ArrowUp className="w-4 h-4 stroke-[2.5] group-hover:-translate-y-0.5 transition-transform" />
+          <ArrowUp className="w-4 h-4" />
         </button>
 
-        {/* Concierge Dispatch Orb Trigger */}
-        <div className="group relative flex items-center">
-          {/* Hover label */}
-          <span className="absolute right-full mr-3 whitespace-nowrap px-3 py-1.5 rounded-lg bg-[#07161B]/90 backdrop-blur-md border border-[#2B7574]/40 text-[10px] font-mono uppercase tracking-wider text-[#F2B632] opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300 pointer-events-none hidden sm:block shadow-xl">
-            Concierge · Online
-          </span>
+        {/* Support Center Launcher Button */}
+        <button
+          onClick={() => setSupportOpen(!isSupportOpen)}
+          aria-expanded={isSupportOpen}
+          aria-label={isSupportOpen ? 'Close Support Center' : 'Open Support Center'}
+          className={`relative w-12 h-12 rounded-2xl border transition-colors flex items-center justify-center cursor-pointer ${
+            isSupportOpen
+              ? 'bg-[#12484C] text-[#F2B632] border-[#F2B632]'
+              : 'bg-[#0E2931] hover:bg-[#12484C] text-[#F2B632] border-[#2B7574]/60 hover:border-[#F2B632]'
+          }`}
+        >
+          {isSupportOpen ? (
+            <X className="w-5 h-5 stroke-[2]" />
+          ) : (
+            <Headphones className="w-5 h-5 stroke-[2]" />
+          )}
 
-          <button
-            onClick={() => setSupportOpen(!isSupportOpen)}
-            aria-label="Open 24/7 Ground Concierge Terminal"
-            className="relative animate-float-soft"
-          >
-            {/* Rotating gold ring */}
-            <span className="chat-ring absolute -inset-[3px] rounded-full opacity-80" />
-            <span className="chat-ring absolute -inset-[3px] rounded-full opacity-40 [animation-direction:reverse] [animation-duration:5s]" />
-
-            {/* Orb body */}
-            <span
-              className={`relative flex items-center justify-center w-14 h-14 rounded-full border transition-all duration-300 shadow-2xl backdrop-blur-xl ${
-                isSupportOpen
-                  ? 'bg-[#0E2931] border-[#F2B632] text-[#F2B632] shadow-[0_0_30px_rgba(242,182,50,0.4)]'
-                  : 'bg-gradient-to-br from-[#12484C] to-[#07161B] border-[#2B7574]/60 hover:border-[#F2B632]/80 text-[#F4F6F5] shadow-[0_8px_30px_rgba(0,0,0,0.5)]'
-              }`}
-            >
-              {isSupportOpen ? (
-                <X className="w-6 h-6 stroke-[2]" />
-              ) : (
-                <Headphones className="w-6 h-6 text-[#F2B632] stroke-[1.8]" />
-              )}
-            </span>
-
-            {/* Online status dot */}
-            {!isSupportOpen && (
-              <span className="absolute top-0.5 right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-400 border border-[#07161B]" />
-              </span>
-            )}
-          </button>
-        </div>
+          {/* Clean presence indicator dot (no ping, no shadow) */}
+          {!isSupportOpen && (
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-400" />
+          )}
+        </button>
       </div>
 
-      {/* ── Flight Deck Ground Dispatch Console ── */}
+      {/* ═══════════════════════════════════════════════════════════════
+          SUPPORT CENTER PANEL (PROFESSIONAL CUSTOMER CARE DESK)
+         ═══════════════════════════════════════════════════════════════ */}
       {isSupportOpen && (
         <div
-          className="fixed bottom-24 right-4 sm:right-7 z-50 w-[360px] sm:w-[420px] bg-[#07161B]/97 text-[#F4F6F5] border border-[#2B7574]/60 rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col h-[540px] animate-chat-rise select-none relative"
           data-lenis-prevent="true"
+          className="fixed bottom-20 right-6 z-50 w-[410px] max-w-[calc(100vw-28px)] h-[580px] max-h-[calc(100dvh-100px)] bg-[#07161B] text-[#EAEFEF] border border-[#2B7574]/60 rounded-3xl flex flex-col overflow-hidden animate-in fade-in duration-200 select-none"
+          style={{
+            position: 'fixed',
+            bottom: '5.25rem',
+            right: '1.5rem',
+            zIndex: 60,
+          }}
         >
-          {/* Top Golden Laser Accent */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#F2B632] to-transparent z-20" />
-
-          {/* Console Header Bar */}
-          <div className="bg-[#0A1F26] px-4 py-3.5 border-b border-[#18363F] flex items-center justify-between relative">
+          {/* ── Support Center Header ── */}
+          <div className="px-5 py-4 bg-[#0A1F26] border-b border-[#18363F] flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
-              {/* Concierge avatar orb */}
               <div className="relative">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#12484C] via-[#0D5C75] to-[#199FB1] animate-orb-shift border border-[#2B7574]/60 flex items-center justify-center text-[#F2B632] shadow-sm">
-                  <Headphones className="w-4 h-4 stroke-[1.8]" />
+                <div className="w-10 h-10 rounded-2xl bg-[#12484C] text-[#F2B632] border border-[#2B7574]/60 flex items-center justify-center font-mono font-bold text-xs">
+                  NA
                 </div>
-                <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-400 border border-[#0A1F26]" />
-                </span>
+                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0A1F26]" />
               </div>
 
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-monument text-[13px] font-bold tracking-wider text-white">
-                    Aerovista Concierge
-                  </span>
-                  <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
-                    <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" /> LIVE
+                  <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
+                    Aerovista Support Center
+                  </h3>
+                  <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/40">
+                    24/7 LIVE
                   </span>
                 </div>
-                <p className="text-[10px] text-[#A5D1E1]/70 font-mono mt-0.5">
-                  Ground Dispatch · replies instantly
+                <p className="text-[10px] text-[#A5D1E1]/80 font-mono mt-0.5">
+                  Guest Care &amp; Flight Operations · Under 1m wait
                 </p>
               </div>
             </div>
 
-            {/* Utility Toggles: Sound Chime + Close */}
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={() => setSoundEnabled(!soundEnabled)}
-                className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
-                  soundEnabled
-                    ? 'text-[#F2B632] border-[#2B7574]/50 bg-[#12484C]/40'
-                    : 'text-[#A5D1E1]/40 border-transparent hover:text-white'
-                }`}
-                title={soundEnabled ? 'Chime sound enabled' : 'Mute sound chimes'}
-              >
-                {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
-              </button>
-
-              <button
-                onClick={() => setSupportOpen(false)}
-                className="p-1.5 rounded-lg text-[#A5D1E1]/60 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                title="Close dispatch console"
-              >
-                <X className="w-4 h-4 stroke-[2]" />
-              </button>
-            </div>
-          </div>
-
-          {/* Quick-Dispatch Interactive Action Cards */}
-          <div className="p-2.5 px-3 bg-[#051114]/80 border-b border-[#18363F] overflow-x-auto no-scrollbar flex items-center gap-2">
-            {QUICK_DISPATCH_PROMPTS.map((item) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={item.label}
-                  onClick={() => submitQuery(item.prompt)}
-                  className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0D242B] hover:bg-[#12484C] text-[#A5D1E1] hover:text-[#F2B632] border border-[#2B7574]/40 hover:border-[#F2B632]/40 text-[10px] font-mono transition-all cursor-pointer"
-                >
-                  <Icon className="w-3 h-3 text-[#F2B632]" />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Transmission Stream (Messages) */}
-          <div
-            className="flex-1 p-4 overflow-y-auto space-y-4 bg-[#051114]/50 text-xs font-sans overscroll-contain"
-            data-lenis-prevent="true"
-          >
-            {messages.map((m) => (
-              <div key={m.id} className={`flex gap-2.5 ${m.sender === 'user' ? 'flex-row-reverse' : 'flex-row'} animate-msg-pop`}>
-                {/* Avatar */}
-                <div
-                  className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold border ${
-                    m.sender === 'user'
-                      ? 'bg-[#12484C] text-[#F2B632] border-[#2B7574]/60'
-                      : 'bg-gradient-to-br from-[#12484C] via-[#0D5C75] to-[#199FB1] text-[#F2B632] border-[#2B7574]/60 animate-orb-shift'
-                  }`}
-                >
-                  {m.sender === 'user' ? (
-                    userInitials || 'U'
-                  ) : (
-                    <Headphones className="w-3.5 h-3.5 stroke-[1.8]" />
-                  )}
-                </div>
-
-                {/* Bubble */}
-                <div className={`max-w-[80%] ${m.sender === 'user' ? 'items-end' : 'items-start'} flex flex-col`}>
-                  <div
-                    className={`rounded-2xl p-3 leading-relaxed relative ${
-                      m.sender === 'user'
-                        ? 'bg-[#12484C] text-[#F4F6F5] border border-[#2B7574]/60 rounded-tr-sm shadow-md'
-                        : 'bg-[#091D24] text-[#EAEFEF] border border-[#2B7574]/40 rounded-tl-sm shadow-lg'
-                    }`}
-                  >
-                    {/* Category Header Stamp for Concierge */}
-                    {m.sender === 'concierge' && (
-                      <div className="flex items-center gap-1.5 pb-1.5 mb-1.5 border-b border-[#18363F] text-[9px] font-mono">
-                        <Sparkles className="w-2.5 h-2.5 text-[#F2B632]" />
-                        <span className="text-[#F2B632] font-bold tracking-wider">
-                          {m.tag || 'SOVEREIGN ADVISORY'}
-                        </span>
-                      </div>
-                    )}
-
-                    <p className="text-[12px] leading-relaxed font-light">{m.text}</p>
-
-                    <span className="block text-[8px] opacity-60 mt-1.5 font-mono text-right">
-                      {m.time}
-                    </span>
-                  </div>
-
-                  {/* Suggested follow-up chips */}
-                  {m.sender === 'concierge' && m.suggestions && m.suggestions.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mt-2">
-                      {m.suggestions.map((s) => (
-                        <button
-                          key={s}
-                          onClick={() => submitQuery(s)}
-                          className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#0D242B]/70 hover:bg-[#12484C] text-[#A5D1E1] hover:text-[#F2B632] border border-[#2B7574]/30 hover:border-[#F2B632]/40 transition-all cursor-pointer"
-                        >
-                          {s}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-
-            {/* Equalizer Typing Indicator */}
-            {isTyping && (
-              <div className="flex gap-2.5 animate-msg-pop">
-                <div className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center bg-gradient-to-br from-[#12484C] via-[#0D5C75] to-[#199FB1] animate-orb-shift border border-[#2B7574]/60">
-                  <Headphones className="w-3.5 h-3.5 text-[#F2B632] stroke-[1.8]" />
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#091D24] border border-[#2B7574]/40 rounded-tl-sm">
-                  <div className="flex items-end gap-1 h-4">
-                    {[0, 1, 2, 3].map((i) => (
-                      <span
-                        key={i}
-                        className="w-1 bg-[#F2B632] rounded-full origin-bottom"
-                        style={{
-                          height: '100%',
-                          animation: 'eq-bounce 0.9s ease-in-out infinite',
-                          animationDelay: `${i * 0.12}s`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-[10px] tracking-wider text-[#A5D1E1] font-mono">TRANSMITTING…</span>
-                </div>
-              </div>
-            )}
-
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Console Input Deck */}
-          <form
-            onSubmit={handleSend}
-            className="p-3 bg-[#0A1F26] border-t border-[#18363F] flex items-center gap-2"
-          >
-            <input
-              ref={inputRef}
-              type="text"
-              value={inputVal}
-              onChange={(e) => setInputVal(e.target.value)}
-              placeholder="Transmit inquiry to flight operations…"
-              className="flex-1 bg-[#051114] border border-[#2B7574]/40 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-[#A5D1E1]/40 focus:outline-none focus:border-[#F2B632] font-mono transition-colors"
-            />
             <button
-              type="submit"
-              disabled={!inputVal.trim() || isTyping}
-              className="btn-gold p-2.5 rounded-xl flex items-center justify-center cursor-pointer shrink-0 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition-transform"
-              title="Transmit dispatch"
+              type="button"
+              onClick={() => setSupportOpen(false)}
+              className="p-1.5 rounded-xl text-[#A5D1E1]/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              title="Close support center"
             >
-              <Send className="w-4 h-4 stroke-[2]" />
+              <X size={18} />
             </button>
-          </form>
+          </div>
 
-          {/* Bottom Telemetry Bar */}
-          <div className="px-3.5 py-1.5 bg-[#051114] border-t border-[#18363F] flex items-center justify-between text-[9px] font-mono text-[#A5D1E1]/50">
+          {/* ── Support Center Navigation Tabs ── */}
+          <div className="grid grid-cols-3 bg-[#051114] border-b border-[#18363F] text-xs font-mono shrink-0">
+            <button
+              type="button"
+              onClick={() => setActiveTab('chat')}
+              className={`py-2.5 flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                activeTab === 'chat'
+                  ? 'border-b-2 border-[#F2B632] text-[#F2B632] font-bold bg-[#091F26]'
+                  : 'text-[#A5D1E1] hover:text-white'
+              }`}
+            >
+              <MessageSquare size={13} />
+              <span>Live Chat</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('help')}
+              className={`py-2.5 flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                activeTab === 'help'
+                  ? 'border-b-2 border-[#F2B632] text-[#F2B632] font-bold bg-[#091F26]'
+                  : 'text-[#A5D1E1] hover:text-white'
+              }`}
+            >
+              <HelpCircle size={13} />
+              <span>Help Center</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('callback')}
+              className={`py-2.5 flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                activeTab === 'callback'
+                  ? 'border-b-2 border-[#F2B632] text-[#F2B632] font-bold bg-[#091F26]'
+                  : 'text-[#A5D1E1] hover:text-white'
+              }`}
+            >
+              <Phone size={13} />
+              <span>Callback</span>
+            </button>
+          </div>
+
+          {/* ─────────────────────────────────────────────────────────────
+              TAB 1: LIVE SUPPORT CHAT
+             ───────────────────────────────────────────────────────────── */}
+          {activeTab === 'chat' && (
+            <div className="flex-1 flex flex-col min-h-0 bg-[#07161B]">
+              {/* Quick Topic Chips */}
+              <div className="px-3 py-2 bg-[#051114] border-b border-[#18363F] flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0">
+                {[
+                  { label: 'Flight changes', prompt: 'I need to check or modify my flight corridor.' },
+                  { label: 'Baggage rules', prompt: 'What is the checked baggage allowance for my suite?' },
+                  { label: 'FNPL payment', prompt: 'How do I settle my monthly travel loan installment?' },
+                  { label: 'Tarmac driver', prompt: 'Confirm tarmac chauffeur details for my arrival.' },
+                ].map((chip) => (
+                  <button
+                    key={chip.label}
+                    onClick={() => submitQuery(chip.prompt)}
+                    className="shrink-0 px-2.5 py-1 rounded-full bg-[#091F26] hover:bg-[#12484C] text-[#A5D1E1] hover:text-[#F2B632] border border-[#2B7574]/40 text-[10px] font-mono transition-colors cursor-pointer whitespace-nowrap"
+                  >
+                    {chip.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Message Stream */}
+              <div
+                className="flex-1 p-4 overflow-y-auto space-y-3.5 text-xs font-mono"
+                data-lenis-prevent="true"
+              >
+                {messages.map((m) => (
+                  <div
+                    key={m.id}
+                    className={`flex flex-col ${m.sender === 'user' ? 'items-end' : 'items-start'} space-y-1`}
+                  >
+                    <div className="flex items-center gap-1.5 text-[9px] text-[#A5D1E1]/60 px-1">
+                      <span>{m.sender === 'user' ? 'You' : 'Nkem A. (Guest Care)'}</span>
+                      <span>·</span>
+                      <span>{m.time}</span>
+                    </div>
+
+                    <div
+                      className={`p-3 rounded-2xl max-w-[85%] leading-relaxed ${
+                        m.sender === 'user'
+                          ? 'bg-[#12484C] text-white rounded-tr-xs border border-[#2B7574]'
+                          : 'bg-[#0A1F26] text-[#EAEFEF] rounded-tl-xs border border-[#2B7574]/40'
+                      }`}
+                    >
+                      <p>{m.text}</p>
+                    </div>
+                  </div>
+                ))}
+
+                {isTyping && (
+                  <div className="flex items-center gap-2 text-[10px] text-[#A5D1E1]/70 font-mono p-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#F2B632] animate-bounce" />
+                    <span>Nkem is typing an answer...</span>
+                  </div>
+                )}
+
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Chat Input Bar */}
+              <form
+                onSubmit={handleSend}
+                className="p-3 bg-[#0A1F26] border-t border-[#18363F] flex items-center gap-2 shrink-0"
+              >
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputVal}
+                  onChange={(e) => setInputVal(e.target.value)}
+                  placeholder="Ask customer support a question..."
+                  className="flex-1 bg-[#051114] border border-[#2B7574]/50 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-[#A5D1E1]/40 focus:outline-none focus:border-[#F2B632] font-mono transition-colors"
+                />
+                <button
+                  type="submit"
+                  disabled={!inputVal.trim() || isTyping}
+                  className="w-10 h-10 rounded-xl bg-[#12484C] hover:bg-[#1a5f64] text-[#F2B632] border border-[#2B7574]/80 flex items-center justify-center transition-colors disabled:opacity-40 cursor-pointer shrink-0"
+                  title="Send message"
+                >
+                  <Send size={15} />
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* ─────────────────────────────────────────────────────────────
+              TAB 2: KNOWLEDGE BASE & HELP ARTICLES
+             ───────────────────────────────────────────────────────────── */}
+          {activeTab === 'help' && (
+            <div className="flex-1 flex flex-col min-h-0 bg-[#07161B] p-4 space-y-3.5 overflow-y-auto">
+              {/* Search Bar */}
+              <div className="relative shrink-0">
+                <Search className="w-4 h-4 text-[#A5D1E1] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search help articles & FAQs..."
+                  className="w-full h-10 pl-10 pr-3.5 rounded-xl bg-[#051114] border border-[#2B7574]/40 text-xs text-white font-mono placeholder-[#A5D1E1]/40 outline-none focus:border-[#F2B632]"
+                />
+              </div>
+
+              {/* Articles List */}
+              <div className="space-y-2.5 flex-1 overflow-y-auto">
+                {filteredArticles.map((art) => {
+                  const Icon = art.icon;
+                  const isExpanded = expandedArticleId === art.id;
+                  return (
+                    <div
+                      key={art.id}
+                      className="p-3.5 rounded-2xl bg-[#0A1F26] border border-[#2B7574]/40 font-mono transition-all"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setExpandedArticleId(isExpanded ? null : art.id)}
+                        className="w-full text-left flex items-start gap-3 cursor-pointer"
+                      >
+                        <div className="w-8 h-8 rounded-xl bg-[#12484C] text-[#F2B632] flex items-center justify-center shrink-0 mt-0.5">
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-[9px] uppercase font-bold text-[#F2B632] block">
+                            {art.category}
+                          </span>
+                          <h4 className="text-xs font-bold text-white mt-0.5">
+                            {art.title}
+                          </h4>
+                          <p className="text-[10px] text-[#A5D1E1]/80 mt-1 leading-relaxed">
+                            {art.summary}
+                          </p>
+                        </div>
+                        <ChevronRight
+                          className={`w-4 h-4 text-[#A5D1E1] shrink-0 mt-2 transition-transform ${
+                            isExpanded ? 'rotate-90' : ''
+                          }`}
+                        />
+                      </button>
+
+                      {isExpanded && (
+                        <div className="mt-3 pt-3 border-t border-white/10 text-[11px] text-white/90 leading-relaxed">
+                          <p>{art.content}</p>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              submitQuery(`Help with: ${art.title}`);
+                              setActiveTab('chat');
+                            }}
+                            className="mt-2 text-[10px] text-[#F2B632] hover:underline font-bold flex items-center gap-1 cursor-pointer"
+                          >
+                            <span>Ask an agent about this →</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* ─────────────────────────────────────────────────────────────
+              TAB 3: PRIORITY PHONE CALLBACK & DIRECT HOTLINE
+             ───────────────────────────────────────────────────────────── */}
+          {activeTab === 'callback' && (
+            <div className="flex-1 flex flex-col min-h-0 bg-[#07161B] p-5 space-y-4 overflow-y-auto font-mono text-xs">
+              <div className="p-4 rounded-2xl bg-[#0A1F26] border border-[#2B7574]/50 space-y-2">
+                <span className="text-[10px] text-[#F2B632] font-bold uppercase block">
+                  Direct Guest Care Hotline
+                </span>
+                <div className="flex items-center gap-2">
+                  <PhoneCall className="w-4 h-4 text-emerald-400" />
+                  <span className="text-sm font-bold text-white">+234 (01) 800-AEROVISTA</span>
+                </div>
+                <p className="text-[10px] text-[#A5D1E1]/80">
+                  Toll-free 24/7 client line for flight disruptions and medical priority.
+                </p>
+              </div>
+
+              {/* Request Callback Form */}
+              <form onSubmit={handleRequestCallback} className="p-4 rounded-2xl bg-[#0A1F26] border border-[#2B7574]/40 space-y-3.5">
+                <div className="flex items-center gap-2 text-white font-bold text-xs uppercase">
+                  <Clock className="w-4 h-4 text-[#F2B632]" />
+                  <span>Request Priority Callback</span>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] uppercase text-[#A5D1E1] mb-1">
+                    Your Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    value={callbackPhone}
+                    onChange={(e) => setCallbackPhone(e.target.value)}
+                    required
+                    className="w-full h-11 px-3.5 rounded-xl bg-[#051114] border border-[#2B7574]/50 text-white font-mono text-xs outline-none focus:border-[#F2B632]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] uppercase text-[#A5D1E1] mb-1">
+                    Expected Response
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setCallbackUrgency('immediate')}
+                      className={`py-2 rounded-xl text-[10px] uppercase font-bold border transition-colors cursor-pointer ${
+                        callbackUrgency === 'immediate'
+                          ? 'bg-[#12484C] text-[#F2B632] border-[#2B7574]'
+                          : 'bg-[#051114] text-[#A5D1E1] border-white/5'
+                      }`}
+                    >
+                      Within 3 Mins
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCallbackUrgency('15min')}
+                      className={`py-2 rounded-xl text-[10px] uppercase font-bold border transition-colors cursor-pointer ${
+                        callbackUrgency === '15min'
+                          ? 'bg-[#12484C] text-[#F2B632] border-[#2B7574]'
+                          : 'bg-[#051114] text-[#A5D1E1] border-white/5'
+                      }`}
+                    >
+                      Within 15 Mins
+                    </button>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={callbackConfirmed}
+                  className="w-full h-11 rounded-xl bg-[#12484C] hover:bg-[#1a5f64] text-[#F2B632] border border-[#2B7574]/70 font-mono font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer mt-2"
+                >
+                  <PhoneCall size={14} />
+                  <span>{callbackConfirmed ? 'Request Queued...' : 'Request Instant Callback'}</span>
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* ── Support Center Static Footer ── */}
+          <div className="px-4 py-2 bg-[#051114] border-t border-[#18363F] flex items-center justify-between text-[9px] font-mono text-[#A5D1E1]/60 shrink-0">
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              TERMINAL · MM2 LAGOS
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              GUEST CARE DESK · MM2 LAGOS
             </span>
-            <span className="text-[#F2B632]">AES-256 · IATA DIRECT</span>
+            <span className="text-[#F2B632]">TICKET REGISTRY ACTIVE</span>
           </div>
         </div>
       )}

@@ -97,7 +97,7 @@ export interface AppState {
   setAuthModalOpen: (open: boolean) => void;
   login: (role: 'traveler' | 'admin', name?: string, email?: string) => void;
   logout: () => void;
-  switchRole: () => void;
+  updateCurrentUser: (partial: Partial<UserProfile>) => void;
 
   // Navigation
   activeRoute: string;
@@ -159,6 +159,8 @@ export interface AppState {
   setLatestBooking: (b: BookingRecord | null) => void;
   bookingHistory: BookingRecord[];
   addBookingToHistory: (b: BookingRecord) => void;
+  updateBookingRecord: (bookingId: string, partial: Partial<BookingRecord>) => void;
+  updatePassengerMeal: (bookingId: string, meal: string) => void;
   payLoanInstallment: (bookingId: string, amountNgn: number) => void;
 
   // Fly Now Pay Later Draft & Decision
@@ -190,6 +192,7 @@ export interface AppState {
   updateFlightOps: (flightId: string, partial: Partial<FlightOpsRecord>) => void;
   approveUnderwriting: (appId: string) => void;
   declineUnderwriting: (appId: string) => void;
+  batchApprovePrimeLoans: () => number;
 
   // Support Widget
   isSupportOpen: boolean;
@@ -399,13 +402,8 @@ export const useAppStore = create<AppState>()(
           isAuthModalOpen: false,
         });
       },
-      switchRole: () => {
-        const current = get().currentUser;
-        if (current.role === 'traveler') {
-          set({ currentUser: DEFAULT_ADMIN_PROFILE });
-        } else {
-          set({ currentUser: DEFAULT_TRAVELER_PROFILE });
-        }
+      updateCurrentUser: (partial) => {
+        set((state) => ({ currentUser: { ...state.currentUser, ...partial } }));
       },
 
       // Navigation
@@ -512,6 +510,23 @@ export const useAppStore = create<AppState>()(
           latestBooking: booking,
         })),
 
+      updateBookingRecord: (bookingId, partial) =>
+        set((state) => ({
+          bookingHistory: state.bookingHistory.map((b) => (b.id === bookingId ? { ...b, ...partial } : b)),
+          latestBooking: state.latestBooking?.id === bookingId ? { ...state.latestBooking, ...partial } : state.latestBooking,
+        })),
+
+      updatePassengerMeal: (bookingId, meal) =>
+        set((state) => ({
+          bookingHistory: state.bookingHistory.map((b) => {
+            if (b.id === bookingId) {
+              const updatedPassengers = b.passengers.map((p, idx) => idx === 0 ? { ...p, mealPreference: meal } : p);
+              return { ...b, passengers: updatedPassengers };
+            }
+            return b;
+          }),
+        })),
+
       payLoanInstallment: (bookingId, amountNgn) =>
         set((state) => {
           const updated = state.bookingHistory.map((b) => {
@@ -584,6 +599,20 @@ export const useAppStore = create<AppState>()(
             app.id === appId ? { ...app, status: 'Declined' } : app
           ),
         })),
+      batchApprovePrimeLoans: () => {
+        let count = 0;
+        set((state) => {
+          const updated = state.underwritingQueue.map((app) => {
+            if (app.riskTier === 'Tier 1 Prime' && app.status === 'Pending') {
+              count++;
+              return { ...app, status: 'Approved' as const };
+            }
+            return app;
+          });
+          return { underwritingQueue: updated };
+        });
+        return count;
+      },
 
       isSupportOpen: false,
       setSupportOpen: (isSupportOpen) => set({ isSupportOpen }),

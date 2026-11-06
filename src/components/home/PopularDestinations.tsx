@@ -87,13 +87,13 @@ export const PopularDestinations: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
           <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
-            01. CURATED EXPEDITIONS
+            FEATURED DESTINATIONS · LIVE FARES
           </span>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
             POPULAR FLIGHT ROUTES
           </h2>
           <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1 max-w-xl">
-            Direct departures from Lagos (LOS). Choose a route to see sample flight options. Check current prices with the airline before booking.
+            Curated journeys departing from Lagos MM2. Starting fares include all terminal fees and standard baggage.
           </p>
         </div>
 
@@ -150,7 +150,7 @@ export const PopularDestinations: React.FC = () => {
                 {/* Duration Badge */}
                 <div className="absolute bottom-3 left-3 bg-[#0E2931]/70 backdrop-blur-sm text-[#F4F6F5] px-2 py-0.5 rounded text-[11px] font-mono flex items-center gap-1">
                   <Plane className="w-3 h-3 text-[#F2B632] stroke-[1.5]" />
-                  <span>{dest.flightDuration} Direct</span>
+                  <span>{dest.flightDuration} · Nonstop</span>
                 </div>
               </div>
 
@@ -185,7 +185,7 @@ export const PopularDestinations: React.FC = () => {
                   </div>
 
                   <span className="text-xs font-semibold text-[#12484C] dark:text-[#F2B632] group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                    Book Route →
+                    Explore Flights →
                   </span>
                 </div>
               </div>

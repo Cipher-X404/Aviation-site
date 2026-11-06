@@ -14,7 +14,7 @@
   --gold: #F2B632;
   --crimson: #861211;
 
-  --font-display: 'Cinzel', 'Cormorant Garamond', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-serif: 'Cormorant Garamond', 'Cinzel', Georgia, serif;
   --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
@@ -47,8 +47,7 @@
 
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -82,7 +81,7 @@
 
 /* Ocean gradient for the Fly Now Pay Later section */
 .bg-ocean-gradient {
-  background: linear-gradient(135deg, #0D5C75 0%, #12484C 50%, #199FB1 100%);
+  background: #103c43;
 }
 
 /* Perforated divider for boarding passes */
@@ -144,17 +143,15 @@
   background-color: #F2B632;
   color: #0E2931;
   font-weight: 600;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(242, 182, 50, 0.25);
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  border: 1px solid #d29a1d;
   border-radius: 6px;
 }
 .btn-gold:hover {
   background-color: #F8C34B;
-  box-shadow: 0 6px 20px rgba(242, 182, 50, 0.35);
-  transform: translateY(-1px);
 }
 .btn-gold:active {
-  transform: translateY(0);
+  background-color: #e4a923;
 }
 
 /* Soft teal tinted shadows */
@@ -243,19 +240,17 @@
 
 /* Contest-Grade 10X Luxury Card Styling (Zero Border Color Change) */
 .card-luxury {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 20px -2px rgba(18, 72, 76, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  box-shadow: none;
 }
 .card-luxury:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 25px 50px -12px rgba(18, 72, 76, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(18, 72, 76, 0.48);
 }
 .dark .card-luxury {
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: none;
 }
 .dark .card-luxury:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 25px 50px -12px rgba(18, 72, 76, 0.45), inset 0 1px 0 rgba(242, 182, 50, 0.15);
+  border-color: rgba(242, 182, 50, 0.48);
 }
 
 @keyframes spin {
@@ -279,7 +274,7 @@
   left: 20%;
   right: 20%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #F2B632, transparent);
+  background: #9a7727;
   transform: scaleX(0);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -333,8 +328,7 @@
   to { transform: rotate(360deg); }
 }
 .chat-ring {
-  background: conic-gradient(from 0deg, transparent 0%, rgba(242,182,50,0.9) 22%, rgba(242,182,50,0) 50%, transparent 100%);
-  animation: shimmer-rotate 3.5s linear infinite;
+  background: #c9a955;
 }
 
 /* Gentle float for the launcher orb */
@@ -343,7 +337,7 @@
   50% { transform: translateY(-5px); }
 }
 .animate-float-soft {
-  animation: float-soft 4s ease-in-out infinite;
+  animation: none;
 }
 
 /* Chat console entrance */
@@ -361,8 +355,7 @@
   50% { background-position: 100% 50%; }
 }
 .animate-orb-shift {
-  background-size: 200% 200%;
-  animation: orb-shift 5s ease-in-out infinite;
+  background-size: cover;
 }
 
 /* Message bubble pop-in */
@@ -382,8 +375,30 @@
 
 /* Keyboard users get a clear, high-contrast focus marker across native controls. */
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-  outline: 2px solid #c9a955;
+  outline: 2px solid #8a6413;
   outline-offset: 3px;
+}
+
+/* Keep cards still: interaction is shown with a crisp edge or color change. */
+[class*="hover:-translate-y-"]:hover,
+[class*="hover:translate-x-"]:hover {
+  transform: none !important;
+}
+
+[class*="hover:scale-"]:hover,
+img[class*="group-hover:scale-"] {
+  transform: none !important;
+}
+
+[class*="hover:shadow-"]:hover {
+  box-shadow: none !important;
+}
+
+@media (hover: hover) {
+  [class*="hover:-translate-y-"]:hover,
+  [class*="hover:translate-x-"]:hover {
+    border-color: rgba(154, 119, 39, 0.55);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

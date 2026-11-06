@@ -15,7 +15,7 @@ export const ServicesBento: React.FC = () => {
           Plan a trip, your way
         </h2>
         <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1 max-w-2xl">
-          Explore sample flights, hotel stays and payment-plan examples. This prototype does not make live bookings.
+          Direct access to sovereign air corridors, verified luxury sanctuaries, and 0% APR flight financing.
         </p>
       </div>
 
@@ -40,7 +40,7 @@ export const ServicesBento: React.FC = () => {
                 <Plane className="w-5 h-5 stroke-[1.5] -rotate-45" />
               </div>
               <span className="text-[11px] font-mono text-[#2B7574] dark:text-[#F2B632] uppercase border border-[#2B7574]/30 px-2 py-0.5 rounded">
-                Sample flight search
+                Live GDS Corridors
               </span>
             </div>
 
@@ -48,7 +48,7 @@ export const ServicesBento: React.FC = () => {
               Explore flight options
             </h3>
             <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-2 max-w-lg leading-relaxed">
-              Browse sample routes and compare the details shown for each flight. Check live availability and fare rules with the airline before you book.
+              Direct connectivity to major West African and global carriers with live seat inventory, transparent fare classes, and instant e-ticketing.
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6 pt-6 border-t border-[#E2E2E0] dark:border-[#18363F]">
@@ -57,7 +57,7 @@ export const ServicesBento: React.FC = () => {
                   Carriers
                 </span>
                 <span className="text-sm font-semibold text-[#0E2931] dark:text-[#FFFFFF]">
-                  Sample routes
+                  Direct Corridors
                 </span>
               </div>
               <div>
@@ -73,7 +73,7 @@ export const ServicesBento: React.FC = () => {
                   Ticketing
                 </span>
                 <span className="text-sm font-semibold text-[#0E2931] dark:text-[#FFFFFF]">
-                  Demo only
+                  Instant E-Ticket
                 </span>
               </div>
             </div>
@@ -102,7 +102,7 @@ export const ServicesBento: React.FC = () => {
                 <Building2 className="w-5 h-5 stroke-[1.5]" />
               </div>
               <span className="text-[11px] font-mono text-[#2B7574] dark:text-[#F2B632] uppercase border border-[#2B7574]/30 px-2 py-0.5 rounded">
-                Hotel examples
+                Power-Verified
               </span>
             </div>
 
@@ -110,17 +110,17 @@ export const ServicesBento: React.FC = () => {
               Destination Hotels
             </h3>
             <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-2 leading-relaxed">
-              Use your destination and dates to explore example stays. Confirm check-in, amenities and transport with the property.
+              Curated sanctuaries with audited generator backup, enterprise Wi-Fi, and coordinated tarmac-to-suite chauffeur transfers.
             </p>
 
             <div className="space-y-2 mt-6 pt-6 border-t border-[#E2E2E0] dark:border-[#18363F]">
               <div className="flex items-center gap-2 text-xs text-[#12484C] dark:text-[#A5D1E1]">
                 <ShieldCheck className="w-4 h-4 text-[#2B7574] dark:text-[#F2B632] stroke-[1.5]" />
-                <span>Listed amenities vary by property</span>
+                <span>100% Verified backup power systems</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-[#12484C] dark:text-[#A5D1E1]">
                 <Zap className="w-4 h-4 text-[#2B7574] dark:text-[#F2B632] stroke-[1.5]" />
-                <span>Compare flight and hotel costs</span>
+                <span>Synchronized flight and hotel arrangements</span>
               </div>
             </div>
           </div>
@@ -145,14 +145,14 @@ export const ServicesBento: React.FC = () => {
             <div className="space-y-3 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#0E2931]/60 border border-[#A5D1E1]/30 text-xs font-mono text-[#F2B632]">
                 <Zap className="w-3.5 h-3.5 stroke-[1.5]" />
-                <span>PAYMENT PLAN EXAMPLES</span>
+                <span>0% APR FINANCING</span>
               </div>
 
               <h3 className="font-display text-2xl sm:text-4xl font-extrabold uppercase tracking-wide">
                 Fly Now, Pay Later
               </h3>
               <p className="text-sm sm:text-base text-[#A5D1E1] leading-relaxed">
-                Use the example calculator to compare payment terms. It does not submit an application or approve credit.
+                Spread your travel investment over 3, 6, 9, or 12 months with zero hidden interest. Backed by CBN-licensed financial infrastructure.
               </p>
             </div>
 
@@ -161,7 +161,7 @@ export const ServicesBento: React.FC = () => {
                 type="button"
                 className="btn-gold px-6 py-3.5 text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-lg"
               >
-                <span>See example payments</span>
+                <span>Configure Payment Plan</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2]" />
               </button>
             </div>

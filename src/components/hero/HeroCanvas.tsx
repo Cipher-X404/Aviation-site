@@ -33,7 +33,7 @@ const SCENES: SceneContent[] = [
     badge: 'ROUTES TO CONSIDER',
     headline: 'ABOVE THE HORIZON',
     subheadline:
-      'Compare sample routes from Lagos to regional and international destinations.',
+      'Fly direct from Lagos to regional capitals and global destinations across all cabin classes.',
     start: 0.28,
     end: 0.58,
   },

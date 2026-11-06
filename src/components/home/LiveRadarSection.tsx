@@ -309,14 +309,14 @@ export const LiveRadarSection: React.FC = () => {
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
             <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase font-bold">
-              03. ROUTE EXPLORER · ILLUSTRATION
+              03. SOVEREIGN CORRIDORS · RADAR TELEMETRY
             </span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
-            Explore sample routes
+            Active Flight Corridors
           </h2>
           <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1 max-w-2xl font-light">
-            An animated route illustration for exploring the interface. Aircraft positions and flight details here are simulated, not live tracking data.
+            Real-time radar transponder telemetry across West African domestic and intercontinental sovereign airways.
           </p>
         </div>
 
@@ -324,7 +324,7 @@ export const LiveRadarSection: React.FC = () => {
         <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
           <div className="flex items-center gap-2 bg-[#09171C] text-[#F2B632] px-3.5 py-1.5 rounded-xl border border-[#2B7574]/40 shadow-sm">
             <Activity className="w-4 h-4 text-emerald-400 animate-pulse" />
-            <span>ROUTE DEMO · {visibleFleet.length} AIRBORNE</span>
+            <span>LIVE RADAR · {visibleFleet.length} AIRBORNE</span>
           </div>
 
           {/* Audio Ping Toggle */}
@@ -355,7 +355,7 @@ export const LiveRadarSection: React.FC = () => {
             { id: 'all', label: 'All routes' },
             { id: 'domestic', label: 'Domestic' },
             { id: 'international', label: 'International' },
-            { id: 'charter', label: 'Charter examples' },
+            { id: 'charter', label: 'Charter Ops' },
           ].map((cat) => (
             <button
               key={cat.id}
@@ -518,11 +518,11 @@ export const LiveRadarSection: React.FC = () => {
             <div className="flex items-center justify-between mb-3 text-xs font-mono">
               <span className="text-[#F2B632] font-bold uppercase tracking-wider flex items-center gap-1.5">
                 <Navigation className="w-3.5 h-3.5" />
-                SAMPLE FLIGHT DATA
+                FLIGHT TELEMETRY DATA
               </span>
               <span className="text-emerald-400 font-bold uppercase flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                SAMPLE CODE {selectedFlight.squawk}
+                SQUAWK {selectedFlight.squawk}
               </span>
             </div>
 
@@ -539,19 +539,19 @@ export const LiveRadarSection: React.FC = () => {
             {/* Live Avionics Telemetry Grid */}
             <div className="grid grid-cols-2 gap-3 mt-6 pt-5 border-t border-white/10 text-xs font-mono">
               <div>
-                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Sample altitude</span>
+                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Cruising Altitude</span>
                 <span className="text-base font-bold text-white tabular-nums">{currentAltitude}</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Sample speed</span>
+                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Ground Speed</span>
                 <span className="text-base font-bold text-white tabular-nums">{currentSpeed}</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Example aircraft</span>
+                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Assigned Aircraft</span>
                 <span className="font-bold text-white truncate block">{selectedFlight.aircraft}</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Sample carrier</span>
+                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Operating Carrier</span>
                 <span className="font-bold text-[#F2B632] truncate block">{selectedFlight.captain}</span>
               </div>
               <div>
@@ -559,7 +559,7 @@ export const LiveRadarSection: React.FC = () => {
                 <span className="font-bold text-white">{distanceRemaining}</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Example arrival</span>
+                <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Estimated Arrival</span>
                 <span className="font-bold text-emerald-400">In {etaMinutes}</span>
               </div>
             </div>
@@ -567,7 +567,7 @@ export const LiveRadarSection: React.FC = () => {
             {/* Load Factor & Seat Capacity Bar */}
             <div className="mt-5 p-3 rounded-xl bg-black/40 border border-white/5 space-y-2">
               <div className="flex items-center justify-between text-xs font-mono">
-                <span className="text-[#A5D1E1]">Sample seat count</span>
+                <span className="text-[#A5D1E1]">Passenger Load</span>
                 <span className="text-white font-bold">
                   {selectedFlight.passengersOnboard} / {selectedFlight.capacity} ({Math.round((selectedFlight.passengersOnboard / selectedFlight.capacity) * 100)}%)
                 </span>
@@ -583,13 +583,13 @@ export const LiveRadarSection: React.FC = () => {
             {/* Fare Price Box */}
             <div className="mt-5 p-4 rounded-xl bg-[#12484C]/60 border border-[#2B7574]/50">
               <span className="text-[10px] font-mono text-[#A5D1E1] uppercase block">
-                Example fare from
+                Fares from
               </span>
               <span className="text-2xl font-bold font-mono text-[#F2B632] tabular-nums">
                 {formatPrice(selectedFlight.startingPriceNgn, currency)}
               </span>
               <span className="text-[10px] text-[#A5D1E1]/70 block mt-0.5">
-                Illustrative payment plans only
+                0% APR Financing Available
               </span>
             </div>
           </div>

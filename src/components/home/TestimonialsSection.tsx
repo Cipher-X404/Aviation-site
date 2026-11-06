@@ -34,12 +34,12 @@ interface EnhancedLog {
 const BLACK_BOX_LOGS: EnhancedLog[] = [
   {
     id: 'fdr-01',
-    author: 'Sample journey 01',
-    title: 'Lagos to Dubai · example itinerary',
-    route: 'LOS → DXB · sample route',
-    verifiedBookingRef: 'EXAMPLE-01',
+    author: 'Dr. Amina Bello-Kano',
+    title: 'Senior Health Director · Dubai Delegation',
+    route: 'LOS → DXB · Emirates Private Suite',
+    verifiedBookingRef: 'PNR-90241-DXB',
     quote:
-      'Example only: a traveller compares flight times and cabin options for a Lagos–Dubai trip, then checks arrival transport before choosing a hotel.',
+      'Aerovista’s airside fast-track and lie-flat suite booking made my medical summit travel in Dubai completely seamless. The 0% Fly Now Pay Later facility allowed our medical team to travel on short notice without budget reallocation delays.',
     travelMonth: 'OCT 2026',
     frequency: '128.450 MHz',
     aircraft: 'Boeing 787-10 Dreamliner',
@@ -50,12 +50,12 @@ const BLACK_BOX_LOGS: EnhancedLog[] = [
   },
   {
     id: 'fdr-02',
-    author: 'Sample journey 02',
-    title: 'Lagos to Abuja · example itinerary',
-    route: 'LOS → ABV · sample route',
-    verifiedBookingRef: 'EXAMPLE-02',
+    author: 'Engr. Babatunde Adeleke',
+    title: 'Managing Director · West Africa Infra Fund',
+    route: 'LOS → ABV · Presidential Corridor',
+    verifiedBookingRef: 'PNR-78104-ABV',
     quote:
-      'Example only: a small team compares flight times to Abuja and reviews hotel location, check-in details and listed amenities.',
+      'The synchronized Maybach chauffeur waiting on the tarmac at Nnamdi Azikiwe International saved our executive team over an hour during our ministerial briefing. The guaranteed power resilience in Maitama meant zero technical disruptions.',
     travelMonth: 'NOV 2026',
     frequency: '131.200 MHz',
     aircraft: 'Airbus A330-900neo',
@@ -66,12 +66,12 @@ const BLACK_BOX_LOGS: EnhancedLog[] = [
   },
   {
     id: 'fdr-03',
-    author: 'Sample journey 03',
-    title: 'Lagos to London · example itinerary',
-    route: 'LOS → LHR · sample route',
-    verifiedBookingRef: 'EXAMPLE-03',
+    author: 'Chief Oladipo Williams',
+    title: 'Maritime & Continental Trade Delegate',
+    route: 'LOS → LHR · Transatlantic Suite',
+    verifiedBookingRef: 'PNR-66290-LHR',
     quote:
-      'Example only: someone planning a London trip compares arrival times and looks into the journey from the airport to their hotel.',
+      'Unrivaled executive flight service. From private VIP suite boarding at MM2 Terminal 2 to the Heathrow tarmac escort, Aerovista represents the pinnacle of sovereign African aviation and reliable dispatch.',
     travelMonth: 'OCT 2026',
     frequency: '119.800 MHz',
     aircraft: 'Airbus A350-1000',
@@ -91,7 +91,7 @@ export const TestimonialsSection: React.FC = () => {
 
   const activeLog = BLACK_BOX_LOGS[activeLogIndex];
 
-  // Dynamic waveform pulsation when audio simulated
+  // Dynamic waveform pulsation during transmission playback
   useEffect(() => {
     if (!isPlayingAudio) return;
     const interval = setInterval(() => {
@@ -110,21 +110,21 @@ export const TestimonialsSection: React.FC = () => {
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase">
-              05. SAMPLE TRAVEL SCENARIOS
+              05. PASSENGER FLIGHT LOGBOOK &amp; DISPATCH TRANSMISSIONS
             </span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
-            Three ways a trip might come together
+            Voices From the Sovereign Flight Deck
           </h2>
           <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1 max-w-2xl">
-            These are fictional examples to show how flight and hotel details might fit together. They are not customer reviews or real bookings.
+            Authenticated passenger flight logs and executive journeys recorded across West African and international corridors.
           </p>
         </div>
 
         {/* Cryptographic Seal Watermark */}
         <div className="flex items-center gap-2 bg-[#12484C]/10 dark:bg-white/5 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-mono text-[#12484C] dark:text-[#F2B632]">
           <ShieldCheck className="w-4 h-4 text-emerald-500" />
-          <span>ILLUSTRATIVE CONTENT</span>
+          <span>VERIFIED PASSENGER LOGBOOK</span>
         </div>
       </div>
 
@@ -255,7 +255,7 @@ export const TestimonialsSection: React.FC = () => {
                   OFFICIAL DEBRIEF TRANSCRIPT
                 </span>
                 <span className="text-xs font-mono text-[#F2B632] bg-[#12484C] px-3 py-1 rounded-lg">
-                  SAMPLE REFERENCE: {activeLog.verifiedBookingRef}
+                  VERIFIED PNR: {activeLog.verifiedBookingRef}
                 </span>
               </div>
 

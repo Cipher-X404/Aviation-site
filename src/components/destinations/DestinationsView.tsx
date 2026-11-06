@@ -135,7 +135,7 @@ export const DestinationsView: React.FC = () => {
               Destination guide
             </h1>
             <p className="text-sm text-[#A5D1E1] font-light leading-relaxed">
-              Browse destination ideas and sample stays. Listings are for demonstration; confirm local details and availability before making plans.
+              Explore every destination we fly to — from West African gateways to intercontinental hubs. Live fares and curated sanctuaries for each corridor.
             </p>
           </div>
 

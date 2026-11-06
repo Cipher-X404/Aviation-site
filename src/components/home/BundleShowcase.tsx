@@ -23,13 +23,13 @@ export const BundleShowcase: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
         <div>
           <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
-            03. SYNCED PACKAGES
+            CURATED PACKAGES
           </span>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
             FLIGHT + HOTEL BUNDLES
           </h2>
           <p className="text-sm text-[#12484C]/80 dark:text-[#A5D1E1] mt-1 max-w-xl">
-            Coordinated flight touchdowns with luxury hotel check-ins. Save up to 15% compared to booking individually.
+            Curated Flight + Sanctuary bundles. Synchronized tarmac chauffeur and verified power resilience included. Book each component separately or as a complete package.
           </p>
         </div>
       </div>
@@ -56,9 +56,8 @@ export const BundleShowcase: React.FC = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
 
-                {/* Savings Badge */}
-                <div className="absolute top-4 right-4 bg-[#861211] text-[#FFFFFF] px-3 py-1 rounded font-mono text-xs font-bold uppercase tracking-wider shadow-md">
-                  YOU SAVE {formatPrice(bundle.savingsNgn, currency)}
+                <div className="absolute top-4 right-4 bg-[#09171C]/85 text-[#F4F6F5] px-3 py-1 border border-white/20 font-mono text-xs uppercase tracking-wider">
+                  SOVEREIGN BUNDLE
                 </div>
 
                 {/* Destination Badge */}
@@ -78,18 +77,18 @@ export const BundleShowcase: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <Plane className="w-4 h-4 text-[#2B7574] dark:text-[#F2B632] stroke-[1.5]" />
                       <span>
-                        Return {flight?.airline} {flight?.flightNumber} ({flight?.cabinClass})
+                        Confirmed flight · {flight?.airline} {flight?.flightNumber} ({flight?.cabinClass})
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Building2 className="w-4 h-4 text-[#2B7574] dark:text-[#F2B632] stroke-[1.5]" />
                       <span>
-                        {bundle.totalNights} Nights Deluxe Accommodation with Breakfast
+                        {bundle.totalNights} nights · verified sanctuary stay
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Building2 className="w-4 h-4 text-[#2B7574] dark:text-[#F2B632] stroke-[1.5]" />
-                      <span>Private Chauffeured Airport Transfer Included</span>
+                      <span>Tarmac chauffeur included</span>
                     </div>
                   </div>
                 </div>
@@ -100,8 +99,8 @@ export const BundleShowcase: React.FC = () => {
                 {/* Pricing & CTA */}
                 <div className="flex items-center justify-between pt-2">
                   <div>
-                    <span className="block text-[11px] font-mono line-through text-[#12484C]/60 dark:text-[#A5D1E1]/60">
-                      Regular {formatPrice(bundle.individualTotalNgn, currency)}
+                    <span className="block text-[11px] font-mono text-[#12484C]/70 dark:text-[#A5D1E1]/70">
+                    Bundle total from
                     </span>
                     <span className="text-xl sm:text-2xl font-bold font-mono tabular-nums text-[#0E2931] dark:text-[#F2B632]">
                       {formatPrice(bundle.bundlePriceNgn, currency)}
@@ -112,7 +111,7 @@ export const BundleShowcase: React.FC = () => {
                     onClick={() => handleBookBundle(bundle.flightId, bundle.hotelId)}
                     className="btn-gold py-2.5 px-4 text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer"
                   >
-                    <span>Reserve Bundle</span>
+                    <span>Book This Package</span>
                     <ArrowRight className="w-3.5 h-3.5 stroke-[2]" />
                   </button>
                 </div>

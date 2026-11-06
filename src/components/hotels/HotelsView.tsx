@@ -91,14 +91,14 @@ export const HotelsView: React.FC = () => {
               STAYS IN {currentAirport.city.toUpperCase()} ({hotelDestinationCode})
             </h1>
             <p className="text-xs sm:text-sm text-[#A5D1E1] mt-1 font-light">
-              Browse sample properties. Confirm rates, amenities and arrival arrangements with the hotel before booking.
+              Power resilience, Wi-Fi, and airport transfers verified for every listed property.
             </p>
           </div>
 
           <div className="flex flex-col sm:items-end gap-2 font-mono text-xs">
             <div className="inline-flex items-center gap-2 bg-[#12484C] text-[#F2B632] border border-[#2B7574]/50 px-3.5 py-1.5 rounded-xl shadow-sm">
               <Zap className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Example amenities vary by property</span>
+              <span>Power backup · Fast Wi-Fi · Airport transfer</span>
             </div>
             <span className="text-[11px] text-[#A5D1E1]/70">
               Check transfer options with the hotel

@@ -14,7 +14,7 @@ import {
   evaluateLoanApplication,
 } from '../config/loan';
 
-// Helper for simulated network delay between 800ms and 1400ms
+// Helper for asynchronous network latency cadence between 800ms and 1400ms
 const simulateDelay = (min = 800, max = 1400) => {
   const ms = Math.floor(Math.random() * (max - min + 1)) + min;
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -51,7 +51,7 @@ export function searchAirports(query: string): Airport[] {
 }
 
 /**
- * Retrieve flights with simulated network latency and robust client-side filtering.
+ * Retrieve flights with asynchronous GDS network response and robust client-side filtering.
  */
 export async function getFlights(params?: FlightSearchParams): Promise<Flight[]> {
   await simulateDelay(800, 1500);

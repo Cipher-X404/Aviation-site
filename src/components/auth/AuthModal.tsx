@@ -151,7 +151,7 @@ export const AuthModal: React.FC = () => {
 
       setStatusMsg({ type: 'success', text: 'ATC Operations clearance confirmed. Initializing Dispatch HUD...' });
       login('admin');
-      window.dispatchEvent(new Event('aerovista-admin-authenticated'));
+      window.dispatchEvent(new Event('cjtravels-admin-authenticated'));
 
       setTimeout(() => {
         handleClose();
@@ -199,7 +199,7 @@ export const AuthModal: React.FC = () => {
           <div className="relative z-10 space-y-4">
             <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#F2B632] uppercase">
               <span className="w-2 h-2 rounded-full bg-[#F2B632] animate-pulse" />
-              <span>AEROVISTA SECURITY PROTOCOL 4.2</span>
+              <span>CJ TRAVELS SECURITY PROTOCOL 4.2</span>
             </div>
 
             <div>
@@ -480,7 +480,7 @@ export const AuthModal: React.FC = () => {
                     Station Master Access Key
                   </label>
                   <span className="text-[10px] font-mono text-[#F2B632]">
-                    Default: AEROVISTA-ATC-COMMAND-2026
+                    Default: CJTRAVELS-ATC-COMMAND-2026
                   </span>
                 </div>
                 <div className="relative">

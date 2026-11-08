@@ -391,7 +391,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
         {/* Compact Footer */}
         <div className="px-5 py-2.5 bg-[#061216] border-t border-[#18363F] flex items-center justify-between text-[11px] font-mono text-[#A5D1E1]/50">
           <span>Use ↑ ↓ to navigate · ↵ to select</span>
-          <span className="text-[#F2B632]/80">AEROVISTA SEARCH</span>
+          <span className="text-[#F2B632]/80">CJ TRAVELS SEARCH</span>
         </div>
       </div>
     </div>

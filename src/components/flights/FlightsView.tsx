@@ -443,7 +443,7 @@ export const FlightsView: React.FC = () => {
               className="w-full bg-[#F4F6F5] dark:bg-[#061216] border border-[#2B7574]/30 rounded-xl px-3 py-2 text-xs font-mono text-[#0E2931] dark:text-[#FFFFFF] focus:outline-none"
             >
               <option value="all">All Partner Carriers</option>
-              <option value="aerovista">Aerovista Airways</option>
+              <option value="aerovista">CJ Travels Airways</option>
               <option value="zenith">Zenith Airways</option>
               <option value="equatorial">Equatorial Air</option>
               <option value="savannah">Savannah Wings</option>

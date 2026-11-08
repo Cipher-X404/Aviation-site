@@ -18,6 +18,6 @@ export const RouteJournal: React.FC<{ route: string }> = ({ route }) => {
       <div><p className="text-[10px] tracking-[.28em] uppercase text-[#9a7727] mb-4">{entry.eyebrow}</p><h2 className="font-serif normal-case tracking-tight text-3xl sm:text-5xl leading-tight max-w-lg">{entry.title}</h2><p className="mt-5 max-w-lg text-sm leading-7 opacity-70">{entry.body}</p></div>
       <div className="divide-y divide-[#2B7574]/20 border-y border-[#2B7574]/20">{entry.items.map(([title, body], index) => <article key={title} className="grid grid-cols-[42px_1fr] gap-4 py-5 sm:py-6"><span className="font-mono text-xs text-[#9a7727] pt-1">0{index + 1}</span><div><h3 className="normal-case tracking-normal text-base font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 opacity-65 max-w-xl">{body}</p></div></article>)}</div>
     </div>
-    <button onClick={() => setActiveRoute('/')} className="mt-8 text-xs uppercase tracking-[.18em] border-b border-[#9a7727] pb-2 hover:text-[#9a7727]">Back to Aerovista home ↗</button>
+    <button onClick={() => setActiveRoute('/')} className="mt-8 text-xs uppercase tracking-[.18em] border-b border-[#9a7727] pb-2 hover:text-[#9a7727]">Back to CJ Travels home ↗</button>
   </section>;
 };

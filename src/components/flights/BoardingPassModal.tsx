@@ -73,7 +73,7 @@ export const BoardingPassModal: React.FC<BoardingPassModalProps> = ({
               </div>
               <div>
                 <span className="font-display text-lg font-bold tracking-widest uppercase">
-                  AEROVISTA ROYAL
+                  CJ TRAVELS ROYAL
                 </span>
                 <span className="block text-[10px] font-mono text-[#A5D1E1]">
                   ELECTRONIC PASSENGER COUPON
@@ -230,7 +230,7 @@ export const BoardingPassModal: React.FC<BoardingPassModalProps> = ({
           {/* Footer Actions */}
           <div className="bg-[#EAEFEF] px-6 py-4 flex items-center justify-between border-t border-[#E2E2E0]">
             <span className="text-[11px] font-mono text-[#12484C]">
-              ISSUED BY AEROVISTA AIR & EXPEDITIONS
+              ISSUED BY CJ TRAVELS OWERRI
             </span>
 
             <div className="flex items-center gap-2">

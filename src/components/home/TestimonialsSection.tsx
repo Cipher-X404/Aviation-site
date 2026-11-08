@@ -39,7 +39,7 @@ const BLACK_BOX_LOGS: EnhancedLog[] = [
     route: 'LOS → DXB · Emirates Private Suite',
     verifiedBookingRef: 'PNR-90241-DXB',
     quote:
-      'Aerovista’s airside fast-track and lie-flat suite booking made my medical summit travel in Dubai completely seamless. The 0% Fly Now Pay Later facility allowed our medical team to travel on short notice without budget reallocation delays.',
+      'CJ Travels Owerri’s airside fast-track and lie-flat suite booking made my medical summit travel in Dubai completely seamless. The 0% Fly Now Pay Later facility allowed our medical team to travel on short notice without budget reallocation delays.',
     travelMonth: 'OCT 2026',
     frequency: '128.450 MHz',
     aircraft: 'Boeing 787-10 Dreamliner',
@@ -71,7 +71,7 @@ const BLACK_BOX_LOGS: EnhancedLog[] = [
     route: 'LOS → LHR · Transatlantic Suite',
     verifiedBookingRef: 'PNR-66290-LHR',
     quote:
-      'Unrivaled executive flight service. From private VIP suite boarding at MM2 Terminal 2 to the Heathrow tarmac escort, Aerovista represents the pinnacle of sovereign African aviation and reliable dispatch.',
+      'Unrivaled executive flight service. From private VIP suite boarding at MM2 Terminal 2 to the Heathrow tarmac escort, CJ Travels Owerri represents the pinnacle of sovereign African aviation and reliable dispatch.',
     travelMonth: 'OCT 2026',
     frequency: '119.800 MHz',
     aircraft: 'Airbus A350-1000',

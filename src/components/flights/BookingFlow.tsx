@@ -106,7 +106,7 @@ export const BookingFlow: React.FC = () => {
       bookingDate: new Date().toISOString().split('T')[0],
       travelDate: '2026-11-12',
       status: 'confirmed',
-      qrCodeSeed: `AEROVISTA-${bookingRef}-VERIFIED`,
+      qrCodeSeed: `CJTRAVELS-${bookingRef}-VERIFIED`,
     };
 
     addBookingToHistory(newBooking);

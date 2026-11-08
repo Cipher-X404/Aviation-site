@@ -56,7 +56,7 @@ export const TrustMarquee: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#12484C]/60 border border-[#2B7574]/40 text-[10px] font-mono text-[#F2B632] uppercase tracking-[0.2em]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>AEROVISTA PLATFORM · LIVE INVENTORY</span>
+            <span>CJ TRAVELS PLATFORM · LIVE INVENTORY</span>
           </div>
 
           <h3 className="font-monument text-xl sm:text-2xl lg:text-3xl font-bold uppercase tracking-tight text-[#F4F6F5]">

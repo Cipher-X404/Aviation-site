@@ -1000,13 +1000,13 @@ export const AccountView: React.FC = () => {
               <div>
                 <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-[#F2B632] uppercase mb-2">
                   <Award className="w-4 h-4" />
-                  <span>AEROVISTA DIPLOMATIC & SOVEREIGN VAULT</span>
+                  <span>CJ TRAVELS DIPLOMATIC &amp; SOVEREIGN VAULT</span>
                 </div>
                 <h2 className="text-2xl sm:text-4xl font-monument font-black uppercase tracking-tight text-white">
                   Onyx Presidential Diplomatic
                 </h2>
                 <p className="text-xs sm:text-sm text-[#A5D1E1] max-w-2xl mt-1 font-mono">
-                  Aerovista Privileges Club #AV-99182746 · Lifetime Accreditation · Diplomatic Fast-Track
+                  CJ Travels Privileges Club #CJ-99182746 · Lifetime Accreditation · Diplomatic Fast-Track
                 </p>
               </div>
 
@@ -1047,7 +1047,7 @@ export const AccountView: React.FC = () => {
                   Unlimited Lounge Access
                 </h4>
                 <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] font-mono">
-                  Guaranteed entry across 850+ SkyTeam and Aerovista partner lounges globally with +2 complimentary delegates.
+                  Guaranteed entry across 850+ SkyTeam and CJ Travels partner lounges globally with +2 complimentary delegates.
                 </p>
               </div>
 

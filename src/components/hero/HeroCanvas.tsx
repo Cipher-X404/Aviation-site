@@ -22,7 +22,7 @@ const SCENES: SceneContent[] = [
   {
     id: 'scene-1',
     badge: 'START WITH THE JOURNEY',
-    headline: 'AEROVISTA',
+    headline: 'CJ TRAVELS',
     subheadline:
       'Plan a flight, find a place to stay, and keep the details together.',
     start: 0.0,

@@ -626,7 +626,7 @@ export const FlyNowPayLaterView: React.FC = () => {
                       className="mt-0.5 accent-[#F2B632]"
                     />
                     <span>
-                      I confirm that the information provided is accurate and I authorise Aerovista's CBN-licensed lending partner to run a soft credit check to generate my financing offer.
+                      I confirm that the information provided is accurate and I authorise CJ Travels' CBN-licensed lending partner to run a soft credit check to generate my financing offer.
                     </span>
                   </label>
 

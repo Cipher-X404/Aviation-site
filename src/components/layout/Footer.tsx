@@ -83,16 +83,21 @@ export const Footer: React.FC = () => {
             {/* ── LEFT: Brand block ── */}
             <div className="flex flex-col gap-3 max-w-[280px] shrink-0">
 
-              {/* Logo pill — small rounded icon + name, identical to reference */}
-              <div className="flex items-center gap-2 mb-0.5">
-                <div className="w-7 h-7 rounded-[7px] bg-[#0E2931] dark:bg-[#EAEFEF]/90 flex items-center justify-center shrink-0 shadow-sm">
-                  {/* Minimal plane silhouette as SVG inline — no lucide import needed */}
-                  <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 fill-[#F2B632]" aria-hidden="true">
-                    <path d="M14.5 6.5L9 4V1.5a1 1 0 0 0-2 0V4L1.5 6.5 1 8l6-1.5V9l-1.5 1V11l2.5-.75L10.5 11v-1L9 9V6.5L15 8l-.5-1.5Z"/>
-                  </svg>
+              {/* Wordmark Logo — same style as Navbar */}
+              <div className="flex flex-col leading-none mb-1">
+                <div className="flex items-baseline gap-1.5">
+                  <span
+                    className="text-[26px] font-black italic tracking-tight text-[#0E2931] dark:text-[#F2B632]"
+                    style={{ fontFamily: "'Cinzel', serif" }}
+                  >
+                    CJ
+                  </span>
+                  <span className="text-[12px] font-bold tracking-[0.28em] uppercase text-[#0E2931] dark:text-[#EAEFEF]">
+                    TRAVELS
+                  </span>
                 </div>
-                <span className="text-[14px] font-semibold text-[#0E2931] dark:text-[#EAEFEF] tracking-tight">
-                  Aerovista
+                <span className="text-[8px] font-mono tracking-[0.35em] uppercase text-[#2B7574] dark:text-[#A5D1E1] -mt-0.5">
+                  ✦ OWERRI ✦
                 </span>
               </div>
 
@@ -103,12 +108,12 @@ export const Footer: React.FC = () => {
 
               {/* Description */}
               <p className="text-[12.5px] leading-[1.75] text-[#5A6B70] dark:text-[#849CA3]">
-                Aerovista brings direct GDS flight booking, verified hotel sanctuaries, tarmac chauffeur transfers, and 0% APR Fly Now Pay Later — all in one place beside your original travel ambitions.
+                CJ Travels Owerri brings direct GDS flight booking, verified hotel sanctuaries, tarmac chauffeur transfers, and 0% APR Fly Now Pay Later — all in one place beside your original travel ambitions.
               </p>
 
               {/* Copyright — sits directly under description, no button above it */}
               <p className="text-[11.5px] text-[#8A9DA3] dark:text-[#4a6570] mt-1">
-                © 2026 Aerovista · All rights reserved
+                © 2026 CJ Travels Owerri · All rights reserved
               </p>
 
               {/* "Built with ♥ by" row with subtle theme toggle */}
@@ -126,7 +131,7 @@ export const Footer: React.FC = () => {
                     : <Moon className="w-3 h-3 text-[#5A6B70]" />
                   }
                   <span className="text-[#0E2931] dark:text-[#EAEFEF] font-medium">
-                    Aerovista Team
+                    CJ Travels Team
                   </span>
                 </button>
               </div>
@@ -178,7 +183,7 @@ export const Footer: React.FC = () => {
                 </ul>
               </div>
 
-              {/* Column 3 — More products (Partners in Aerovista context) */}
+              {/* Column 3 — More products (Partners in CJ Travels context) */}
               {/* On mobile this spans both cols so it sits as a full-width row */}
               <div className="col-span-2 sm:col-span-1">
                 <h4 className="text-[12.5px] font-semibold text-[#0E2931] dark:text-[#EAEFEF] mb-4 tracking-wide">
@@ -206,7 +211,7 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          WATERMARK — the huge AEROVISTA wordmark bleeding off the
+          WATERMARK — the huge CJ TRAVELS wordmark bleeding off the
           bottom, sitting directly on the scenic background, exactly
           like "Cooldock" in the reference image.
       ───────────────────────────────────────────────────────────── */}
@@ -222,7 +227,7 @@ export const Footer: React.FC = () => {
             marginBottom: 'clamp(-22px, -5.5vw, -80px)',
           }}
         >
-          AEROVISTA
+          CJ TRAVELS
         </h2>
       </div>
 

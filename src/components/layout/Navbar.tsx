@@ -243,21 +243,35 @@ export const Navbar: React.FC = () => {
             onClick={() => navigateTo('/')}
             className="flex items-center gap-2.5 sm:gap-3 text-left group cursor-pointer focus:outline-none shrink-0"
           >
-            {/* Reserved image mark: drop the final brand artwork into this frame later. */}
-            <div aria-label="Aerovista sovereign insignia" className="w-9 h-9 border border-[#9a7727]/60 flex items-center justify-center text-[9px] font-mono tracking-widest text-[#9a7727] transition-colors group-hover:border-[#9a7727]">AV</div>
-
-            <div className="flex flex-col">
+            {/* CJ Travels Owerri — Wordmark Logo */}
+            <div className="flex flex-col leading-none">
+              {/* Top line: "CJ" large + "Travels" */}
+              <div className="flex items-baseline gap-1.5">
+                <span
+                  className={`font-serif text-2xl sm:text-[26px] lg:text-[28px] font-black italic tracking-tight transition-colors ${
+                    isScrolled ? 'text-[#0E2931] dark:text-[#F2B632]' : 'text-[#F2B632]'
+                  }`}
+                  style={{ fontFamily: "'Cinzel', serif" }}
+                >
+                  CJ
+                </span>
+                <span
+                  className={`text-[11px] sm:text-[13px] font-bold tracking-[0.28em] uppercase transition-colors ${
+                    isScrolled ? 'text-[#0E2931] dark:text-[#EAEFEF]' : 'text-[#F4F6F5]'
+                  }`}
+                >
+                  TRAVELS
+                </span>
+              </div>
+              {/* Bottom line: "OWERRI" — small mono tag */}
               <span
-                className={`font-monument text-base sm:text-lg lg:text-xl font-bold tracking-[0.2em] uppercase whitespace-nowrap transition-colors ${
+                className={`text-[7px] sm:text-[8px] font-mono tracking-[0.35em] uppercase -mt-0.5 transition-colors ${
                   isScrolled
-                    ? 'text-[#0E2931] dark:text-[#EAEFEF]'
-                    : 'text-[#F4F6F5]'
+                    ? 'text-[#2B7574] dark:text-[#A5D1E1]'
+                    : 'text-[#A5D1E1]/80'
                 }`}
               >
-                AEROVISTA
-              </span>
-              <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-[#2B7574] dark:text-[#A5D1E1] uppercase -mt-1 hidden sm:block">
-                Sovereign Aviation
+                ✦ OWERRI ✦
               </span>
             </div>
           </button>
@@ -702,8 +716,7 @@ export const Navbar: React.FC = () => {
 
               <div>
                 <span className="text-[10px] font-mono tracking-widest text-[#F2B632] uppercase">
-                  AEROVISTA MOBILE
-                </span>
+                  CJ TRAVELS OWERRI                </span>
                 <p className="text-[11px] text-[#A5D1E1] font-mono mt-0.5">
                   LAT 06° 31&apos; N · MM2 LAGOS
                 </p>
@@ -733,8 +746,7 @@ export const Navbar: React.FC = () => {
             </div>
 
             <div className="relative z-10 text-[10px] font-mono text-[#A5D1E1]/70">
-              <span>AEROVISTA · SOVEREIGN AIRWAYS</span>
-            </div>
+              <span>CJ TRAVELS · OWERRI</span>            </div>
           </div>
 
           {/* Right Shutter Panel */}

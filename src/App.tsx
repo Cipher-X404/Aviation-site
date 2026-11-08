@@ -87,8 +87,8 @@ export default function App() {
         })
         .catch(() => setAdminSessionValid(false));
     };
-    window.addEventListener('aerovista-admin-authenticated', onAdminAuthenticated);
-    return () => window.removeEventListener('aerovista-admin-authenticated', onAdminAuthenticated);
+    window.addEventListener('cjtravels-admin-authenticated', onAdminAuthenticated);
+    return () => window.removeEventListener('cjtravels-admin-authenticated', onAdminAuthenticated);
   }, [login]);
 
   return (

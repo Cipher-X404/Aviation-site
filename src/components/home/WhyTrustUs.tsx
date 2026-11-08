@@ -59,7 +59,7 @@ export const WhyTrustUs: React.FC = () => {
                 Compare flights before you book
               </h4>
               <p className="text-xs text-[#12484C]/80 dark:text-[#A5D1E1] leading-relaxed">
-                Aerovista sources fares directly from partner carrier GDS. Compare flight options across cabin classes, then confirm baggage allowance and final pricing at checkout.
+                CJ Travels Owerri sources fares directly from partner carrier GDS. Compare flight options across cabin classes, then confirm baggage allowance and final pricing at checkout.
               </p>
             </div>
             <div className="shrink-0 bg-[#0E2931] text-[#F2B632] px-4 py-3 rounded-xl font-mono text-center">

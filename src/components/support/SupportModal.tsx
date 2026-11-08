@@ -84,7 +84,7 @@ export const SupportModal: React.FC = () => {
     {
       id: 'm-1',
       sender: 'support',
-      text: `Hello ${currentUser.name.split(' ')[0] || 'there'}, welcome to Aerovista Customer Support Center. I'm Nkem from the guest care team. How can we help you with your journey or bookings today?`,
+      text: `Hello ${currentUser.name.split(' ')[0] || 'there'}, welcome to CJ Travels Owerri Customer Support Center. I'm Nkem from the guest care team. How can we help you with your journey or bookings today?`,
       time: formatTime(),
     },
   ]);
@@ -256,7 +256,7 @@ export const SupportModal: React.FC = () => {
               <div>
                 <div className="flex items-center gap-2">
                   <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
-                    Aerovista Support Center
+                    CJ Travels Support
                   </h3>
                   <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/40">
                     24/7 LIVE
@@ -492,7 +492,7 @@ export const SupportModal: React.FC = () => {
                 </span>
                 <div className="flex items-center gap-2">
                   <PhoneCall className="w-4 h-4 text-emerald-400" />
-                  <span className="text-sm font-bold text-white">+234 (01) 800-AEROVISTA</span>
+                  <span className="text-sm font-bold text-white">+234 (01) 800-CJTRAVELS</span>
                 </div>
                 <p className="text-[10px] text-[#A5D1E1]/80">
                   Toll-free 24/7 client line for flight disruptions and medical priority.

@@ -13,7 +13,7 @@ export const FaqSection: React.FC = () => {
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
       <div className="mb-12 text-center">
         <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
-          06. GOOD TO KNOW
+          09. GOOD TO KNOW
         </span>
         <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
           A few common questions

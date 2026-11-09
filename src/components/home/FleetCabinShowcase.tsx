@@ -100,7 +100,7 @@ export const FleetCabinShowcase: React.FC = () => {
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#F2B632]" />
             <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase">
-              04. THE Cabin classes, explained
+              06. THE Cabin classes, explained
             </span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">

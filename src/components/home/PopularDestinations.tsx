@@ -90,7 +90,7 @@ export const PopularDestinations: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
           <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
-            FEATURED DESTINATIONS · LIVE FARES
+            01. FEATURED DESTINATIONS · LIVE FARES
           </span>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
             POPULAR FLIGHT ROUTES

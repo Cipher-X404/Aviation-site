@@ -9,7 +9,7 @@ export const WhyTrustUs: React.FC = () => {
       <div className="relative z-10">
       <div className="mb-12 text-left">
         <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
-          04. A FEW THINGS TO CHECK
+          07. A FEW THINGS TO CHECK
         </span>
         <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
           The details make the difference

@@ -9,7 +9,7 @@ export const ServicesBento: React.FC = () => {
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="mb-10 text-left">
         <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
-          WHAT YOU CAN DO HERE
+          05. WHAT YOU CAN DO HERE
         </span>
         <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
           Plan a trip, your way

@@ -309,7 +309,7 @@ export const LiveRadarSection: React.FC = () => {
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
             <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase font-bold">
-              03. SOVEREIGN CORRIDORS · RADAR TELEMETRY
+              04. SOVEREIGN CORRIDORS · RADAR TELEMETRY
             </span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">
@@ -390,44 +390,45 @@ export const LiveRadarSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Radar Display Box */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 rounded-3xl bg-gradient-to-b from-[#09171C] via-[#0E2931] to-[#0A1B20] text-white p-5 sm:p-8 shadow-[0_30px_70px_-20px_rgba(9,23,28,0.6)] relative overflow-hidden border border-[#2B7574]/30">
-        {/* Radar Map Canvas Representation */}
-        <div className="lg:col-span-8 relative min-h-[420px] sm:min-h-[500px] rounded-2xl bg-[#061216] border border-cyan-500/20 overflow-hidden flex items-center justify-center select-none">
-          {/* Subtle Radar Map Background Grid */}
-          <div className="absolute inset-0 bg-[radial-gradient(#199FB1_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
+      {/* Main Radar Display Box — 10x Better Styling: 3D Glass, Depth, Glow, and Holographic Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 rounded-[32px] bg-[#0E2931]/80 backdrop-blur-[32px] border border-[#2B7574]/50 shadow-[0_40px_100px_-20px_rgba(9,23,28,0.9),inset_0_0_50px_rgba(25,159,177,0.15)] relative overflow-hidden p-5 sm:p-8 text-white">
+        {/* 10x BETTER RADAR MAP CANVAS REPRESENTATION */}
+        <div className="lg:col-span-8 relative min-h-[480px] sm:min-h-[580px] rounded-[24px] bg-[#061216] border border-[#199FB1]/30 overflow-hidden flex items-center justify-center select-none shadow-inner">
+          {/* Holographic Grid Pattern with Depth */}
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2248%22%20height%3D%2248%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0%200h48v48H0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M48%200L48%2048%200%2048%22%20fill%3D%22none%22%20stroke%3D%22%23199FB1%22%20stroke-width%3D%220.5%22%20opacity%3D%220.1%22%2F%3E%3Cpath%20d%3D%22M24%200v48M0%2024h48%22%20fill%3D%22none%22%20stroke%3D%22%23199FB1%22%20stroke-width%3D%220.5%22%20opacity%3D%220.05%22%2F%3E%3C%2Fsvg%3E') repeat center / 48px 48px opacity-30 pointer-events-none transition-opacity duration-1000\" />
+          
+          {/* Advanced Concentric Range Rings with Neon Glow */}
+          <div className="absolute w-[95%] aspect-square rounded-full border border-[#199FB1]/20 shadow-[0_0_20px_rgba(25,159,177,0.1)] pointer-events-none animate-[pulse_8s_infinite]" />
+          <div className="absolute w-[75%] aspect-square rounded-full border border-[#199FB1]/30 shadow-[0_0_15px_rgba(25,159,177,0.15)] pointer-events-none" />
+          <div className="absolute w-[50%] aspect-square rounded-full border border-[#199FB1]/40 shadow-[0_0_10px_rgba(25,159,177,0.2)] pointer-events-none" />
+          <div className="absolute w-[25%] aspect-square rounded-full border border-[#199FB1]/50 shadow-[0_0_8px_rgba(25,159,177,0.25)] pointer-events-none" />
 
-          {/* Concentric Range Rings */}
-          <div className="absolute w-[92%] aspect-square rounded-full border border-cyan-500/10 pointer-events-none" />
-          <div className="absolute w-[70%] aspect-square rounded-full border border-cyan-500/15 pointer-events-none" />
-          <div className="absolute w-[46%] aspect-square rounded-full border border-cyan-500/20 pointer-events-none" />
-          <div className="absolute w-[22%] aspect-square rounded-full border border-cyan-500/25 pointer-events-none" />
-
-          {/* Range Distance Labels */}
-          <span className="absolute top-[5%] right-[5%] text-[9px] font-mono text-cyan-500/40 pointer-events-none">RANGE: 800 NM</span>
-          <span className="absolute top-[16%] right-[16%] text-[9px] font-mono text-cyan-500/40 pointer-events-none">600 NM</span>
-          <span className="absolute top-[28%] right-[28%] text-[9px] font-mono text-cyan-500/40 pointer-events-none">400 NM</span>
-          <span className="absolute top-[40%] right-[40%] text-[9px] font-mono text-cyan-500/40 pointer-events-none">200 NM</span>
-
-          {/* Crosshairs */}
-          <div className="absolute inset-x-0 top-1/2 h-px bg-cyan-500/15 pointer-events-none" />
-          <div className="absolute inset-y-0 left-1/2 w-px bg-cyan-500/15 pointer-events-none" />
-
-          {/* Dynamic Rotating Radar Sweep Line */}
+          {/* 3D Laser Sweep Beam with Glow & Glass Reflection */}
           <div
-            className="absolute top-1/2 left-1/2 w-[520px] h-[520px] -translate-x-1/2 -translate-y-1/2 pointer-events-none origin-center transition-transform"
+            className="absolute top-1/2 left-1/2 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 pointer-events-none origin-center transition-transform duration-100 ease-linear"
             style={{
               transform: `translate(-50%, -50%) rotate(${sweepAngle}deg)`,
-              background: 'conic-gradient(from 0deg, rgba(25, 159, 177, 0.35) 0deg, rgba(25, 159, 177, 0.08) 35deg, transparent 65deg)',
             }}
-          />
+          >
+            {/* Main Sweep Cone */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#199FB1]/60 via-[#F2B632]/30 to-transparent rotate-[15deg] transform origin-left" />
+            {/* Central Core Laser */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[8px] h-[8px] bg-[#F2B632] rounded-full shadow-[0_0_30px_#F2B632] animate-[pulse_2s_infinite]" />
+            {/* Outer Ring Scan */}
+            <div className="absolute inset-0 border border-[#199FB1]/40 rounded-full animate-[spin_12s_linear_infinite]" />
+          </div>
 
-          {/* Projected Flight Path Arc for the Selected Aircraft */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none">
+          {/* Advanced Flight Path Arc with Glitch & Glow Effect */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
             <defs>
+              <filter id="glow-filter" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
               <linearGradient id="corridorGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F2B632" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#199FB1" stopOpacity="0.4" />
+                <stop offset="0%" stopColor="#F2B632" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#199FB1" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#199FB1" stopOpacity="0.2" />
               </linearGradient>
             </defs>
             <line
@@ -436,39 +437,41 @@ export const LiveRadarSection: React.FC = () => {
               x2={`${selectedFlight.destPos.x}%`}
               y2={`${selectedFlight.destPos.y}%`}
               stroke="url(#corridorGlow)"
-              strokeWidth="2"
-              strokeDasharray="4 4"
-              className="animate-pulse"
+              strokeWidth="3"
+              strokeDasharray="8 4"
+              filter="url(#glow-filter)"
+              className="animate-[dash_4s_linear_infinite]"
+              style={{ animationName: 'dash' }}
             />
           </svg>
 
-          {/* Key Airport Waypoint Hubs */}
-          <div className="absolute left-[34%] top-[64%] text-[10px] font-mono text-cyan-400 pointer-events-none flex items-center gap-1.5 z-10">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#199FB1]" />
-            <span className="font-bold">LOS (Lagos MM2)</span>
+          {/* Key Airport Waypoint Hubs with Advanced Pulse */}
+          <div className="absolute left-[34%] top-[64%] text-[10px] font-mono text-[#199FB1] pointer-events-none flex items-center gap-1.5 z-10">
+            <span className="w-2 h-2 rounded-full bg-[#199FB1] shadow-[0_0_12px_#199FB1] animate-[pulse_2s_infinite]" />
+            <span className="font-bold tracking-wider">LOS (Lagos MM2)</span>
           </div>
-          <div className="absolute left-[44%] top-[46%] text-[10px] font-mono text-cyan-400 pointer-events-none flex items-center gap-1.5 z-10">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#199FB1]" />
-            <span className="font-bold">ABV (Abuja NAIA)</span>
+          <div className="absolute left-[44%] top-[46%] text-[10px] font-mono text-[#199FB1] pointer-events-none flex items-center gap-1.5 z-10">
+            <span className="w-2 h-2 rounded-full bg-[#199FB1] shadow-[0_0_12px_#199FB1] animate-[pulse_2s_infinite]" />
+            <span className="font-bold tracking-wider">ABV (Abuja NAIA)</span>
           </div>
-          <div className="absolute left-[40%] top-[72%] text-[10px] font-mono text-cyan-400/80 pointer-events-none flex items-center gap-1 z-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/70" />
+          <div className="absolute left-[40%] top-[72%] text-[10px] font-mono text-[#199FB1]/80 pointer-events-none flex items-center gap-1 z-10">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#199FB1]/70" />
             <span>PHC (Port Harcourt)</span>
           </div>
-          <div className="absolute left-[22%] top-[66%] text-[10px] font-mono text-cyan-400/80 pointer-events-none flex items-center gap-1 z-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/70" />
+          <div className="absolute left-[22%] top-[66%] text-[10px] font-mono text-[#199FB1]/80 pointer-events-none flex items-center gap-1 z-10">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#199FB1]/70" />
             <span>ACC (Accra Kotoka)</span>
           </div>
-          <div className="absolute left-[82%] top-[28%] text-[10px] font-mono text-cyan-400 pointer-events-none flex items-center gap-1.5 z-10">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#199FB1]" />
-            <span className="font-bold">DXB (Dubai Intl)</span>
+          <div className="absolute left-[82%] top-[28%] text-[10px] font-mono text-[#199FB1] pointer-events-none flex items-center gap-1.5 z-10">
+            <span className="w-2 h-2 rounded-full bg-[#199FB1] shadow-[0_0_12px_#199FB1] animate-[pulse_2s_infinite]" />
+            <span className="font-bold tracking-wider">DXB (Dubai Intl)</span>
           </div>
-          <div className="absolute left-[42%] top-[12%] text-[10px] font-mono text-cyan-400 pointer-events-none flex items-center gap-1.5 z-10">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#199FB1]" />
-            <span className="font-bold">LHR (London Heathrow)</span>
+          <div className="absolute left-[42%] top-[12%] text-[10px] font-mono text-[#199FB1] pointer-events-none flex items-center gap-1.5 z-10">
+            <span className="w-2 h-2 rounded-full bg-[#199FB1] shadow-[0_0_12px_#199FB1] animate-[pulse_2s_infinite]" />
+            <span className="font-bold tracking-wider">LHR (London Heathrow)</span>
           </div>
 
-          {/* Interactive Airborne Aircraft Blips with Active Smooth Positions */}
+          {/* Interactive Airborne Aircraft Blips with Advanced Holographic Glow */}
           {visibleFleet.map((flight) => {
             const isSelected = selectedFlight.id === flight.id;
             const pos = getFlightCurrentPos(flight);
@@ -491,33 +494,43 @@ export const LiveRadarSection: React.FC = () => {
                   top: `${pos.y}%`,
                   transition: isSimPaused ? 'none' : 'left 0.1s linear, top 0.1s linear',
                 }}
-                className={`absolute -translate-x-1/2 -translate-y-1/2 p-2 rounded-xl transition-transform duration-200 cursor-pointer group z-20 ${
+                className={`absolute -translate-x-1/2 -translate-y-1/2 p-3 rounded-2xl transition-all duration-300 cursor-pointer group z-20 ${
                   isSelected
-                    ? 'scale-125 bg-[#F2B632] text-[#0E2931] shadow-[0_0_25px_rgba(242,182,50,0.9)] z-30'
-                    : 'bg-[#12484C]/90 text-[#F2B632] hover:scale-115 hover:bg-[#12484C] shadow-md border border-[#2B7574]/50'
+                    ? 'scale-[1.3] bg-[#F2B632] text-[#0E2931] shadow-[0_0_40px_rgba(242,182,50,0.8),inset_0_0_15px_#F2B632] z-40 border border-[#F2B632]'
+                    : 'bg-[#12484C]/95 text-[#199FB1] hover:scale-115 hover:bg-[#12484C] shadow-lg border border-[#199FB1]/50 group-hover:border-[#F2B632]'
                 }`}
               >
                 <div className="flex items-center gap-1.5">
                   <Plane
-                    className="w-4 h-4 transition-transform duration-300"
+                    className={`w-5 h-5 transition-transform duration-500 ${isSelected ? 'text-[#F2B632]' : 'text-[#199FB1]'}`}
                     style={{ transform: `rotate(${angleDeg}deg)` }}
                   />
-                  <span className="font-mono text-[10px] font-bold whitespace-nowrap">{flight.flightNumber}</span>
+                  <span className={`font-mono text-[11px] font-bold whitespace-nowrap ${isSelected ? 'text-[#0E2931]' : 'text-[#199FB1]'}`}>
+                    {flight.flightNumber}
+                  </span>
                 </div>
 
-                {/* Pulsing Beacon Ping on the Blip */}
-                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                {/* Advanced Pulsing Beacon Ping */}
+                <span className={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${isSelected ? 'bg-[#F2B632] shadow-[0_0_15px_#F2B632]' : 'bg-emerald-400 shadow-[0_0_8px_#199FB1]'} animate-ping`} />
+                
+                {/* Vector Trail */}
+                {isSelected && (
+                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-0.5 h-8 bg-gradient-to-b from-[#F2B632] to-transparent rounded-full" />
+                )}
               </button>
             );
           })}
+
+          {/* Glass Overlay Reflection */}
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/5 via-transparent to-black/30 rounded-[24px]" />
         </div>
 
-        {/* Right Details Panel: Live Cockpit & Corridor Telemetry */}
-        <div className="lg:col-span-4 bg-white/5 rounded-2xl p-6 sm:p-7 backdrop-blur-md border border-[#2B7574]/40 flex flex-col justify-between space-y-6">
+        {/* Right Details Panel: Live Cockpit & Corridor Telemetry with 10x Better Glass UI */}
+        <div className="lg:col-span-4 bg-[#0E2931]/60 rounded-[24px] p-7 sm:p-8 backdrop-blur-[24px] border border-[#199FB1]/40 flex flex-col justify-between space-y-6 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
           <div>
-            <div className="flex items-center justify-between mb-3 text-xs font-mono">
+            <div className="flex items-center justify-between mb-4 text-xs font-mono">
               <span className="text-[#F2B632] font-bold uppercase tracking-wider flex items-center gap-1.5">
-                <Navigation className="w-3.5 h-3.5" />
+                <Navigation className="w-4 h-4" />
                 FLIGHT TELEMETRY DATA
               </span>
               <span className="text-emerald-400 font-bold uppercase flex items-center gap-1">
@@ -526,25 +539,25 @@ export const LiveRadarSection: React.FC = () => {
               </span>
             </div>
 
-            <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-wide text-white">
+            <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tighter text-white drop-shadow-[0_2px_4px_rgba(242,182,50,0.3)]">
               {selectedFlight.flightNumber}
             </h3>
             <div className="text-sm font-mono text-[#A5D1E1] mt-0.5 flex items-center gap-2">
               <span>Route:</span>
-              <strong className="text-white bg-[#12484C] px-2 py-0.5 rounded border border-[#2B7574]/40 font-bold">
+              <strong className="text-white bg-[#12484C] px-2 py-0.5 rounded border border-[#199FB1]/40 font-bold">
                 {selectedFlight.route}
               </strong>
             </div>
 
-            {/* Live Avionics Telemetry Grid */}
-            <div className="grid grid-cols-2 gap-3 mt-6 pt-5 border-t border-white/10 text-xs font-mono">
+            {/* Live Avionics Telemetry Grid with Glass Cards */}
+            <div className="grid grid-cols-2 gap-3 mt-6 pt-5 border-t border-[#199FB1]/30 text-xs font-mono">
               <div>
                 <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Cruising Altitude</span>
-                <span className="text-base font-bold text-white tabular-nums">{currentAltitude}</span>
+                <span className="text-base font-bold text-white tabular-nums drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]">{currentAltitude}</span>
               </div>
               <div>
                 <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Ground Speed</span>
-                <span className="text-base font-bold text-white tabular-nums">{currentSpeed}</span>
+                <span className="text-base font-bold text-white tabular-nums drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]">{currentSpeed}</span>
               </div>
               <div>
                 <span className="text-[10px] text-[#A5D1E1] block uppercase tracking-wider">Assigned Aircraft</span>
@@ -564,46 +577,58 @@ export const LiveRadarSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Load Factor & Seat Capacity Bar */}
-            <div className="mt-5 p-3 rounded-xl bg-black/40 border border-white/5 space-y-2">
+            {/* Load Factor & Seat Capacity Bar with Advanced Glass Effect */}
+            <div className="mt-5 p-4 rounded-[16px] bg-[#09171C]/80 border border-[#199FB1]/30 backdrop-blur-md space-y-2">
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="text-[#A5D1E1]">Passenger Load</span>
                 <span className="text-white font-bold">
                   {selectedFlight.passengersOnboard} / {selectedFlight.capacity} ({Math.round((selectedFlight.passengersOnboard / selectedFlight.capacity) * 100)}%)
                 </span>
               </div>
-              <div className="w-full h-1.5 bg-[#18363F] rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-[#18363F] rounded-full overflow-hidden border border-[#199FB1]/20">
                 <div
-                  className="h-full bg-gradient-to-r from-emerald-400 to-[#F2B632] rounded-full"
+                  className="h-full bg-gradient-to-r from-emerald-400 via-[#199FB1] to-[#F2B632] rounded-full shadow-[0_0_10px_rgba(242,182,50,0.4)]"
                   style={{ width: `${(selectedFlight.passengersOnboard / selectedFlight.capacity) * 100}%` }}
                 />
               </div>
             </div>
 
-            {/* Fare Price Box */}
-            <div className="mt-5 p-4 rounded-xl bg-[#12484C]/60 border border-[#2B7574]/50">
-              <span className="text-[10px] font-mono text-[#A5D1E1] uppercase block">
+            {/* Fare Price Box with Gold Gradient */}
+            <div className="mt-5 p-5 rounded-[16px] bg-[#12484C]/80 border border-[#F2B632]/30 backdrop-blur-md flex flex-col items-center justify-center">
+              <span className="text-[10px] font-mono text-[#A5D1E1] uppercase block mb-1">
                 Fares from
               </span>
-              <span className="text-2xl font-bold font-mono text-[#F2B632] tabular-nums">
+              <span className="text-3xl font-bold font-mono text-[#F2B632] tabular-nums drop-shadow-[0_2px_6px_rgba(242,182,50,0.5)]">
                 {formatPrice(selectedFlight.startingPriceNgn, currency)}
               </span>
-              <span className="text-[10px] text-[#A5D1E1]/70 block mt-0.5">
+              <span className="text-[10px] text-[#A5D1E1]/70 block mt-1 font-mono">
                 0% APR Financing Available
               </span>
             </div>
           </div>
 
-          {/* Direct Booking Action */}
+          {/* Direct Booking Action with Glow */}
           <button
             type="button"
             onClick={() => handleBookSelected(selectedFlight)}
-            className="w-full btn-gold py-3.5 px-4 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xl group"
+            className="w-full btn-gold py-4 px-5 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_25px_rgba(242,182,50,0.4)] group transition-all duration-300 hover:scale-[1.02]"
           >
             <span>Book Next Flight ({selectedFlight.route})</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
+
+        {/* Advanced CSS Keyframes for Radar Animations */}
+        <style>{`
+          @keyframes dash {
+            0% { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+          }
+          @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+          }
+        `}</style>
       </div>
     </section>
   );

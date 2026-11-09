@@ -113,7 +113,7 @@ export const TestimonialsSection: React.FC = () => {
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase">
-              05. PASSENGER FLIGHT LOGBOOK &amp; DISPATCH TRANSMISSIONS
+              08. PASSENGER FLIGHT LOGBOOK &amp; DISPATCH TRANSMISSIONS
             </span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#0E2931] dark:text-[#EAEFEF] uppercase">

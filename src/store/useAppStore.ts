@@ -37,10 +37,31 @@ export interface BookingRecord {
   };
   bookingDate: string;
   travelDate: string;
-  status: 'confirmed' | 'active' | 'completed';
+  status: 'confirmed' | 'active' | 'completed' | 'cancelled';
   qrCodeSeed: string;
   gate?: string;
   seat?: string;
+
+  // ── Post-booking lifecycle ──────────────────────────────────────
+  /** When the traveller cancelled, ISO timestamp. */
+  cancelledAt?: string;
+  /** Refund owed / paid out on cancellation, in naira. */
+  refundNgn?: number;
+  /** Cancellation fee retained, in naira. */
+  cancellationFeeNgn?: number;
+  /** Amount charged (or credited, if negative) for a flight change. */
+  changeFeeChargedNgn?: number;
+  /** Append-only trail of what happened to this booking. */
+  activity?: BookingActivity[];
+  /** Last time the itinerary was amended. */
+  lastChangedAt?: string;
+}
+
+export interface BookingActivity {
+  id: string;
+  at: string;
+  kind: 'created' | 'cancelled' | 'changed' | 'checked-in' | 'noted';
+  summary: string;
 }
 
 export interface UserProfile {
@@ -162,6 +183,9 @@ export interface AppState {
   updateBookingRecord: (bookingId: string, partial: Partial<BookingRecord>) => void;
   updatePassengerMeal: (bookingId: string, meal: string) => void;
   payLoanInstallment: (bookingId: string, amountNgn: number) => void;
+  cancelBooking: (bookingId: string, refundNgn: number, cancellationFeeNgn: number) => void;
+  changeBookingFlight: (bookingId: string, newFlight: Flight, amountChargedNgn: number) => void;
+  appendBookingActivity: (bookingId: string, kind: BookingActivity['kind'], summary: string) => void;
 
   // Fly Now Pay Later Draft & Decision
   loanDraft: {
@@ -546,6 +570,91 @@ export const useAppStore = create<AppState>()(
             }
             return b;
           });
+          const nextLatest = state.latestBooking?.id === bookingId
+            ? updated.find((b) => b.id === bookingId) ?? state.latestBooking
+            : state.latestBooking;
+          return { bookingHistory: updated, latestBooking: nextLatest };
+        }),
+
+      /* ── Post-booking lifecycle ──────────────────────────────────
+         Cancelling keeps the record (travellers need the audit trail and the
+         refund amount), but flips the status so every downstream surface —
+         boarding passes, radar, admin ops — stops treating it as live. */
+      cancelBooking: (bookingId, refundNgn, cancellationFeeNgn) =>
+        set((state) => {
+          const stamp = new Date().toISOString();
+          const updated = state.bookingHistory.map((b) => {
+            if (b.id !== bookingId) return b;
+            const entry: BookingActivity = {
+              id: `act-${Date.now()}-cancel`,
+              at: stamp,
+              kind: 'cancelled',
+              summary: `Booking cancelled. ₦${refundNgn.toLocaleString('en-NG')} refunded, ₦${cancellationFeeNgn.toLocaleString('en-NG')} retained as the cancellation fee.`,
+            };
+            // A cancelled financed trip has its facility closed out.
+            const loanDetails = b.loanDetails
+              ? { ...b.loanDetails, remainingBalanceNgn: 0, installmentsRemaining: 0 }
+              : b.loanDetails;
+            return {
+              ...b,
+              status: 'cancelled' as const,
+              cancelledAt: stamp,
+              refundNgn,
+              cancellationFeeNgn,
+              loanDetails,
+              activity: [entry, ...(b.activity ?? [])],
+            };
+          });
+          const nextLatest = state.latestBooking?.id === bookingId
+            ? updated.find((b) => b.id === bookingId) ?? state.latestBooking
+            : state.latestBooking;
+          return { bookingHistory: updated, latestBooking: nextLatest };
+        }),
+
+      /* Moving a booking to a different flight re-issues the reference seed so
+         a previously downloaded boarding pass cannot be reused. */
+      changeBookingFlight: (bookingId, newFlight, amountChargedNgn) =>
+        set((state) => {
+          const stamp = new Date().toISOString();
+          const updated = state.bookingHistory.map((b) => {
+            if (b.id !== bookingId) return b;
+            const entry: BookingActivity = {
+              id: `act-${Date.now()}-change`,
+              at: stamp,
+              kind: 'changed',
+              summary: `Itinerary moved to ${newFlight.airline} ${newFlight.flightNumber} (${newFlight.origin} → ${newFlight.destination}) on ${b.travelDate}. ${
+                amountChargedNgn >= 0
+                  ? `₦${amountChargedNgn.toLocaleString('en-NG')} charged.`
+                  : `₦${Math.abs(amountChargedNgn).toLocaleString('en-NG')} issued as credit.`
+              }`,
+            };
+            return {
+              ...b,
+              flight: newFlight,
+              totalPaidNgn: b.totalPaidNgn + Math.max(0, amountChargedNgn),
+              changeFeeChargedNgn: (b.changeFeeChargedNgn ?? 0) + amountChargedNgn,
+              lastChangedAt: stamp,
+              qrCodeSeed: `CJTRAVELS-${b.bookingRef}-REISSUED-${Date.now()}`,
+              activity: [entry, ...(b.activity ?? [])],
+            };
+          });
+          const nextLatest = state.latestBooking?.id === bookingId
+            ? updated.find((b) => b.id === bookingId) ?? state.latestBooking
+            : state.latestBooking;
+          return { bookingHistory: updated, latestBooking: nextLatest };
+        }),
+
+      appendBookingActivity: (bookingId, kind, summary) =>
+        set((state) => {
+          const entry: BookingActivity = {
+            id: `act-${Date.now()}-${kind}`,
+            at: new Date().toISOString(),
+            kind,
+            summary,
+          };
+          const updated = state.bookingHistory.map((b) =>
+            b.id === bookingId ? { ...b, activity: [entry, ...(b.activity ?? [])] } : b,
+          );
           return { bookingHistory: updated };
         }),
 

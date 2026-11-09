@@ -38,8 +38,9 @@ const VisaInfoView = lazy(() => import("./components/visa/VisaInfoView").then(m 
 const BlogView = lazy(() => import("./components/blog/BlogView").then(m => ({ default: m.BlogView })));
 const InsuranceView = lazy(() => import("./components/insurance/InsuranceView").then(m => ({ default: m.InsuranceView })));
 const GroupBookingsView = lazy(() => import("./components/group/GroupBookingsView").then(m => ({ default: m.GroupBookingsView })));
+const ManageBookingView = lazy(() => import("./components/manage/ManageBookingView").then(m => ({ default: m.ManageBookingView })));
 
-const KNOWN_ROUTES = ["/", "/flights", "/flights/book", "/hotels", "/hotels/book", "/fly-now-pay-later", "/account", "/admin", "/destinations", "/about", "/privacy", "/terms", "/contact", "/deals", "/visa-info", "/blog", "/insurance", "/group-bookings"];
+const KNOWN_ROUTES = ["/", "/flights", "/flights/book", "/hotels", "/hotels/book", "/fly-now-pay-later", "/account", "/admin", "/destinations", "/about", "/privacy", "/terms", "/contact", "/deals", "/visa-info", "/blog", "/insurance", "/group-bookings", "/manage-booking"];
 
 function NotFound({ onHome }: { onHome: () => void }) {
   return (
@@ -131,6 +132,7 @@ export default function App() {
           {activeRoute === "/blog" && <BlogView />}
           {activeRoute === "/insurance" && <InsuranceView />}
           {activeRoute === "/group-bookings" && <GroupBookingsView />}
+          {activeRoute === "/manage-booking" && <ManageBookingView />}
           {activeRoute === "/admin" && (adminSessionValid ? <AdminDashboard /> : (
             <div className="min-h-[70vh] grid place-content-center px-6 text-center">
               <p className="text-[10px] tracking-[.25em] uppercase text-[#9a7727]">Protected area</p>

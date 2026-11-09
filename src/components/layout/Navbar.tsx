@@ -56,6 +56,7 @@ const MEGA_TABS: MegaTab[] = [
       { label: 'Fly Now Pay Later Console', route: '/fly-now-pay-later' },
       { label: 'Payment examples', route: '/fly-now-pay-later' },
       { label: 'My Trips & Boarding Passes', route: '/account' },
+      { label: 'Manage or cancel a booking', route: '/manage-booking' },
     ],
   },
 ];
@@ -75,6 +76,7 @@ const MOBILE_LINKS = [
   { section: '03 // FINANCE', items: [
     { label: 'Pay Later', route: '/fly-now-pay-later' },
     { label: 'My Trips', route: '/account' },
+    { label: 'Manage a booking', route: '/manage-booking' },
   ] },
   { section: '04 // OPERATIONS', items: [
     { label: 'About', route: '/about' },
@@ -686,6 +688,7 @@ export const Navbar: React.FC = () => {
                 <div className="space-y-1">
                   {[
                     { label: 'My Trips', route: '/account' },
+                    { label: 'Manage a booking', route: '/manage-booking' },
                     { label: 'Fly Now Pay Later', route: '/fly-now-pay-later' },
                   ].map((link) => (
                     <button

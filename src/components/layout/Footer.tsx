@@ -36,7 +36,7 @@ const SUPPORT_LINKS: FooterLink[] = [
   { label: 'Visa information', route: '/visa-info' },
   { label: 'Travel insurance', route: '/insurance' },
   { label: 'Fly now, pay later', route: '/fly-now-pay-later' },
-  { label: 'Manage a booking', route: '/account' },
+  { label: 'Manage a booking', route: '/manage-booking', note: 'Self-serve' },
 ];
 
 const PARTNER_LINKS: FooterLink[] = [
@@ -50,6 +50,7 @@ const PARTNER_LINKS: FooterLink[] = [
 ];
 
 const LEGAL_LINKS: FooterLink[] = [
+  { label: 'Manage booking', route: '/manage-booking' },
   { label: 'Privacy', route: '/privacy' },
   { label: 'Terms', route: '/terms' },
   { label: 'Cookies', route: '/privacy' },

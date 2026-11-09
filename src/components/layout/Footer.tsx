@@ -211,20 +211,18 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          WATERMARK — the huge CJ TRAVELS wordmark bleeding off the
-          bottom, sitting directly on the scenic background, exactly
-          like "Cooldock" in the reference image.
+          WATERMARK — luxury stroke-only outlined wordmark.
+          Hollow letters with a thin stroke — no fill, no solid mass.
+          Much more refined than a debossed block.
       ───────────────────────────────────────────────────────────── */}
       <div className="relative z-10 w-full overflow-hidden leading-none flex items-end justify-center pointer-events-none">
-        {/* Light streak caustic overlay */}
-        <div className="trove-light-streaks absolute inset-0 z-10 opacity-60 dark:opacity-30" />
 
         <h2
-          className="font-monument trove-debossed font-bold tracking-tight text-center w-full uppercase"
+          className="font-monument wm-footer font-black text-center w-full uppercase tracking-[-0.03em]"
           style={{
-            fontSize: 'clamp(68px, 22vw, 360px)',
+            fontSize: 'clamp(68px, 22vw, 380px)',
             lineHeight: 0.82,
-            marginBottom: 'clamp(-22px, -5.5vw, -80px)',
+            marginBottom: 'clamp(-20px, -5vw, -76px)',
           }}
         >
           CJ TRAVELS

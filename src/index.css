@@ -373,10 +373,89 @@
   50% { transform: scaleY(1); }
 }
 
-/* Keyboard users get a clear, high-contrast focus marker across native controls. */
+/* ═══════════════════════════════════════════════════════════════
+   INPUT FOCUS — gold ring with soft glow, replaces old brown outline
+════════════════════════════════════════════════════════════════ */
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-  outline: 2px solid #8a6413;
-  outline-offset: 3px;
+  outline: 2px solid #F2B632;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(242, 182, 50, 0.18);
+  border-radius: 4px;
+}
+
+/* Input / textarea / select get a gold border-glow on :focus */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #F2B632 !important;
+  box-shadow: 0 0 0 3px rgba(242, 182, 50, 0.20), 0 0 0 1px #F2B632;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION WATERMARK — stroke-only ghost text, ultra-low opacity
+   Usage: add class="wm-section" to a section's relative container
+   then drop <span aria-hidden="true" className="wm-text">TEXT</span>
+════════════════════════════════════════════════════════════════ */
+.wm-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  font-weight: 900;
+  font-size: clamp(60px, 16vw, 260px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(14, 41, 49, 0.09);
+  opacity: 0.55;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.dark .wm-text {
+  -webkit-text-stroke: 1.2px rgba(234, 239, 239, 0.07);
+  opacity: 0.45;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER WATERMARK — outlined stroke wordmark (luxury hollow style)
+   Much more refined than the old solid debossed version.
+════════════════════════════════════════════════════════════════ */
+.wm-footer {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(14, 41, 49, 0.13);
+  text-shadow: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.dark .wm-footer {
+  -webkit-text-stroke: 1.5px rgba(234, 239, 239, 0.10);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FLOATING CHAT ORB — restore stripped animations
+════════════════════════════════════════════════════════════════ */
+.chat-ring {
+  background: conic-gradient(from 0deg, transparent 0%, rgba(242,182,50,0.9) 22%, rgba(242,182,50,0) 50%, transparent 100%);
+  animation: shimmer-rotate 3.5s linear infinite;
+}
+
+.animate-float-soft {
+  animation: float-soft 4s ease-in-out infinite;
+}
+
+.animate-orb-shift {
+  background-size: 200% 200%;
+  animation: orb-shift 5s ease-in-out infinite;
 }
 
 /* Keep cards still: interaction is shown with a crisp edge or color change. */

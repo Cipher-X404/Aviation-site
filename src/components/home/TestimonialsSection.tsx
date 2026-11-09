@@ -103,7 +103,10 @@ export const TestimonialsSection: React.FC = () => {
   }, [isPlayingAudio]);
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative overflow-hidden">
+      {/* Ghost section watermark */}
+      <span aria-hidden="true" className="wm-text select-none">VOICES</span>
+      <div className="relative z-10">
       {/* Header with Aviation Telemetry Prefix */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
         <div>
@@ -282,6 +285,7 @@ export const TestimonialsSection: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

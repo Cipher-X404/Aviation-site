@@ -3,7 +3,10 @@ import { ShieldCheck, Zap, Award, Compass, HeartHandshake } from 'lucide-react';
 
 export const WhyTrustUs: React.FC = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#E2E2E0] dark:border-[#18363F]">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#E2E2E0] dark:border-[#18363F] relative overflow-hidden">
+      {/* Ghost section watermark — stroke-only, barely visible */}
+      <span aria-hidden="true" className="wm-text select-none">TRUST</span>
+      <div className="relative z-10">
       <div className="mb-12 text-left">
         <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
           04. A FEW THINGS TO CHECK
@@ -108,6 +111,7 @@ export const WhyTrustUs: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

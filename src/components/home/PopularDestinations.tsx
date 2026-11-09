@@ -82,8 +82,11 @@ export const PopularDestinations: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Section Header */}
+    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative overflow-hidden">
+      {/* Ghost section watermark */}
+      <span aria-hidden="true" className="wm-text select-none">ROUTES</span>
+      {/* Content above watermark */}
+      <div className="relative z-10">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
           <span className="text-xs font-mono tracking-widest text-[#2B7574] dark:text-[#F2B632] uppercase block mb-1">
@@ -192,6 +195,7 @@ export const PopularDestinations: React.FC = () => {
             </div>
           );
         })}
+      </div>
       </div>
     </section>
   );

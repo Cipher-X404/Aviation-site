@@ -46,9 +46,9 @@ export const FlyNowPayLaterView: React.FC = () => {
   const [monthlyIncome, setMonthlyIncome] = useState<number>(loanDraft.monthlyIncome || 850_000);
   const [employmentType, setEmploymentType] = useState(loanDraft.employmentType || 'employed');
   const [employerName, setEmployerName] = useState(loanDraft.employerName || 'Lagoon Health Group');
-  const [idUploaded, setIdUploaded] = useState(true);
-  const [selfieVerified, setSelfieVerified] = useState(true);
-  const [consentChecked, setConsentChecked] = useState(true);
+  const [idUploaded, setIdUploaded] = useState(false);
+  const [selfieVerified, setSelfieVerified] = useState(false);
+  const [consentChecked, setConsentChecked] = useState(false);
 
   const breakdown = calculateLoanBreakdown(amount, tenure, downPercent);
   const schedule = generateRepaymentSchedule(breakdown);

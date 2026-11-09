@@ -21,8 +21,8 @@ export const Footer: React.FC = () => {
   const navigationLinks = [
     { label: 'Contact',          action: () => setSupportOpen(true) },
     { label: 'My account',       action: () => go('/account') },
-    { label: 'Privacy policy',   action: () => go('/') },
-    { label: 'Terms of service', action: () => go('/') },
+    { label: 'Privacy policy',   action: () => go('/privacy') },
+    { label: 'Terms of service', action: () => go('/terms') },
     { label: 'Customer portal',  action: () => go('/account') },
   ];
 

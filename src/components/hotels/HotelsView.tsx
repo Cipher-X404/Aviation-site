@@ -32,7 +32,6 @@ export const HotelsView: React.FC = () => {
     hotelGuests,
     setHotelSearch,
     setSelectedHotel,
-    setActiveRoute,
     currency,
   } = useAppStore();
 
@@ -42,6 +41,7 @@ export const HotelsView: React.FC = () => {
   const [filterGeneratorOnly, setFilterGeneratorOnly] = useState(true);
   const [filterAirportPickup, setFilterAirportPickup] = useState(false);
   const [selectedHotelDetail, setSelectedHotelDetail] = useState<Hotel | null>(null);
+  const [reserveToastId, setReserveToastId] = useState<string | null>(null);
 
   // Compute nights
   const checkIn = new Date(hotelCheckInDate || '2026-11-12');
@@ -283,7 +283,9 @@ export const HotelsView: React.FC = () => {
                   <button
                     onClick={() => {
                       setSelectedHotel(hotel);
-                      setActiveRoute('/flights/book');
+                      setSelectedHotelDetail(hotel);
+                      setReserveToastId(hotel.id);
+                      setTimeout(() => setReserveToastId(null), 3500);
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     className="btn-gold py-3 px-6 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-lg group/btn"
@@ -291,6 +293,11 @@ export const HotelsView: React.FC = () => {
                     <span>Reserve Suite</span>
                     <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
+                  {reserveToastId === hotel.id && (
+                    <p className="mt-2 text-[11px] font-mono text-[#F2B632] text-center animate-msg-pop">
+                      ✦ Hotel checkout coming soon — your selection is saved.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>

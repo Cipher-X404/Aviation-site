@@ -77,6 +77,9 @@ const MOBILE_LINKS = [
     { label: 'My Trips', route: '/account' },
   ]},
   { section: '04 // OPERATIONS', items: [
+    { label: 'About', route: '/about' },
+    { label: 'Contact', route: '/contact' },
+    { label: 'Deals & Offers', route: '/deals' },
   ]},
 ];
 

@@ -56,6 +56,7 @@ const MEGA_TABS: MegaTab[] = [
       { label: 'Fly Now Pay Later Console', route: '/fly-now-pay-later' },
       { label: 'Payment examples', route: '/fly-now-pay-later' },
       { label: 'My Trips & Boarding Passes', route: '/account' },
+      { label: 'Manage or cancel a booking', route: '/manage-booking' },
     ],
   },
 ];
@@ -67,20 +68,22 @@ const MOBILE_LINKS = [
     { label: 'Destinations', route: '/destinations' },
     { label: 'Route map', route: '/', scrollTarget: 'live-radar-section' },
     { label: 'Fleet & Cabins', route: '/', scrollTarget: 'fleet-showcase-section' },
-  ]},
+  ] },
   { section: '02 // SANCTUARIES', items: [
     { label: 'Hotels', route: '/hotels' },
     { label: 'Bundles', route: '/', scrollTarget: 'bundle-showcase-section' },
-  ]},
+  ] },
   { section: '03 // FINANCE', items: [
     { label: 'Pay Later', route: '/fly-now-pay-later' },
     { label: 'My Trips', route: '/account' },
-  ]},
+    { label: 'Manage a booking', route: '/manage-booking' },
+  ] },
   { section: '04 // OPERATIONS', items: [
     { label: 'About', route: '/about' },
     { label: 'Contact', route: '/contact' },
     { label: 'Deals & Offers', route: '/deals' },
-  ]},
+    { label: 'Group Bookings', route: '/group-bookings' },
+  ] },
 ];
 
 export const Navbar: React.FC = () => {
@@ -325,6 +328,25 @@ export const Navbar: React.FC = () => {
               {/* Subtle golden indicator bar on hover */}
               <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-transparent via-[#F2B632] to-transparent scale-x-0 group-hover/nav:scale-x-100 transition-transform duration-300" />
             </button>
+
+            {/* ─── Extra Link: Promotions ─── */}
+            <button
+              type="button"
+              onClick={() => navigateTo('/deals')}
+              className={`group/nav relative py-2 px-3 rounded-lg text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 flex items-center gap-1.5 cursor-pointer bg-transparent border-0 select-none ml-3 ${
+                isScrolled
+                  ? 'text-[#0E2931] dark:text-[#EAEFEF] hover:text-[#F2B632]'
+                  : 'text-[#F4F6F5] hover:text-[#F2B632]'
+              }`}
+              aria-expanded="false"
+            >
+              <span className="relative z-10 transition-colors duration-200">
+                Promotions
+              </span>
+
+              {/* Subtle golden indicator bar on hover */}
+              <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-transparent via-[#F2B632] to-transparent scale-x-0 group-hover/nav:scale-x-100 transition-transform duration-300" />
+            </button>
           </div>
 
           {/* ─── Right Actions ─── */}
@@ -391,8 +413,8 @@ export const Navbar: React.FC = () => {
               aria-label="Open menu"
               className={`lg:hidden flex items-center gap-2 p-2 rounded-lg border transition-all duration-300 cursor-pointer shadow-sm ${
                 isScrolled
-                  ? 'bg-[#12484C] border-[#2B7574] text-[#F4F6F5] hover:bg-[#0E2931] dark:bg-[#12484C]/40 dark:border-[#2B7574]/40 dark:text-[#F2B632]'
-                  : 'bg-[#12484C] border-[#2B7574]/60 text-[#F4F6F5] hover:bg-[#0E2931] dark:bg-[#0E2931]/60 dark:border-[#2B7574]/40 dark:text-[#F2B632]'
+                  ? 'bg-[#12484C] border-[#2B7574] text-[#F4F6F5] hover:bg-[#0E2931] dark:bg-white/5 dark:border-[#18363F] dark:text-[#A5D1E1]'
+                  : 'bg-[#12484C] border-[#2B7574]/60 text-[#F4F6F5] hover:bg-[#0E2931] dark:bg-[#0E2931]/60 dark:border-[#2B7574]/40'
               }`}
             >
               <div className="flex flex-col gap-1 w-5 h-3.5 justify-between">
@@ -666,6 +688,7 @@ export const Navbar: React.FC = () => {
                 <div className="space-y-1">
                   {[
                     { label: 'My Trips', route: '/account' },
+                    { label: 'Manage a booking', route: '/manage-booking' },
                     { label: 'Fly Now Pay Later', route: '/fly-now-pay-later' },
                   ].map((link) => (
                     <button
@@ -770,8 +793,7 @@ export const Navbar: React.FC = () => {
               </button>
             </div>
 
-            {/* Right nav items: sections 3 & 4 */}
-            <div className="relative z-10 space-y-6 my-auto py-6">
+            {/* Right nav items: sections 3 & 4 */}\n            <div className="relative z-10 space-y-6 my-auto py-6">
               {MOBILE_LINKS.slice(2).map((section) => (
                 <div key={section.section}>
                   <span className="text-[9px] font-mono text-[#F2B632] uppercase tracking-widest block mb-2">

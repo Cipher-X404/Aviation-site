@@ -1,4 +1,4 @@
-﻿import React, { useEffect, Suspense, lazy } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useAppStore } from "./store/useAppStore";
@@ -11,7 +11,10 @@ import { RevealOnScroll } from "./components/common/RevealOnScroll";
 
 const HeroCanvas = lazy(() => import("./components/hero/HeroCanvas").then(m => ({ default: m.HeroCanvas })));
 const TrustMarquee = lazy(() => import("./components/home/TrustMarquee").then(m => ({ default: m.TrustMarquee })));
+const TripPlanner = lazy(() => import("./components/home/TripPlanner").then(m => ({ default: m.TripPlanner })));
 const PopularDestinations = lazy(() => import("./components/home/PopularDestinations").then(m => ({ default: m.PopularDestinations })));
+const FareBoardSection = lazy(() => import("./components/home/FareBoardSection").then(m => ({ default: m.FareBoardSection })));
+const FlexibleDatesSection = lazy(() => import("./components/home/FlexibleDatesSection").then(m => ({ default: m.FlexibleDatesSection })));
 const LiveRadarSection = lazy(() => import("./components/home/LiveRadarSection").then(m => ({ default: m.LiveRadarSection })));
 const ServicesBento = lazy(() => import("./components/home/ServicesBento").then(m => ({ default: m.ServicesBento })));
 const FleetCabinShowcase = lazy(() => import("./components/home/FleetCabinShowcase").then(m => ({ default: m.FleetCabinShowcase })));
@@ -20,16 +23,24 @@ const BundleShowcase = lazy(() => import("./components/home/BundleShowcase").the
 const WhyTrustUs = lazy(() => import("./components/home/WhyTrustUs").then(m => ({ default: m.WhyTrustUs })));
 const TestimonialsSection = lazy(() => import("./components/home/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
 const FaqSection = lazy(() => import("./components/home/FaqSection").then(m => ({ default: m.FaqSection })));
-const TripPlanner = lazy(() => import("./components/home/TripPlanner").then(m => ({ default: m.TripPlanner })));
+
 const FlightsView = lazy(() => import("./components/flights/FlightsView").then(m => ({ default: m.FlightsView })));
 const BookingFlow = lazy(() => import("./components/flights/BookingFlow").then(m => ({ default: m.BookingFlow })));
 const HotelsView = lazy(() => import("./components/hotels/HotelsView").then(m => ({ default: m.HotelsView })));
+const HotelBookingFlow = lazy(() => import("./components/hotels/HotelBookingFlow").then(m => ({ default: m.HotelBookingFlow })));
 const FlyNowPayLaterView = lazy(() => import("./components/loan/FlyNowPayLaterView").then(m => ({ default: m.FlyNowPayLaterView })));
 const AccountView = lazy(() => import("./components/account/AccountView").then(m => ({ default: m.AccountView })));
 const AdminDashboard = lazy(() => import("./components/admin/AdminDashboard").then(m => ({ default: m.AdminDashboard })));
 const DestinationsView = lazy(() => import("./components/destinations/DestinationsView").then(m => ({ default: m.DestinationsView })));
+const ContactView = lazy(() => import("./components/contact/ContactView").then(m => ({ default: m.ContactView })));
+const DealsView = lazy(() => import("./components/deals/DealsView").then(m => ({ default: m.DealsView })));
+const VisaInfoView = lazy(() => import("./components/visa/VisaInfoView").then(m => ({ default: m.VisaInfoView })));
+const BlogView = lazy(() => import("./components/blog/BlogView").then(m => ({ default: m.BlogView })));
+const InsuranceView = lazy(() => import("./components/insurance/InsuranceView").then(m => ({ default: m.InsuranceView })));
+const GroupBookingsView = lazy(() => import("./components/group/GroupBookingsView").then(m => ({ default: m.GroupBookingsView })));
+const ManageBookingView = lazy(() => import("./components/manage/ManageBookingView").then(m => ({ default: m.ManageBookingView })));
 
-const KNOWN_ROUTES = ["/", "/flights", "/flights/book", "/hotels", "/fly-now-pay-later", "/account", "/admin", "/destinations", "/about", "/privacy", "/terms"];
+const KNOWN_ROUTES = ["/", "/flights", "/flights/book", "/hotels", "/hotels/book", "/fly-now-pay-later", "/account", "/admin", "/destinations", "/about", "/privacy", "/terms", "/contact", "/deals", "/visa-info", "/blog", "/insurance", "/group-bookings", "/manage-booking"];
 
 function NotFound({ onHome }: { onHome: () => void }) {
   return (
@@ -96,6 +107,8 @@ export default function App() {
               <TrustMarquee />
               <RevealOnScroll direction="left"><TripPlanner /></RevealOnScroll>
               <RevealOnScroll direction="up"><PopularDestinations /></RevealOnScroll>
+              <RevealOnScroll direction="up"><FareBoardSection /></RevealOnScroll>
+              <RevealOnScroll direction="up"><FlexibleDatesSection /></RevealOnScroll>
               <RevealOnScroll direction="left"><LiveRadarSection /></RevealOnScroll>
               <RevealOnScroll direction="up"><ServicesBento /></RevealOnScroll>
               <RevealOnScroll direction="right"><FleetCabinShowcase /></RevealOnScroll>
@@ -109,9 +122,17 @@ export default function App() {
           {activeRoute === "/flights" && <FlightsView />}
           {activeRoute === "/flights/book" && <BookingFlow />}
           {activeRoute === "/hotels" && <HotelsView />}
+          {activeRoute === "/hotels/book" && <HotelBookingFlow />}
           {activeRoute === "/fly-now-pay-later" && <FlyNowPayLaterView />}
           {activeRoute === "/account" && <AccountView />}
           {activeRoute === "/destinations" && <DestinationsView />}
+          {activeRoute === "/contact" && <ContactView />}
+          {activeRoute === "/deals" && <DealsView />}
+          {activeRoute === "/visa-info" && <VisaInfoView />}
+          {activeRoute === "/blog" && <BlogView />}
+          {activeRoute === "/insurance" && <InsuranceView />}
+          {activeRoute === "/group-bookings" && <GroupBookingsView />}
+          {activeRoute === "/manage-booking" && <ManageBookingView />}
           {activeRoute === "/admin" && (adminSessionValid ? <AdminDashboard /> : (
             <div className="min-h-[70vh] grid place-content-center px-6 text-center">
               <p className="text-[10px] tracking-[.25em] uppercase text-[#9a7727]">Protected area</p>

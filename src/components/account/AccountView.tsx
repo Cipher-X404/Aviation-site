@@ -58,7 +58,17 @@ export const AccountView: React.FC = () => {
   const [toastNotice, setToastNotice] = useState<string | null>(null);
 
   // Tab 2 filter
-  const [ticketFilter, setTicketFilter] = useState<'all' | 'upcoming' | 'completed'>('all');
+  const [ticketFilter, setTicketFilter] = useState<'all' | 'upcoming' | 'completed' | 'cancelled'>('all');
+
+  /* The filter button row existed but never actually filtered anything — the
+     list rendered `bookingHistory` verbatim. This derives the visible set so
+     the control does what its label promises. */
+  const visibleBookings = bookingHistory.filter((booking) => {
+    if (ticketFilter === 'all') return true;
+    if (ticketFilter === 'upcoming') return booking.status === 'confirmed' || booking.status === 'active';
+    if (ticketFilter === 'cancelled') return booking.status === 'cancelled';
+    return booking.status === 'completed';
+  });
 
   // Tab 3 Loan Simulator State
   const [simLoanAmount, setSimLoanAmount] = useState<number>(650_000);
@@ -510,7 +520,7 @@ export const AccountView: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              {(['all', 'upcoming', 'completed'] as const).map((filter) => (
+              {(['all', 'upcoming', 'completed', 'cancelled'] as const).map((filter) => (
                 <button
                   key={filter}
                   onClick={() => setTicketFilter(filter)}
@@ -527,7 +537,7 @@ export const AccountView: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {bookingHistory.map((b) => (
+            {visibleBookings.map((b) => (
               <div
                 key={b.id}
                 className="rounded-3xl bg-[#0B1E24] text-white border border-[#2B7574]/40 p-6 sm:p-7 shadow-xl hover:shadow-[0_20px_45px_rgba(0,0,0,0.6)] transition-all duration-300 relative overflow-hidden flex flex-col justify-between space-y-5 group"
@@ -542,7 +552,15 @@ export const AccountView: React.FC = () => {
                     <span className="font-mono text-xs font-bold text-[#F2B632] bg-[#12484C] px-3 py-1 rounded-lg border border-[#2B7574]/60">
                       PNR: {b.bookingRef}
                     </span>
-                    <span className="text-[10px] font-mono uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded font-bold">
+                    <span
+                      className={`text-[10px] font-mono uppercase border px-2 py-0.5 rounded font-bold ${
+                        b.status === 'cancelled'
+                          ? 'bg-rose-500/10 text-rose-300 border-rose-500/30'
+                          : b.status === 'completed'
+                            ? 'bg-white/10 text-[#A5D1E1] border-white/15'
+                            : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+                      }`}
+                    >
                       {b.status}
                     </span>
                   </div>
@@ -612,34 +630,88 @@ export const AccountView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Bottom Actions & Wallet Trigger */}
-                <div className="flex items-center justify-between pt-2">
-                  <div className="flex items-center gap-2">
+                {/* Bottom Actions & Wallet Trigger.
+                    A cancelled pass must not offer a scannable barcode, so the
+                    actions collapse into the refund record instead. */}
+                {b.status === 'cancelled' ? (
+                  <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-rose-500/25 bg-rose-500/5 px-4 py-3">
+                    <div>
+                      <p className="text-[10px] font-mono font-bold uppercase tracking-[0.12em] text-rose-300">
+                        Cancelled · pass void
+                      </p>
+                      <p className="mt-0.5 text-[11px] text-[#A5D1E1]">
+                        {typeof b.refundNgn === 'number'
+                          ? `${formatPrice(b.refundNgn, currency)} refunded`
+                          : 'Refund pending'}
+                        {typeof b.cancellationFeeNgn === 'number' && b.cancellationFeeNgn > 0
+                          ? ` · ${formatPrice(b.cancellationFeeNgn, currency)} fee retained`
+                          : ''}
+                      </p>
+                    </div>
                     <button
-                      onClick={() => triggerToast("Added Sovereign Boarding Pass to Apple Wallet.")}
-                      className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#A5D1E1] hover:text-white text-[10px] font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                      onClick={() => {
+                        setActiveRoute('/manage-booking');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-white/20 px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider text-[#A5D1E1] hover:text-white hover:border-white/40 transition-colors cursor-pointer"
                     >
-                      Apple Wallet
-                    </button>
-                    <button
-                      onClick={() => triggerToast("PDF E-Ticket downloaded to device.")}
-                      className="p-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#A5D1E1] hover:text-white transition-colors cursor-pointer"
-                      title="Download PDF"
-                    >
-                      <Download className="w-3.5 h-3.5" />
+                      View record
+                      <ArrowRight className="w-3 h-3" />
                     </button>
                   </div>
+                ) : (
+                  <div className="flex items-center justify-between pt-2">
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => triggerToast("Added Sovereign Boarding Pass to Apple Wallet.")}
+                        className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#A5D1E1] hover:text-white text-[10px] font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                      >
+                        Apple Wallet
+                      </button>
+                      <button
+                        onClick={() => triggerToast("PDF E-Ticket downloaded to device.")}
+                        className="p-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#A5D1E1] hover:text-white transition-colors cursor-pointer"
+                        title="Download PDF"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
 
-                  <button
-                    onClick={() => setSelectedTicket(b)}
-                    className="btn-gold px-4 py-2 text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-md"
-                  >
-                    <QrCode className="w-4 h-4" />
-                    <span>View Gate Barcode</span>
-                  </button>
-                </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => {
+                          setActiveRoute('/manage-booking');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#A5D1E1] hover:text-white text-[10px] font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                      >
+                        Manage
+                      </button>
+                      <button
+                        onClick={() => setSelectedTicket(b)}
+                        className="btn-gold px-4 py-2 text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-md"
+                      >
+                        <QrCode className="w-4 h-4" />
+                        <span>View Gate Barcode</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
+
+            {visibleBookings.length === 0 && (
+              <div className="lg:col-span-2 rounded-3xl border border-dashed border-[#2B7574]/40 bg-[#0B1E24]/40 px-6 py-14 text-center">
+                <p className="font-monument text-lg font-bold uppercase tracking-wide text-[#EAEFEF]">
+                  No {ticketFilter} passes
+                </p>
+                <p className="mx-auto mt-2 max-w-sm text-xs leading-6 text-[#A5D1E1]/80">
+                  {ticketFilter === 'cancelled'
+                    ? 'You have not cancelled any bookings. Cancelled trips stay listed here with their refund record.'
+                    : 'Nothing in this category yet. Switch to “all” to see your full travel history.'}
+                </p>
+              </div>
+            )}
 
             {/* Seeded Completed Historical Coupon for Depth */}
             <div className="rounded-3xl bg-[#09181D]/60 text-white/70 border border-[#2B7574]/20 p-6 sm:p-7 shadow-sm relative overflow-hidden flex flex-col justify-between space-y-4">
